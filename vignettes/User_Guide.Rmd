@@ -1,0 +1,178 @@
+---
+title: "User Guide"
+author: "Sheeja Manchira Krishnan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{User Guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(IPDFileCheck)
+```
+## IPDFileCheck
+IPDFileCheck is a package that can be used to check the data file from a randomised clinical trial (RCT). The standard checks on data file from RCT will be of the following
+1. To check the file exists and readable
+2. To check if the column exists, 
+3. To get the column number if the column name is known,
+4. To test column contents ie do they contain specific items in a given list?
+5. To test column names of a data being different from what specified,
+6. To check the format of column 'age' in data
+7. To check the format of column 'gender' in data
+8. To check the format of column contents -numeric or string
+9. To check the format of a numeric column
+10. To return the column number if the pattern is contained in the colnames of a data
+11. To return descriptive statistics, sum, no of observations, mean, mode. median, range, standard deviation and standard error
+12. To present the mean and sd of a data set in the form Mean (SD)
+13. To return a subgroup when certain variable equals the given value while omitting those with NA
+14. To estimate standard error of the mean and the mode
+15. To find the number and percentages of categories
+16. To represent categorical data in the form - numbers (percentage)
+17. To calculate age from date of birth and year of birth
+
+## Data
+For demonstration purposes, two simulated data sets (one with valid data and another with invalid data) representing treatment and control arm  of randomised controlled trial will be used. 
+
+```{r }
+ set.seed(17)
+ rctdata <- data.frame(age=abs(rnorm(10, 60, 20)),
+                           sex=c("M", "F","M", "F","M", "F","M", "F","F","F"),
+                           yob=sample(seq(1930,2000), 10, replace=T),
+                           dob=c("07/12/1969","16/02/1962","03/09/1978","17/02/1969",                                      "25/11/1960","17/04/1970","18/03/1997","30/01/1988",
+                                               "03/02/1990","25/09/1978"),
+                           arm=c("Control", "Intervention","Control", "Intervention","Control", "Intervention","Control", "Intervention","Control", "Intervention"),stringsAsFactors = FALSE)
+ 
+rctdata_error <- data.frame(age=runif(10, -60, 120),
+                           sex=c("M", "F","M", "F","M", "F","M", "F","F","F"),
+                           yob=sample(seq(1930,2000), 10, replace=T),
+                           dob=c("1997 May 28","1987-June-18",NA,"2015/July/09","1997 May 28","1987-June-18",NA,"2015/July/09","1997 May 28","1987-June-18"),
+                           arm=c("Control", "Intervention","Control", "Intervention","Control", "Intervention","Control", "Intervention","Control", "Intervention"),stringsAsFactors = FALSE)
+```
+## Examples- IPDFileCheck
+
+#### 1. To check the file exists and readable
+
+The function test_file_exist_read tests if the user provided file exists and is readable. Returns 0 for success and errors for failures. Here in the example a directory named "nodir" is generated and tested.
+```{r }
+  thisfile = system.file("extdata", "blank.txt", package = "IPDFileCheck")
+  test_file_exist_read(thisfile)
+```
+
+####2. To check if the column exists
+The function check_column_exists tests if the column with  user specified column name exists in the data. For example in the above simulated data set 'rctdata', the column with column name 'sex' exists but 'gender' do not. Thus the function returns 0 when 'sex' is used while returns error when 'gender' is used.
+```{r }
+check_column_exists("sex",rctdata)
+```
+
+####3. To get the column number if the column name is known
+The function get_columnno_fornames returns the column number of the column with  user specified column name in the data. For example in the above simulated data set 'rctdata', the column with column name 'sex' exists and it is the 2nd column but 'gender' do not. Thus the function returns column number 2 when 'sex' is used while returns error when 'gender' is used.
+```{r }
+get_columnno_fornames(rctdata,"sex")
+```
+
+####4. To test column contents ie do they contain specific items in a given list?
+The function test_column_contents tests if the column contents are from a list provided by the user. The user can also give an optional code that correspond to the non response in the data.  In the simulated data shown above the column 'sex' contains 'M' and 'F' as the entries and we can test this as shown below. If the entries are of the given format the function returns 0 else indicates error.
+```{r }
+test_column_contents(rctdata,"sex",c("M","F"),NA)
+test_column_contents(rctdata,"sex",c("M","F"))
+```
+
+####5. To test column names of a data being different from what specified
+The function test_columnnames tests if the column names in the data are that provided by the user. In the simulated data 'rctdata', shown above the column 'sex' contains 'M' and 'F' as the entries and we can test this as shown below. If the entries are of the given format the function returns 0 else indicates error.
+```{r }
+test_columnnames(c("age","sex","dob","yob","arm"),rctdata)
+```
+
+####6. To check the format of column 'age' in data
+The function test_age tests if the contents of the column 'age' is valid. User can provide the name of the column and the optional code of non response. Age should be numeric and with in limits of 0 and 150.  In the simulated data 'rctdata' the 'age' column contents are valid thus returning 0. But with the given dataset 'rctdata_error' the age can have negative numbers, such that the function returns an error .
+```{r }
+test_age(rctdata,"age",NA)
+```
+
+####7. To check the format of column 'gender' in data
+The function test_gender tests if the contents of the gender column  is valid. User  provides the name of the gender column, how it is coded, and the optional code of non response.  In the simulated data 'rctdata' the gender column name is 'sex' and coded as 'M' and 'F'. Thus the function returns 0. but if the user tells that the gender is coded as "Male" and "Female" the function returns error. 
+```{r }
+test_gender(rctdata,c("M","F"),"sex",NA)
+```
+
+####8. To check the format of column contents -numeric or string
+The function test_data_numeric tests if the column contents are numeric. User provides the minimum and maximum values the numeric values in the column can have along with an optional code that suggests the non response. If the entries are numeric, format the function returns 0 else indicates error  In the 'rctdata' above,The age is from 0 to 100, hence it returns 0, while the year of birth column "yob" has values greater than 100, hence returning an error.
+```{r }
+test_data_numeric("age",rctdata,NA,0,100)
+```
+
+The function test_data_numeric_norange tests if the column contents are numeric (but with no ranges provided). User can provide with an optional code that suggests the non response.If the entries are numeric, format the function returns 0 else indicates error As the column "arm" has no numeric data in 'rctdata', the function returns error. 
+```{r }
+test_data_numeric_norange("age",rctdata,NA)
+test_data_numeric_norange("yob",rctdata,NA)
+```
+
+The function test_data_string tests if the column contents are string. User can provide with an optional code that suggests the non response.If the entries are numeric, format the function returns 0 else indicates error As the column "arm" has no numeric data in 'rctdata', the function returns 0 and 'yob' with numeric data, indicates error. 
+```{r }
+test_data_string(rctdata,"arm",NA)
+```
+
+The function test_data_string_restriction tests if the column contents are string but with given restrictions. User can provide with an optional code that suggests the non response.If the entries are numeric, format the function returns 0 else indicates error. As the column "arm" has no numeric data in 'rctdata' and they contain the entries as specified, the function returns 0. But the column 'sex' contain "M" and "F" other than "Male" and "Female".
+```{r }
+test_data_string_restriction(rctdata,"arm",NA,c("Intervention","Control"))
+test_data_string_restriction(rctdata,"sex",NA,c("M","F"))
+
+```
+
+####9 To return column number if the pattern is contained in the column names of data
+The function get_colno_pattern_colname returns the column number of the column with column name that contains user specified pattern in the data. For example in the above simulated data set 'rctdata', the column with column name 'dob' and 'yob' contains the pattern 'ob' and they are the 4th and 5th columns but 'gender' do not exist in the data (to return error). 
+```{r }
+get_colno_pattern_colname("ob",colnames(rctdata))
+
+```
+
+####10. To return descriptive statistics, sum, no of observations, mean, mode. median, range, standard deviation and standard error
+
+The function descriptive_stats_col returns the descriptive statistics of the column with the user specified column name. This includes mean, standard deviation, median, mode, standard error f the mean, minimum and maximum values to the 95% confidence intervals. If the column contents are not numeric or any error in calculating any of the quantities, the function returns an error. For example, the column 'age' is numeric and can return the descriptive statistics, but the column 'sex' is not. Hence the function returns an error.
+```{r }
+descriptive_stats_col(rctdata, "age")
+```
+
+####11. To present the mean and sd of a data set in the form Mean (SD)
+The function present_mean_sd_rmna_text returns the mean and SD in the form mean (SD). If the column contents are not numeric or any error in calculating, the function returns an error. For example, the column 'age' is numeric and can return the mean and SD, but the column 'sex' is not. Hence the function returns an error.
+```{r }
+present_mean_sd_rmna_text(rctdata, "age")
+```
+
+####12. To return a subgroup when certain variable equals the given value while omitting those with NA
+The function return_subgroup_omitna returns the subgroup using the user defined condition while omitting any non response values. mean and SD in the form mean (SD). If the column contents are not numeric or any error in calculating, the function returns an error. For example, the first command below gives all the female in the data, while the second command retrieves all those in control arm.
+```{r }
+return_subgroup_omitna(rctdata, "sex","F")
+return_subgroup_omitna(rctdata, "arm","control")
+```
+
+####13. To find the number and percentages of categorical data
+The function represent_categorical_textdata returns the descriptive statistics using number and percentage in a categorical column.User provides the number of categories, how it is coded, and the column name. For example it returns the number and percentage of "M" and "F" in the column "sex" or the number and percentage of "Intervention" and "Control" in the column "arm" 
+```{r }
+represent_categorical_textdata(rctdata, "sex",NA)
+represent_categorical_textdata(rctdata, "arm",NA)
+```
+
+####14. To calculate age from date of birth and year of birth
+
+The function calculate_age_from_dob returns the age calculated from given date of birth. User may provide the column name containing date of birth, format of date of birth and optional non response code.For example, in the 'rctdata' shown above, the 'dob' column has dates in the format "%d/%m/%y". The allowed formats for the dates should be in numeric. For example, in the rctdata_error, the dates are in combined numeric and text format, which will return  an error.
+```{r }
+calculate_age_from_dob(rctdata,"dob","%d/%m/%y",NA)
+```
+
+The function calculate_age_from_year returns the age calculated from given year of birth. User may provide the column name containing date of birth and optional non response code.For example, in the 'rctdata' shown above, the 'yob' column has birth year.
+```{r }
+calculate_age_from_year(rctdata,"yob",NA)
+```
+
+
+
