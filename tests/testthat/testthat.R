@@ -4,7 +4,7 @@ context("testing package installation")
 test_that("testing package installation",  {
   expect_identical(check_load_packages("config"),  0)
   expect_identical(check_load_packages("valueEQ5D"),  0)
-  expect_error(check_load_packages("Sheeja"),  "Invalid package",  fixed = TRUE)
+  expect_warning(check_load_packages("Sheeja"),  "Invalid package",  fixed = TRUE)
   reqd_packages = c("gmodels", "lmtest", "survival", "eha", "nlme", "coda", "lattice", "R2WinBUGS", "MASS", "foreign", "plyr")
   expect_identical(check_load_packages(reqd_packages),  0)
 })
@@ -15,7 +15,7 @@ test_that("test for file existence and access",  {
                           package  =  "IPDFileCheck")
   expect_identical(test_file_exist_read(thisfile), 0)
   nofile <- system.file("extdata",  "read.txt",  package  =  "IPDFileCheck")
-  expect_error(test_file_exist_read(nofile),
+  expect_warning(test_file_exist_read(nofile),
                "Invalid directory or file", fixed = TRUE)
 })
 # #############################################################################
@@ -27,7 +27,7 @@ test_that("testing column names of a data",  {
   colnames(tempdata)  <-  c("num", "name")
   expect_identical(test_columnnames(c("num", "name"), tempdata), 0)
   colnames(tempdata) <- c("num", "sex")
-  expect_error(test_columnnames(c("num", "name"), tempdata),
+  expect_warning(test_columnnames(c("num", "name"), tempdata),
                "One or more columns may have different names", fixed = TRUE)
 })
  # #########################################################################
@@ -72,20 +72,20 @@ test_that("test for age checks for valid age",  {
   y  <-  c(1, 2, 3, 4)
   tempdata <-  as.data.frame(cbind(y, x),stringsAsFactors = F)
   colnames(tempdata) <- c("name", "age")
-  expect_error((test_age(tempdata, "age", "")),
+  expect_warning((test_age(tempdata, "age", "")),
                "Invalid entry in age column", fixed = TRUE)
   x  <-  c(0, 11, 78, 160)
   y  <-  c(1, 2, 3, 4)
   tempdata <-  as.data.frame(cbind(y, x),stringsAsFactors = F)
   colnames(tempdata) <- c("name", "AGE")
-  expect_error((test_age(tempdata, "AGE")),
+  expect_warning((test_age(tempdata, "AGE")),
                "Invalid entry in age column", fixed = TRUE)
   # #
   x  <-  c(-8,  99, 2, 5, -99)
   y  <-  c(1, 2, 3, 4, 5)
   tempdata <-  as.data.frame(cbind(y, x),stringsAsFactors = F)
   colnames(tempdata) <- c("name", "age")
-  expect_error((test_age(tempdata, "age", -99)),
+  expect_warning((test_age(tempdata, "age", -99)),
                "Invalid entry in age column", fixed = TRUE)
   colnames(tempdata) <- c("name", "sex")
   expect_error((test_age(tempdata, "age", -99)),
@@ -135,13 +135,13 @@ test_that("test for gender checks for correct gender",  {
   expect_error(test_gender(tempdata, c("f", "m", 99), "sex", 99),
                "Column name does not exist", fixed = TRUE)
   colnames(tempdata) <- c("name", "sex")
-  expect_error(test_gender(tempdata, c(1, 2), "sex", 99),
+  expect_warning(test_gender(tempdata, c(1, 2), "sex", 99),
                "Invalid entry in gender column", fixed = TRUE)
   x  <-  c("f",  "f", "male", "m", 99)
   y  <-  c(1, 2, 3, 4, 5)
   tempdata <-  as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("name", "gender")
-  expect_error(test_gender(tempdata, c("f", "m", 99), "gender", 99),
+  expect_warning(test_gender(tempdata, c("f", "m", 99), "gender", 99),
                "Invalid entry in gender column", fixed = TRUE)
   x  <-  c("female",  "female", "male", "male", 99)
   y  <-  c(1, 2, 3, 4, 5)
@@ -150,7 +150,7 @@ test_that("test for gender checks for correct gender",  {
   expect_identical(test_gender(tempdata, c("female", "male", 99),
                                "gender", 99), 0)
 })
-###############################################################################
+# ###############################################################################
 context("testing column contents")
 test_that("test column contents",  {
   x  <-  c("f",  "m", "m", "m")
@@ -172,10 +172,10 @@ test_that("test column contents",  {
   colnames(tempdata) <- c("name", "level")
   expect_identical(test_column_contents(tempdata, "level",
                               c(1, 2, 3, 4, 5), 99), 0)
-  expect_error((test_column_contents(tempdata, "level",
+  expect_warning((test_column_contents(tempdata, "level",
                     c(1, 2, 3), 99)), "Invalid entry in column", fixed = TRUE)
 })
-# ###############################################################################
+# # ###############################################################################
 context("testing the column number for column name")
 test_that("test for sex checks for correct gender",  {
   x  <-  c("f",  "female", "m", "male")
@@ -192,7 +192,7 @@ test_that("test for sex checks for correct gender",  {
   colnames(tempdata) <- c("name", "age")
   expect_equal(get_columnno_fornames(tempdata, "age"), 2)
 })
-###############################################################################
+# ###############################################################################
 context("testing numeric column")
 test_that("test for numeric values in a specific column",  {
   x  <-  c(0, 11, 78, 120)
@@ -204,22 +204,22 @@ test_that("test for numeric values in a specific column",  {
   y  <-  c(1, 2, 3, 4, 5)
   tempdata <-  as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("name", "dose")
-  expect_error(test_data_numeric("dose", tempdata, -99, 0, 200),
+  expect_warning(test_data_numeric("dose", tempdata, -99, 0, 200),
                "Invalid ranges in column", fixed = TRUE)
 
   x  <-  c("sheeja",  99, 2, 5, -99)
   y  <-  c(1, 2, 3, 4, 5)
   tempdata <-  as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("name", "dose")
-  expect_error(test_data_numeric("dose", tempdata, -99, 0, 200),
+  expect_warning(test_data_numeric("dose", tempdata, -99, 0, 200),
                "Non numeric values in column", fixed = TRUE)
 
   colnames(tempdata) <- c("name", "sex")
   expect_error(test_data_numeric("dose", tempdata, -99, 0, 200),
                "Column name does not exist", fixed = TRUE)
 })
-
-# ###############################################################################
+#
+# # ###############################################################################
 context("testing numeric column")
 test_that("test for numeric values in a specific column but with no range given",  {
   x  <-  c(0, 11, 78, 120)
@@ -236,20 +236,20 @@ test_that("test for numeric values in a specific column but with no range given"
   y  <-  c(1, 2, 3, 4, 5)
   tempdata <-  as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("name", "dose")
-  expect_error(test_data_numeric_norange("dose", tempdata, -99),
-               "Some values-other than NR code is not numeric", fixed = TRUE)
+  expect_warning(test_data_numeric_norange("dose", tempdata, -99),
+               "Some values - other than NR code is not numeric", fixed = TRUE)
   colnames(tempdata) <- c("name", "sex")
   expect_error(test_data_numeric_norange("dose", tempdata, -99),
                "Column name does not exist", fixed = TRUE)
 })
-###############################################################################
+# ###############################################################################
 context("testing string column with restriction on allowed entries")
 test_that("test for string values in a specific column",  {
   x  <-  c("F", "M", "cvb", "sheeja")
   y  <-  c(1, 2, 3, 4)
   tempdata <-  as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("num", "name")
-  expect_error(test_data_string_restriction(tempdata,
+  expect_warning(test_data_string_restriction(tempdata,
                 "name", 0, c("F", "M")), "Invalid entry in column", fixed = TRUE)
   x  <-  c("F", "M", "m", "m")
   y  <-  c(1, 2, 3, 4)
@@ -257,7 +257,7 @@ test_that("test for string values in a specific column",  {
   colnames(tempdata) <- c("num", "name")
   expect_identical(test_data_string_restriction(tempdata, "name", 0, c("F", "M")), 0)
   expect_identical(test_data_string_restriction(tempdata, "name", NA, c("F", "M")), 0)
-  expect_error(test_data_string_restriction(tempdata, "name", NA, c()), "Please provide the restriction on allowed strings, else use test_data_string(..)", fixed = TRUE)
+  expect_warning(test_data_string_restriction(tempdata, "name", NA, c()), "Please provide the restriction on allowed strings, else use test_data_string(..)", fixed = TRUE)
 
   colnames(tempdata) <- c("num", "sex")
   expect_error(test_data_string_restriction(tempdata, "name", -99,
@@ -266,10 +266,10 @@ test_that("test for string values in a specific column",  {
   y  <-  c(1, 2, 3, 4)
   tempdata <-  as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("num", "name")
-  expect_error(test_data_string_restriction(tempdata, "name", 0,
+  expect_warning(test_data_string_restriction(tempdata, "name", 0,
                   c("F", "M")), "Numeric entry in column", fixed = TRUE)
 })
-# ###############################################################################
+# # ###############################################################################
 context("testing string column")
 test_that("test for string values in a specific column",  {
   x  <-  c("F", "M", "cvb", "sheeja")
@@ -292,13 +292,13 @@ test_that("test for string values in a specific column",  {
   y  <-  c(1, 2, 3, 4)
   tempdata <-  as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("num", "name")
-  expect_error(test_data_string(tempdata, "name", -99),
+  expect_warning(test_data_string(tempdata, "name", -99),
                "Numeric entry in column", fixed = TRUE)
   colnames(tempdata) <- c("num", "sex")
   expect_error(test_data_string(tempdata, "name", -99),
                "Column name does not exist", fixed = TRUE)
 })
-###############################################################################
+# ###############################################################################
 context("testing part of columnmames")
 test_that("testing part of columnmames",  {
   x  <-  c("F", "M", "cvb", "sheeja")
@@ -307,14 +307,14 @@ test_that("testing part of columnmames",  {
   colnames(tempdata) <- c("num.x", "name_x")
   expect_equal(get_colno_pattern_colname("name", colnames(tempdata)), 2)
   colnames(tempdata) <- c("num.x", "name_x")
-  expect_error(get_colno_pattern_colname("sex", colnames(tempdata)),
+  expect_warning(get_colno_pattern_colname("sex", colnames(tempdata)),
                "The pattern does not form any part of columnnames", fixed = TRUE)
-  expect_error(get_colno_pattern_colname("", colnames(tempdata)),
+  expect_warning(get_colno_pattern_colname("", colnames(tempdata)),
                "Error pattern NA or empty", fixed = TRUE)
   colnames(tempdata) <- c("num.x", "num_x")
   expect_equal(get_colno_pattern_colname("num", colnames(tempdata)), c(1, 2))
 })
-###############################################################################
+# ###############################################################################
 context("testing descriptive statistics")
 test_that("testing descriptive statistics",  {
   x  <-  c(0, 11, 78, 160)
@@ -367,8 +367,8 @@ test_that("testing descriptive statistics",  {
   y  <-  c(1, 2, 3, 4)
   tempdata <-  as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("name", "age")
-  expect_error(descriptive_stats_col(tempdata, "age", NA),
-               "Some values-other than NR code is not numeric", fixed = TRUE)
+  expect_warning(descriptive_stats_col(tempdata, "age", NA),
+               "Some values - other than NR code is not numeric", fixed = TRUE)
 
 })
 context("testing descriptive statistics")
@@ -381,7 +381,7 @@ test_that("testing descriptive statistics",  {
                "Error - no column or column name different", fixed = TRUE)
 })
 
-###############################################################################
+# ###############################################################################
 context("testing mode function")
 test_that("testing mode function",  {
   x  <-  c(0, 11, 78, 160)
@@ -390,7 +390,7 @@ test_that("testing mode function",  {
 context("testing mode function")
 test_that("testing mode function",  {
   x  <-  c(0, "f", 78, 160)
-  expect_error(get_mode_from_vector(x), "Non numeric data", fixed = TRUE)
+  expect_warning(get_mode_from_vector(x), "Non numeric data", fixed = TRUE)
 })
 context("testing mode function")
 test_that("testing mode function",  {
@@ -400,9 +400,9 @@ test_that("testing mode function",  {
 context("testing mode function")
 test_that("testing mode function",  {
   x  <-  c(78, "NA", 78, 78)
-  expect_error(get_mode_from_vector(x), "Non numeric data", fixed = TRUE)
+  expect_warning(get_mode_from_vector(x), "Non numeric data", fixed = TRUE)
 })
-###############################################################################
+# ###############################################################################
 context("testing column existence")
 test_that("testing column existence",  {
   x  <-  c(0, NA, "dd", 160)
@@ -417,10 +417,10 @@ test_that("testing column existence",  {
   y  <-  c(1, 2, 3, 4)
   tempdata <-  as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("name", "num")
-  expect_error(check_column_exists("age", tempdata),
+  expect_warning(check_column_exists("age", tempdata),
                "Data does not contain the column with the specfied column name", fixed = TRUE)
 })
-###############################################################################
+# ###############################################################################
 context("testing column existence")
 test_that("testing column existence",  {
   x  <-  c(0, NA, "dd", 160)
@@ -435,11 +435,11 @@ test_that("testing column existence",  {
   y  <-  c(1, 2, 3, 4)
   tempdata <-  as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("name", "num")
-  expect_error(check_column_exists("age", tempdata),
+  expect_warning(check_column_exists("age", tempdata),
                "Data does not contain the column with the specfied column name", fixed = TRUE)
 })
 
-###############################################################################
+# ###############################################################################
 context("testing returning a subgroup omitting NA")
 test_that("testing returning a subgroup omitting NA",  {
   x  <-  c(0, 11, 78, 160)
@@ -467,10 +467,10 @@ test_that("testing returning a subgroup omitting NA",  {
   y2  <-  c(1, 2, 3, 4)
   tempdata <-  as.data.frame(cbind(y2, y1, x))
   colnames(tempdata) <- c("num", "desc", "mark")
-  expect_error(return_subgroup_omitna(tempdata, "gender", "f"),
+  expect_warning(return_subgroup_omitna(tempdata, "gender", "f"),
                "Data does not contain the column with the specfied column name", fixed = TRUE)
 })
-###############################################################################
+# ###############################################################################
 context("testing representing categorical data")
 test_that("testing representing categorical data",  {
   x  <-  c(0, 11, 78, 160)
@@ -483,10 +483,10 @@ test_that("testing representing categorical data",  {
   rownames(ans) <- c("Number", "Percentage")
   expect_equal(represent_categorical_data(tempdata, "gender", NA), ans)
   colnames(tempdata) <- c("num", "a", "mark")
-  expect_error(represent_categorical_data(tempdata, "gender", NA),
+  expect_warning(represent_categorical_data(tempdata, "gender", NA),
                "Data does not contain the column with the specfied column name", fixed = TRUE)
 })
-###############################################################################
+# ###############################################################################
 context("testing cohens d")
 test_that("testing cohens d",  {
   x  <-  c(0, 11, 78, 160)
@@ -504,7 +504,7 @@ test_that("testing cohens d",  {
   expect_error(cohensd(x, y), "Vector contains atleast one NA or string",
                fixed = TRUE)
 })
-###############################################################################
+# ###############################################################################
 context("testing standard error of mean function")
 test_that("testing standard error of mean function",  {
   x  <-  c(0, 11, 78, 160)
@@ -537,7 +537,6 @@ test_that("testing age calculated from date of birth", {
   expect_error(calculate_age_from_dob(tempdata, "dob", 0, NA),
                "Age can not be negative OR greater than 150", fixed = TRUE)
 
-
   x  <-  c("1987-05-28", "1987-06-18", NA, "1987-07-09")
   y  <-  c(1, 2, 3, 4)
   tempdata <-  as.data.frame(cbind(y, x), stringsAsFactors  =  FALSE)
@@ -555,7 +554,6 @@ test_that("testing age calculated from date of birth", {
                                      0, NA)$calc_age_dob
   ages <- c(ag1, ag2, NA, ag3)
   expect_equivalent(ages, mod_data, tolerance  =  0.001)
-
 
   x  <-  c("28/05/1987", "18/06/1987", NA, "9/7/1987")
   y  <-  c(1, 2, 3, 4)
@@ -598,8 +596,7 @@ test_that("testing age calculated from date of birth", {
   expect_error(calculate_age_from_dob(tempdata, "dob", 0, NA),
                "Column name does not exist", fixed = TRUE)
 })
-###############################################################################
-
+# ###############################################################################
 context("testing the unique contents of a column")
 test_that("testing the unique contents of a column",  {
   x  <-  c("f",  "m", "m", "m")
@@ -608,6 +605,6 @@ test_that("testing the unique contents of a column",  {
   colnames(tempdata) <- c("number", "sex")
   expect_identical(get_contents_cols(tempdata, "sex"), c("f", "m"))
   expect_identical(get_contents_cols(tempdata, "number"), c(1, 2, 3, 4))
-  expect_error(get_contents_cols(tempdata, "gender"), "Data does not contain the column with the specfied column name", fixed = TRUE)
+  expect_warning(get_contents_cols(tempdata, "gender"), "Data does not contain the column with the specfied column name", fixed = TRUE)
 
 })

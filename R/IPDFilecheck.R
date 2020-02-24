@@ -6,26 +6,26 @@
 #' @export
 #' @importFrom methods is
 check_load_packages <- function(pkg) {
-  for(i in seq_len(length(pkg))){
+  for (i in seq_len(length(pkg))) {
     x <- pkg[i]
     if (!suppressWarnings(require(x,character.only = TRUE)))
     {
-      trythis <- tryCatch(install.packages(x,dependencies=TRUE,repos = "http://cran.us.r-project.org"),
-               error=function(e)
+      trythis <- tryCatch(install.packages(x,dependencies = TRUE,repos = "http://cran.us.r-project.org"),
+               error = function(e)
                  cat("Error "),
-               warning=function(e)
+               warning = function(e)
                  cat("Warning "))
-      if(is(trythis,"warning")){
-        stop("Warning installing")
+      if (is(trythis,"warning")) {
+        warning("Warning installing")
       }
-      if(is(trythis,"error")){
-        stop("Error installing")
+      if (is(trythis,"error")) {
+        warning("Error installing")
       }
       trythis <- tryCatch(require(x,character.only = TRUE),
-                          error=function(e)
-                            stop("Error in adding to library "),
-                          warning=function(e)
-                            stop("Invalid package ")
+                          error = function(e)
+                            warning("Error in adding to library "),
+                          warning = function(e)
+                            warning("Invalid package ")
       )
     }
   }
@@ -46,7 +46,7 @@ test_columnnames <- function(column_names, data) {
   if (sum(upper_given_colnames == upper_data_colnames) == length(column_names)) {
     return(0)
   }else{
-    stop("One or more columns may have different names")
+    warning("One or more columns may have different names")
   }
 }
 ###############################################################################
@@ -60,11 +60,11 @@ test_columnnames <- function(column_names, data) {
 test_file_exist_read <- function(filename) {
   if (file.exists(filename)) {
     if (file.access(filename, 0)  !=  0) {
-      stop("Error reading file")
+      warning("Error reading file")
     }
     return(0)
   }else{
-    stop("Invalid directory or file")
+    warning("Invalid directory or file")
   }
 }
 ###############################################################################
@@ -97,7 +97,7 @@ get_columnno_fornames <- function(data, column_name) {
 test_age <- function(data, agecolumn = "age", nrcode = NA) {
   column_no <- get_columnno_fornames(data, agecolumn)
    if (column_no < 0) {
-    stop("Column name age does not exist")
+     warning("Column name age does not exist")
   }else{
     entry  <- data[[column_no]]
     blanks <- c(which(entry == ""), which(is.na(entry)))
@@ -105,24 +105,31 @@ test_age <- function(data, agecolumn = "age", nrcode = NA) {
       entry[blanks] <- nrcode
     }
    if (is.na(nrcode)) {
-     this_entry <- entry[!is.na(entry)]
-     this_entry_num <- suppressWarnings(as.numeric(this_entry))
-     if(sum(is.na(this_entry_num)) == 0)
-          newentry <- as.numeric(this_entry)
-      else
-        stop("Error - some entries other then nrcode is not numeric")
+      this_entry <- entry[!is.na(entry)]
+      this_entry_num <- suppressWarnings(as.numeric(this_entry))
+      if (sum(is.na(this_entry_num)) == 0) {
+       newentry <- as.numeric(this_entry)
+       if (any(newentry > 150) || any(newentry < 0)) {
+         warning("Invalid entry in age column")
+       }else{
+         return(0)
+       }
+      }else{
+       warning("Error - some entries other then nrcode is not numeric")
+      }
     }else{
       this_entry <- entry[entry !=  nrcode]
       this_entry_num <- suppressWarnings(as.numeric(this_entry))
-      if(sum(is.na(this_entry_num)) == 0)
+      if (sum(is.na(this_entry_num)) == 0) {
         newentry <- as.numeric(this_entry)
-      else
+        if (any(newentry > 150) || any(newentry < 0)) {
+          warning("Invalid entry in age column")
+        }else{
+          return(0)
+        }
+      }else{
         stop("Error - some entries other then nrcode is not numeric")
-    }
-    if (any(newentry > 150) || any(newentry < 0)) {
-      stop("Invalid entry in age column")
-     }else{
-      return(0)
+      }
     }
   }
 }
@@ -138,11 +145,8 @@ test_age <- function(data, agecolumn = "age", nrcode = NA) {
 #' @export
 test_gender <- function(data, gendercode, gendercolumn = "gender", nrcode = NA) {
   gendercode <- toupper(gendercode)
-  column_no <- get_columnno_fornames(data, gendercolumn)
-  if (column_no < 0) {
-     stop("Column name for ender does not exist")
-  }
-  if (column_no > 0) {
+  if (get_columnno_fornames(data, gendercolumn) > 0) {
+    column_no = get_columnno_fornames(data, gendercolumn)
     entry  <-  data[column_no]
     if (is.na(nrcode)) {
       newentry <- entry[!is.na(entry)]
@@ -155,7 +159,7 @@ test_gender <- function(data, gendercode, gendercolumn = "gender", nrcode = NA) 
     if (all(facs %in% gendercode)) {
         return(0)
     }else{
-      stop("Invalid entry in gender column")
+      warning("Invalid entry in gender column")
     }
   }
 }
@@ -173,7 +177,7 @@ test_gender <- function(data, gendercode, gendercolumn = "gender", nrcode = NA) 
 test_column_contents <- function(data, column, code, nrcode = NA) {
   column_no <- get_columnno_fornames(data, column)
   if (column_no < 0) {
-    stop("Column name does not exist")
+    warning("Column name does not exist")
   }else{
     entry  <-  data[column_no]
     if (is.na(nrcode)) {
@@ -187,7 +191,7 @@ test_column_contents <- function(data, column, code, nrcode = NA) {
     if (all(facs %in% code)) {
       return(0)
     }else{
-      stop("Invalid entry in column")
+      warning("Invalid entry in column")
 
     }
    }
@@ -207,7 +211,7 @@ test_column_contents <- function(data, column, code, nrcode = NA) {
 test_data_numeric <- function(column_name, data, nrcode = NA, minval, maxval) {
   column_no <- get_columnno_fornames(data, column_name)
   if (column_no < 0) {
-    stop("Column name does not exist")
+    warning("Column name does not exist")
   }else{
     entry  <- (data[[column_no]])
     if (is.na(nrcode)) {
@@ -217,12 +221,12 @@ test_data_numeric <- function(column_name, data, nrcode = NA, minval, maxval) {
     }
     if (is.numeric(new_entry)) {
       if (any(new_entry < minval) || any(new_entry > maxval)) {
-        stop("Invalid ranges in column")
+        warning("Invalid ranges in column")
       }else{
         return(0)
       }
     }else{
-      stop("Non numeric values in column")
+      warning("Non numeric values in column")
     }
   }
 }
@@ -239,7 +243,7 @@ test_data_numeric <- function(column_name, data, nrcode = NA, minval, maxval) {
 test_data_numeric_norange <- function(column_name, data, nrcode = NA) {
   column_no <- get_columnno_fornames(data, column_name)
   if (column_no < 0) {
-    stop("Column name does not exist")
+    warning("Column name does not exist")
 
   }else{
     entry  <- unlist(data.frame(data[[column_no]], stringsAsFactors  =  FALSE))
@@ -252,7 +256,7 @@ test_data_numeric_norange <- function(column_name, data, nrcode = NA) {
     if (is.numeric(no_nrcode_entries)) {
       return(0)
     }else{
-      stop("Some values-other than NR code is not numeric")
+      warning("Some values - other than NR code is not numeric")
 
     }
   }
@@ -269,7 +273,7 @@ test_data_numeric_norange <- function(column_name, data, nrcode = NA) {
 test_data_string <- function(data, column_name, nrcode = NA) {
   column_no <- get_columnno_fornames(data, column_name)
   if (column_no < 0) {
-    stop("Column name does not exist")
+    warning("Column name does not exist")
   }else{
     temp <- data[column_no]
     temp <- unlist(temp[!is.na(temp)])
@@ -280,7 +284,7 @@ test_data_string <- function(data, column_name, nrcode = NA) {
     }
     new_entry <- suppressWarnings(as.numeric(as.character(new_entry)))
     if (any(!is.na(new_entry))) {
-      stop("Numeric entry in column")
+      warning("Numeric entry in column")
 
     }else{
       return(0)
@@ -303,7 +307,7 @@ test_data_string_restriction <- function(data, column_name, nrcode = NA, allowed
   if (res == 0) {
     column_no <- get_columnno_fornames(data, column_name)
     if (column_no < 0) {
-      stop("column name does not exist")
+      warning("column name does not exist")
     }else{
       if (length(allowed_strings) >= 1) {
         entry  <- toupper(data[[column_no]])
@@ -315,21 +319,21 @@ test_data_string_restriction <- function(data, column_name, nrcode = NA, allowed
         if (any(is.na(new_entry) == TRUE) ||
             sum(toupper(allowed_strings) %in% unique(new_entry))
             < length(unique(new_entry))) {
-          stop("Invalid entry in column")
+          warning("Invalid entry in column")
 
         }else{
           return(0)
         }
       }else{
-        stop("Please provide the restriction on allowed strings, else use test_data_string(..)")
+        warning("Please provide the restriction on allowed strings, else use test_data_string(..)")
       }
     }
   }else{
     if (res == -1) {
-      stop("Column name does not exist")
+      warning("Column name does not exist")
    }
     if (res == -2) {
-      stop("atleast one non string entry in column")
+      warning("atleast one non string entry in column")
     }
 
   }
@@ -344,7 +348,7 @@ test_data_string_restriction <- function(data, column_name, nrcode = NA, allowed
 #' @export
 check_colno_pattern_colname <- function(pattern, column_names) {
   if (is.na(pattern) || pattern == "") {
-    stop("Error pattern NA or empty")
+    warning("Error pattern NA or empty")
   }else{
     if (is.numeric(pattern)) {
       test <- grep(toString(pattern), toupper(column_names))
@@ -371,7 +375,7 @@ get_colno_pattern_colname <- function(pattern, column_names) {
     test <- grep(toupper(pattern), toupper(column_names))
     return(test)
   }else{
-    stop("The pattern does not form any part of columnnames")
+    warning("The pattern does not form any part of columnnames")
   }
 }
 #' ###############################################################################
@@ -385,7 +389,7 @@ get_mode_from_vector  <-  function(v) {
     uniqv  <-  unique(v)
     uniqv[which.max(tabulate(match(v, uniqv)))]
   }else{
-    stop("Non numeric data")
+    warning("Non numeric data")
 
   }
 }
@@ -403,10 +407,7 @@ get_mode_from_vector  <-  function(v) {
 descriptive_stats_col <- function(data, column_name, nrcode = NA) {
   col.names <- colnames(data)
   if (column_name %in% col.names) {
-    if (test_data_numeric_norange(column_name, data, nrcode) !=  0) {
-      stop("Non numeric columns, cant estimate the descriptive statistics")
-
-    }else{
+    if (test_data_numeric_norange(column_name, data, nrcode) ==  0) {
       this_column <- data[column_name]
       if (is.na(nrcode)) {
         this_column <- this_column[!is.na(data[column_name])]
@@ -452,7 +453,7 @@ check_column_exists <- function(column_name, data) {
   if (any(toupper(colnames(data)) == toupper(column_name))) {
     return(0)
   }else{
-    stop("Data does not contain the column with the specfied column name")
+    warning("Data does not contain the column with the specfied column name")
   }
 }
 #' ###############################################################################
@@ -491,9 +492,6 @@ return_subgroup_omitna <- function(data, variable, value) {
       column_no <- get_columnno_fornames(data, variable)
       subgroup  <-  data[which(data[column_no] == value & !is.na(data[column_no])), ]
       return(subgroup)
-  }else{
-    stop("No column exists")
-
   }
 }
 ###############################################################################
@@ -583,8 +581,6 @@ represent_categorical_data <- function(data, variable, nrcode = NA) {
     colnames(mat_ans)  <- all_names
     rownames(mat_ans) <- c("Number", "Percentage")
     return(mat_ans)
-  }else{
-    stop("No column exists")
   }
 }
 ###############################################################################
@@ -770,7 +766,6 @@ calculate_age_from_year <- function(data, columnname, nrcode = NA) {
   column_no <- get_columnno_fornames(data, columnname)
   if (column_no < 0) {
     stop("Column name for year of birth does not exist")
-
   }else{
     entry <- data[[column_no]]
     blanks <- c(which(entry == ""), which(is.na(entry)))
@@ -817,8 +812,5 @@ get_contents_cols <- function(data, colname) {
     }else{
       return(codes)
     }
-  }else{
-    stop("No column exists with the given name")
-
   }
 }
