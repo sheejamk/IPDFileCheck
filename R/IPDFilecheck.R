@@ -453,7 +453,7 @@ check_column_exists <- function(column_name, data) {
   if (any(toupper(colnames(data)) == toupper(column_name))) {
     return(0)
   }else{
-    warning("Data does not contain the column with the specfied column name")
+    return(-1)
   }
 }
 #' ###############################################################################
@@ -492,6 +492,8 @@ return_subgroup_omitna <- function(data, variable, value) {
       column_no <- get_columnno_fornames(data, variable)
       subgroup  <-  data[which(data[column_no] == value & !is.na(data[column_no])), ]
       return(subgroup)
+  }else{
+    stop("Data does not contain the column with the specfied column name")
   }
 }
 ###############################################################################
@@ -581,6 +583,8 @@ represent_categorical_data <- function(data, variable, nrcode = NA) {
     colnames(mat_ans)  <- all_names
     rownames(mat_ans) <- c("Number", "Percentage")
     return(mat_ans)
+  }else{
+    stop("Data does not contain the column with the specfied column name")
   }
 }
 ###############################################################################
@@ -812,5 +816,7 @@ get_contents_cols <- function(data, colname) {
     }else{
       return(codes)
     }
+  }else{
+    stop("Data does not contain the column with the specfied column name")
   }
 }

@@ -417,8 +417,7 @@ test_that("testing column existence",  {
   y  <-  c(1, 2, 3, 4)
   tempdata <-  as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("name", "num")
-  expect_warning(check_column_exists("age", tempdata),
-               "Data does not contain the column with the specfied column name", fixed = TRUE)
+  expect_equal(check_column_exists("age", tempdata), -1)
 })
 # ###############################################################################
 context("testing column existence")
@@ -435,8 +434,7 @@ test_that("testing column existence",  {
   y  <-  c(1, 2, 3, 4)
   tempdata <-  as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("name", "num")
-  expect_warning(check_column_exists("age", tempdata),
-               "Data does not contain the column with the specfied column name", fixed = TRUE)
+  expect_equal(check_column_exists("age", tempdata), -1)
 })
 
 # ###############################################################################
@@ -467,7 +465,7 @@ test_that("testing returning a subgroup omitting NA",  {
   y2  <-  c(1, 2, 3, 4)
   tempdata <-  as.data.frame(cbind(y2, y1, x))
   colnames(tempdata) <- c("num", "desc", "mark")
-  expect_warning(return_subgroup_omitna(tempdata, "gender", "f"),
+  expect_error(return_subgroup_omitna(tempdata, "gender", "f"),
                "Data does not contain the column with the specfied column name", fixed = TRUE)
 })
 # ###############################################################################
@@ -483,7 +481,7 @@ test_that("testing representing categorical data",  {
   rownames(ans) <- c("Number", "Percentage")
   expect_equal(represent_categorical_data(tempdata, "gender", NA), ans)
   colnames(tempdata) <- c("num", "a", "mark")
-  expect_warning(represent_categorical_data(tempdata, "gender", NA),
+  expect_error(represent_categorical_data(tempdata, "gender", NA),
                "Data does not contain the column with the specfied column name", fixed = TRUE)
 })
 # ###############################################################################
@@ -605,6 +603,6 @@ test_that("testing the unique contents of a column",  {
   colnames(tempdata) <- c("number", "sex")
   expect_identical(get_contents_cols(tempdata, "sex"), c("f", "m"))
   expect_identical(get_contents_cols(tempdata, "number"), c(1, 2, 3, 4))
-  expect_warning(get_contents_cols(tempdata, "gender"), "Data does not contain the column with the specfied column name", fixed = TRUE)
+  expect_error(get_contents_cols(tempdata, "gender"), "Data does not contain the column with the specfied column name", fixed = TRUE)
 
 })
