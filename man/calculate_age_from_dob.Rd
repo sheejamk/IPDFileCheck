@@ -4,7 +4,7 @@
 \alias{calculate_age_from_dob}
 \title{Function to calculate age from date of birth}
 \usage{
-calculate_age_from_dob(data, columnname, dateformat = FALSE,
+calculate_age_from_dob(data, columnname, dateformat = "dmy",
   nrcode = NA)
 }
 \arguments{
@@ -12,7 +12,7 @@ calculate_age_from_dob(data, columnname, dateformat = FALSE,
 
 \item{columnname}{name of column corresponding to date of birth}
 
-\item{dateformat}{format of date e.g. dmy default is FALSE}
+\item{dateformat}{format of date e.g. dmy default is dmy}
 
 \item{nrcode}{non response code corresponding to date of birth}
 }
@@ -26,5 +26,5 @@ Function to calculate age from date of birth
 library(IPDFileCheck)
 this.df <- data.frame(c("1987-05-28", "1987-06-18"),c(1,2), stringsAsFactors = FALSE)
 colnames(this.df) <- c("dob","num")
-calculate_age_from_dob(this.df,"dob")
+calculate_age_from_dob(this.df,"dob","ymd")
 }

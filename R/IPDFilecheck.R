@@ -46,7 +46,8 @@ test_columnnames <- function(column_names, data) {
   if (sum(upper_given_colnames == upper_data_colnames) == length(column_names)) {
     return(0)
   }else{
-    warning("One or more columns may have different names")
+    return(-1)
+    #warning("One or more columns may have different names")
   }
 }
 ###############################################################################
@@ -60,11 +61,11 @@ test_columnnames <- function(column_names, data) {
 test_file_exist_read <- function(filename) {
   if (file.exists(filename)) {
     if (file.access(filename, 0)  !=  0) {
-      warning("Error reading file")
+      return(-1)
     }
     return(0)
   }else{
-    warning("Invalid directory or file")
+    return(-2)
   }
 }
 ###############################################################################
@@ -97,7 +98,8 @@ get_columnno_fornames <- function(data, column_name) {
 test_age <- function(data, agecolumn = "age", nrcode = NA) {
   column_no <- get_columnno_fornames(data, agecolumn)
    if (column_no < 0) {
-     warning("Column name age does not exist")
+     return(-1)
+     #warning("Column name age does not exist")
   }else{
     entry  <- data[[column_no]]
     blanks <- c(which(entry == ""), which(is.na(entry)))
@@ -110,12 +112,12 @@ test_age <- function(data, agecolumn = "age", nrcode = NA) {
       if (sum(is.na(this_entry_num)) == 0) {
        newentry <- as.numeric(this_entry)
        if (any(newentry > 150) || any(newentry < 0)) {
-         warning("Invalid entry in age column")
+         return(-1)
        }else{
          return(0)
        }
       }else{
-       warning("Error - some entries other then nrcode is not numeric")
+        return(-2)
       }
     }else{
       this_entry <- entry[entry !=  nrcode]
@@ -123,12 +125,12 @@ test_age <- function(data, agecolumn = "age", nrcode = NA) {
       if (sum(is.na(this_entry_num)) == 0) {
         newentry <- as.numeric(this_entry)
         if (any(newentry > 150) || any(newentry < 0)) {
-          warning("Invalid entry in age column")
+          return(-3)
         }else{
           return(0)
         }
       }else{
-        stop("Error - some entries other then nrcode is not numeric")
+        return(-4)
       }
     }
   }
@@ -159,7 +161,8 @@ test_gender <- function(data, gendercode, gendercolumn = "gender", nrcode = NA) 
     if (all(facs %in% gendercode)) {
         return(0)
     }else{
-      warning("Invalid entry in gender column")
+      return(-1)
+      #warning("Invalid entry in gender column")
     }
   }
 }
@@ -177,7 +180,8 @@ test_gender <- function(data, gendercode, gendercolumn = "gender", nrcode = NA) 
 test_column_contents <- function(data, column, code, nrcode = NA) {
   column_no <- get_columnno_fornames(data, column)
   if (column_no < 0) {
-    warning("Column name does not exist")
+    return(-1)
+    #warning("Column name does not exist")
   }else{
     entry  <-  data[column_no]
     if (is.na(nrcode)) {
@@ -191,7 +195,8 @@ test_column_contents <- function(data, column, code, nrcode = NA) {
     if (all(facs %in% code)) {
       return(0)
     }else{
-      warning("Invalid entry in column")
+      return(-2)
+      #warning("Invalid entry in column")
 
     }
    }
@@ -211,7 +216,8 @@ test_column_contents <- function(data, column, code, nrcode = NA) {
 test_data_numeric <- function(column_name, data, nrcode = NA, minval, maxval) {
   column_no <- get_columnno_fornames(data, column_name)
   if (column_no < 0) {
-    warning("Column name does not exist")
+    return(-1)
+    #("Column name does not exist")
   }else{
     entry  <- (data[[column_no]])
     if (is.na(nrcode)) {
@@ -221,12 +227,14 @@ test_data_numeric <- function(column_name, data, nrcode = NA, minval, maxval) {
     }
     if (is.numeric(new_entry)) {
       if (any(new_entry < minval) || any(new_entry > maxval)) {
-        warning("Invalid ranges in column")
+        return(-2)
+        #warning("Invalid ranges in column")
       }else{
         return(0)
       }
     }else{
-      warning("Non numeric values in column")
+      return(-3)
+      #warning("Non numeric values in column")
     }
   }
 }
@@ -243,7 +251,8 @@ test_data_numeric <- function(column_name, data, nrcode = NA, minval, maxval) {
 test_data_numeric_norange <- function(column_name, data, nrcode = NA) {
   column_no <- get_columnno_fornames(data, column_name)
   if (column_no < 0) {
-    warning("Column name does not exist")
+    return(-1)
+    #warning("Column name does not exist")
 
   }else{
     entry  <- unlist(data.frame(data[[column_no]], stringsAsFactors  =  FALSE))
@@ -256,7 +265,8 @@ test_data_numeric_norange <- function(column_name, data, nrcode = NA) {
     if (is.numeric(no_nrcode_entries)) {
       return(0)
     }else{
-      warning("Some values - other than NR code is not numeric")
+      return(-2)
+      #warning("Some values - other than NR code is not numeric")
 
     }
   }
@@ -273,7 +283,8 @@ test_data_numeric_norange <- function(column_name, data, nrcode = NA) {
 test_data_string <- function(data, column_name, nrcode = NA) {
   column_no <- get_columnno_fornames(data, column_name)
   if (column_no < 0) {
-    warning("Column name does not exist")
+    return(-1)
+    #warning("Column name does not exist")
   }else{
     temp <- data[column_no]
     temp <- unlist(temp[!is.na(temp)])
@@ -284,8 +295,8 @@ test_data_string <- function(data, column_name, nrcode = NA) {
     }
     new_entry <- suppressWarnings(as.numeric(as.character(new_entry)))
     if (any(!is.na(new_entry))) {
-      warning("Numeric entry in column")
-
+      return(-2)
+      #warning("Numeric entry in column")
     }else{
       return(0)
     }
@@ -307,7 +318,8 @@ test_data_string_restriction <- function(data, column_name, nrcode = NA, allowed
   if (res == 0) {
     column_no <- get_columnno_fornames(data, column_name)
     if (column_no < 0) {
-      warning("column name does not exist")
+      return(-1)
+      #warning("column name does not exist")
     }else{
       if (length(allowed_strings) >= 1) {
         entry  <- toupper(data[[column_no]])
@@ -319,23 +331,26 @@ test_data_string_restriction <- function(data, column_name, nrcode = NA, allowed
         if (any(is.na(new_entry) == TRUE) ||
             sum(toupper(allowed_strings) %in% unique(new_entry))
             < length(unique(new_entry))) {
-          warning("Invalid entry in column")
+          return(-2)
+          #warning("Invalid entry in column")
 
         }else{
           return(0)
         }
       }else{
-        warning("Please provide the restriction on allowed strings, else use test_data_string(..)")
+        return(-3)
+        #warning("Please provide the restriction on allowed strings, else use test_data_string(..)")
       }
     }
   }else{
     if (res == -1) {
-      warning("Column name does not exist")
+      return(-4)
+      # warning("Column name does not exist")
    }
     if (res == -2) {
-      warning("atleast one non string entry in column")
+      return(-5)
+      # warning("atleast one non string entry in column")
     }
-
   }
 }
 #' ###############################################################################
@@ -348,7 +363,8 @@ test_data_string_restriction <- function(data, column_name, nrcode = NA, allowed
 #' @export
 check_colno_pattern_colname <- function(pattern, column_names) {
   if (is.na(pattern) || pattern == "") {
-    warning("Error pattern NA or empty")
+    return(-1)
+    #warning("Error pattern NA or empty")
   }else{
     if (is.numeric(pattern)) {
       test <- grep(toString(pattern), toupper(column_names))
@@ -375,7 +391,8 @@ get_colno_pattern_colname <- function(pattern, column_names) {
     test <- grep(toupper(pattern), toupper(column_names))
     return(test)
   }else{
-    warning("The pattern does not form any part of columnnames")
+    return(-1)
+    #warning("The pattern does not form any part of columnnames")
   }
 }
 #' ###############################################################################
@@ -389,7 +406,8 @@ get_mode_from_vector  <-  function(v) {
     uniqv  <-  unique(v)
     uniqv[which.max(tabulate(match(v, uniqv)))]
   }else{
-    warning("Non numeric data")
+    return(-1)
+    #warning("Non numeric data")
 
   }
 }
@@ -435,10 +453,11 @@ descriptive_stats_col <- function(data, column_name, nrcode = NA) {
                              "Count", "LQ", "UQ", "95%CI.low", "95%CI.high")
       rownames(results) <- column_name
       return(results)
+    }else{
+      stop("Error - column contents not numeric")
     }
   }else{
     stop("Error - no column or column name different")
-
   }
 }
 ###############################################################################
@@ -533,7 +552,6 @@ get_sem  <-  function(x) {
   xx <- suppressWarnings(as.numeric(x))
   if (sum(is.na(xx)) > 0) {
     stop("Vector contains non numeric data")
-
   }else{
     ans <- sd(x) / sqrt(length(x))
     return(ans)
@@ -614,14 +632,14 @@ represent_categorical_textdata <- function(data, variable, nrcode) {
     return(ans)
 }
 ###############################################################################
-#' Helper function to keep date formats in year/month/date
+#' Helper function to keep date formats in year-month-date
 #' @param entry a data frame or a  vector
-#' @param index those correspond to valid date (omitting non response code or no entry)
-#' @param monthfirst if month is given before date, NULL by default
-#' @return entry corrected entries
-#' @examples convert_stddate_format(c("01/01/2000","02/02/2002"),c(1,2),NULL)
+#' @param index those correspond to valid date in numeic form (omitting non response code or no entry)
+#' @param orderby give the order such as mdy, dmy etc where d refers to day, m to month and y to year
+#' @return entry corrected entries as in standard date format
+#' @examples convert_date_numeric_stdform(c("01/01/2000","02/02/2002"),c(1,2),"dmy")
 #' @export
-convert_stddate_format <- function(entry, index, monthfirst = NULL) {
+convert_date_numeric_stdform_old<- function(entry, index, orderby = "dmy") {
   contents <- unlist(strsplit(entry[1], ""))
   first <- which(!grepl("^[0-9]", contents))[1]
   ch <- contents[first]
@@ -642,71 +660,228 @@ convert_stddate_format <- function(entry, index, monthfirst = NULL) {
     one <- as.numeric(one)
     two <- as.numeric(two)
     three <- as.numeric(three)
-    if (min(one) >= 1000) {
-      if (is.null(monthfirst)) {
-        if (max(two) <= 12 || max(three) > 12) {
-          for (i in seq_len(length(index)))
-            entry[index[i]] <- paste(one[i], "/", two[i], "/", three[i], sep = "")
-        }else{
-          for (i in seq_len(length(index)))
-            entry[index[i]] <- paste(one[i], "/", three[i], "/", two[i], sep = "")
-        }
-      }else{
-        if (monthfirst == FALSE) {
-          for (i in seq_len(length(index)))
-            entry[index[i]] <- paste(one[i], "/", three[i], "/", two[i], sep = "")
-        }else{
-          for (i in seq_len(length(index)))
-            entry[index[i]] <- paste(one[i], "/", two[i], "/", three[i], sep = "")
-        }
-      }
-    }else{
-      if (min(three) >= 1000) {
-        if (is.null(monthfirst)) {
-          if (max(two) <= 12 || max(one) > 12) {
-            for (i in seq_len(length(index))) {
-              entry[index[i]] <- paste(three[i], "/", two[i], "/", one[i], sep = "")
-            }
-          }else{
-            for (i in seq_len(length(index))) {
-              entry[index[i]] <- paste(three[i], "/", one[i], "/", two[i], sep = "")
-            }
-          }
-        }else{
-          if (monthfirst == FALSE) {
-            for (i in seq_len(length(index))) {
-              entry[index[i]] <- paste(three[i], "/", two[i], "/", one[i], sep = "")
-            }
-          }else{
-            for (i in seq_len(length(index))) {
-              entry[index[i]] <- paste(three[i], "/", one[i], "/", two[i], sep = "")
-            }
-          }
-        }
-      }else{
-        stop("Error-no year shown in date")
-      }
+    if(orderby == "dmy"){
+      month  = two
+      day = one
+      year = three
     }
+    if(orderby == "dym"){
+      month  = three
+      day = one
+      year = two
+    }
+    if(orderby == "mdy"){
+      month  = one
+      day = two
+      year = three
+    }
+    if(orderby == "myd"){
+      month  = one
+      day = three
+      year = two
+    }
+    if(orderby == "ymd"){
+      month  = two
+      day = three
+      year = one
+    }
+    if(orderby == "ydm"){
+      month  = three
+      day = two
+      year = one
+    }
+    if (max(month) > 12 || max(month) < 1) {
+        stop("Month should be between 1 and 12")
+    }
+    if (max(day) > 31 || max(day) < 1) {
+      stop("Day should be between 1 and 31")
+    }
+    if (max(year) < 1 || max(year) > format(Sys.Date(), "%Y")) {
+      stop("Year should be between 1 and the current year")
+    }
+    for(i in 1:length(index))
+      entry[index[i]] <- paste(year[i], "-", month[i], "-", day[i], sep = "")
   }else{
     stop("Date not in numeric formats")
   }
   return(entry)
 }
+
+################################################################################
+#' Function that convert a number represented as character array
+#' @param character_array a character array of numbers
+#' @return converted_number in numeric form
+#' @examples convert_to_number(c("1","9","8"))
+#' @export
+convert_to_number <- function(character_array){
+  converted = 0
+  ending = length(character_array)
+  for(i in 1:ending){
+    converted = converted + as.numeric(character_array[i]) * 10^(ending-i)
+  }
+  return(converted)
+}
+###############################################################################
+#' Helper function to keep date formats in year-month-date
+#' @param column a data frame or a  vector
+#' @param index those correspond to valid date in numeic form (omitting non response code or no entry)
+#' @param orderby give the order such as mdy, dmy etc where d refers to day, m to month and y to year
+#' @return entry corrected entries as in standard date format
+#' @examples convert_date_numeric_stdform(c("01/01/2000","02/02/2002"),c(1,2),"dmy")
+#' @export
+convert_date_numeric_stdform <- function(column, index, orderby = "dmy"){
+  required <- column[index]
+  leng = length(required)
+  converted <- list()
+  for(i in 1:leng){
+    converted_date <- convert_date_string_stdform(required[i],orderby)
+    converted = append(converted,converted_date)
+  }
+  converted = unlist(converted)
+  column[index] <- converted
+  return(column)
+}
+###############################################################################
+#' Helper function to keep date formats in year-month-date
+#' @param entry a date e.g 1 Jan 2020 with no commas
+#' @param orderby give the order such as mdy, dmy etc where d refers to day, m to month and y to year
+#' @return entry corrected entries as in standard date format
+#' @examples convert_date_string_stdform("Jan-1-2020",dmy")
+#' @export
+convert_date_string_stdform<- function(entry, orderby) {
+  contents <- unlist(strsplit(entry, ""))
+  months = toupper(c("Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+  months_full = toupper(c("January", "February", "March", "April", "May", "June","July", "August",
+                          "September", "October", "November", "December"))
+
+  spec_chars = c(" ", "/", "-")
+  spec_char_exist = NULL
+  stop = length(spec_chars)
+  i =1
+  while(i <= stop){
+    spec_char_exist <- grep(spec_chars[i], contents)
+    # print(length(spec_char_exist))
+    if(length(spec_char_exist) != 0){
+      i = length(spec_chars)+1
+    }else{
+      i = i + 1
+    }
+  }
+  len_spchar = length(spec_char_exist)
+  if(len_spchar !=2)
+    stop("Many special characters, check your date format -
+         only mid separators needed including the white space")
+
+  first = list()
+  for(i in 1:spec_char_exist[1]-1){
+    this = (contents[i])
+    first = append(first,this)
+  }
+  first = unlist(first)
+  if("," %in% first){
+    comma_ind <- grep(",", first)
+    first <- first[-comma_ind]
+  }
+  last = list()
+  start = spec_char_exist[2]+1
+  ending = length(contents)
+  for(i in start:ending ){
+    this = (contents[i])
+    last = append(last,this)
+  }
+  last = unlist(last)
+  if("," %in% last){
+    comma_ind <- grep(",", last)
+    last <- last[-comma_ind]
+  }
+
+  mid = list()
+  start = spec_char_exist[1]+1
+  ending = spec_char_exist[2]-1
+  for(i in start:ending ){
+    this = (contents[i])
+    mid = append(mid,this)
+  }
+  mid = unlist(mid)
+  if("," %in% mid){
+    comma_ind <- grep(",", mid)
+    mid <- mid[-comma_ind]
+  }
+
+  if(orderby == "dmy"){
+    day = convert_to_number(first)
+    month = toupper(paste(mid, collapse = ''))
+    year = convert_to_number(last)
+  }
+  if(orderby == "dym"){
+    day = convert_to_number(first)
+    month = toupper(paste(last, collapse = ''))
+    year = convert_to_number(mid)
+  }
+  if(orderby == "mdy"){
+    day = convert_to_number(mid)
+    month = toupper(paste(first, collapse = ''))
+    year = convert_to_number(last)
+  }
+  if(orderby == "myd"){
+    day = convert_to_number(last)
+    month = toupper(paste(first, collapse = ''))
+    year = convert_to_number(mid)
+  }
+  if(orderby == "ydm"){
+    day = convert_to_number(mid)
+    month = toupper(paste(last, collapse = ''))
+    year = convert_to_number(first)
+  }
+  if(orderby == "ymd"){
+    day = convert_to_number(last)
+    month = toupper(paste(mid, collapse = ''))
+    year = convert_to_number(first)
+  }
+  if(suppressWarnings(is.na(as.numeric(month)))){
+    if(month %in% months){
+      month_index =  which(month == months)
+    }else{
+      if(month %in% months_full){
+        month_index =  which(month == months_full)
+      }else{
+        stop("Check the spelling for the month")
+      }
+    }
+  }else{
+    month = as.numeric(month)
+    month_index = month
+  }
+  if(month_index ==2 & year %% 4 != 0){
+    if(day == 29 )
+      stop("Date 29 can only occur in a leap year")
+  }
+  if( day > 30  & (month_index == 2 | month_index == 4 |month_index == 6 |month_index == 9 |month_index == 11)){
+    stop("Date can not larger than 31")
+  }
+  if(day > 31 | day < 1 | month_index > 12 | month_index <1){
+    stop("Month or date not valid")
+  }
+
+  date_return <- paste(year, "-", month_index, "-", day, sep = "")
+  return(date_return)
+}
+
 ###############################################################################
 #' Function to calculate age from date of birth
 #' @param data a data frame
 #' @param columnname name of column corresponding to date of birth
-#' @param dateformat format of date e.g. dmy default is FALSE
+#' @param dateformat format of date e.g. dmy default is dmy
 #' @param nrcode non response code corresponding to date of birth
 #' @return data if success error if failure
 #' @examples
 #' library(IPDFileCheck)
 #' this.df <- data.frame(c("1987-05-28", "1987-06-18"),c(1,2), stringsAsFactors = FALSE)
 #' colnames(this.df) <- c("dob","num")
-#' calculate_age_from_dob(this.df,"dob")
+#' calculate_age_from_dob(this.df,"dob","ymd")
 #' @importFrom eeptools age_calc
 #' @export
-calculate_age_from_dob <- function(data, columnname, dateformat = FALSE, nrcode = NA) {
+calculate_age_from_dob <- function(data, columnname, dateformat = "dmy", nrcode = NA) {
   column_no <- get_columnno_fornames(data, columnname)
   if (column_no < 0) {
     stop("Column name for date of birth does not exist")
@@ -723,25 +898,7 @@ calculate_age_from_dob <- function(data, columnname, dateformat = FALSE, nrcode 
     }else{
       index <- which(entry !=  nrcode)
     }
-    if (dateformat == FALSE) {
-      mod_entry <- convert_stddate_format(entry, index, monthfirst <- NULL)
-    }else{
-      if (dateformat == "%y/%m/%d" || dateformat == "%y-%m-%d") {
-        mod_entry <- entry
-      }
-      if (dateformat == "%y/%d/%m" || dateformat == "%y-%d-%m") {
-        monthfirst <- FALSE
-        mod_entry <- convert_stddate_format(entry, index, monthfirst)
-      }
-      if (dateformat == "%m/%d/%y" || dateformat == "%m-%d-%y") {
-        monthfirst <- TRUE
-        mod_entry <- convert_stddate_format(entry, index, monthfirst)
-      }
-      if (dateformat == "%d/%m/%y" || dateformat == "%d-%m-%y") {
-        monthfirst <- FALSE
-        mod_entry <- convert_stddate_format(entry, index, monthfirst)
-      }
-    }
+    mod_entry <- convert_date_numeric_stdform(entry, index, orderby = dateformat)
     result  <-  eeptools::age_calc(as.Date(mod_entry[index]), units = "years")
     calculated_ages[index] <- result
     calculated_ages[blanks] <- NA
