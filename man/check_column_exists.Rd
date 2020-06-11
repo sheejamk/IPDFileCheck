@@ -18,5 +18,5 @@ check_column_exists(column_name, data)
 Function to check the given column exists
 }
 \examples{
-check_column_exists("age", data.frame("Age" = c(21,15), "Name" = c("John","Dora")))
+check_column_exists("age", data.frame("Age" = c(21, 15), "Name" = c("John", "Dora")))
 }

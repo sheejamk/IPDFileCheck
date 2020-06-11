@@ -23,6 +23,8 @@ test_data_string_restriction(data, column_name, nrcode = NA,
 Function to check the format of a string column when the string values are given
 }
 \examples{
-test_data_string_restriction(data.frame("Age" = c(21,15), "sex" =  c("m","f")),
-"sex",-999,c("f","m"))
+test_data_string_restriction(
+  data.frame("Age" = c(21, 15), "sex" = c("m", "f")),
+  "sex", -999, c("f", "m")
+)
 }

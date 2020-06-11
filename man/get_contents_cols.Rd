@@ -18,6 +18,8 @@ the contents of the column, if success error if failure
 Function to return the unique contents of the column given the column name
 }
 \examples{
-get_contents_cols(data.frame("yob" =  c(1951,1980),
-"Name" =  c("John","Dora")),"yob")
+get_contents_cols(data.frame(
+  "yob" =  c(1951, 1980),
+  "Name" =  c("John", "Dora")
+), "yob")
 }

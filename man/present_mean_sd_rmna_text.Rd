@@ -22,6 +22,8 @@ the mean(sd), error for failure
 Function to present the mean and sd of a data set in the form Mean (SD)
 }
 \examples{
-present_mean_sd_rmna_text(data.frame("age" = c(21,15),
-"Name" = c("John","Dora")),"age",NA)
+present_mean_sd_rmna_text(data.frame(
+  "age" = c(21, 15),
+  "Name" = c("John", "Dora")
+), "age", NA)
 }

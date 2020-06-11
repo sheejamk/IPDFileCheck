@@ -20,6 +20,8 @@ test_data_numeric_norange(column_name, data, nrcode = NA)
 Function to check the format of a numeric column when the values are not bounded
 }
 \examples{
-test_data_numeric_norange("marks", data.frame("marks"  =  c(210,99),
-"Name" =  c("John","Dora")),-99)
+test_data_numeric_norange("marks", data.frame(
+  "marks"  =  c(210, 99),
+  "Name" =  c("John", "Dora")
+), -99)
 }

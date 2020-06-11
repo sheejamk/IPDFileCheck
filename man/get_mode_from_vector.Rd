@@ -18,5 +18,5 @@ mode
 Function to return mode
 }
 \examples{
-get_mode_from_vector(c(1,1,2,3))
+get_mode_from_vector(c(1, 1, 2, 3))
 }

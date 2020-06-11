@@ -24,6 +24,8 @@ test_data_numeric(column_name, data, nrcode = NA, minval, maxval)
 Function to check the format of a numeric column
 }
 \examples{
-test_data_numeric("age", data.frame("Age" =  c(21,15),
-"Name"  = c("John","Dora")),-99,0,100)
+test_data_numeric("age", data.frame(
+  "Age" =  c(21, 15),
+  "Name"  = c("John", "Dora")
+), -99, 0, 100)
 }

@@ -20,7 +20,7 @@ data, if success error if failure
 Function to calculate age from year of birth
 }
 \examples{
-this.data.frame <-data.frame(c(1951,1980),c("John","Dora"))
-colnames(this.data.frame) <- c("yob","name")
-calculate_age_from_year(this.data.frame,"yob",NA)
+this.data.frame <- data.frame(c(1951, 1980), c("John", "Dora"))
+colnames(this.data.frame) <- c("yob", "name")
+calculate_age_from_year(this.data.frame, "yob", NA)
 }

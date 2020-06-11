@@ -16,5 +16,5 @@ converted_number in numeric form
 Function that convert a number represented as character array
 }
 \examples{
-convert_to_number(c("1","9","8"))
+convert_to_number(c("1", "9", "8"))
 }

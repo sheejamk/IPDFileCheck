@@ -20,5 +20,5 @@ test_data_string(data, column_name, nrcode = NA)
 Function to check the format of a string column
 }
 \examples{
-test_data_string(data.frame("Age" = c(21,15), "Name" = c("John","Dora")),"name",-999)
+test_data_string(data.frame("Age" = c(21, 15), "Name" = c("John", "Dora")), "name", -999)
 }

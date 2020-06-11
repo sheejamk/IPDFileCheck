@@ -18,5 +18,5 @@ cohens d estimated with 95% CI or error if failure
 Function to find the effect size Cohen's d
 }
 \examples{
-cohensd(c(1,2,3,4),c(3,4,5,6))
+cohensd(c(1, 2, 3, 4), c(3, 4, 5, 6))
 }

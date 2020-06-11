@@ -20,5 +20,5 @@ entry corrected entries as in standard date format
 Helper function to keep date formats in year-month-date
 }
 \examples{
-convert_date_numeric_stdform(c("01/01/2000","02/02/2002"),c(1,2),"dmy")
+convert_date_numeric_stdform(c("01/01/2000", "02/02/2002"), c(1, 2), "dmy")
 }

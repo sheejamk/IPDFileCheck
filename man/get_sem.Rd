@@ -18,5 +18,5 @@ SE the standard error of the mean
 Function to estimate standard error of the mean
 }
 \examples{
-get_sem(c(1,2,3,4))
+get_sem(c(1, 2, 3, 4))
 }

@@ -22,5 +22,5 @@ Function to return the column number if a given pattern is contained in
 the column names of a data
 }
 \examples{
-check_colno_pattern_colname("age","female_age")
+check_colno_pattern_colname("age", "female_age")
 }

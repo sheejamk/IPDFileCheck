@@ -24,7 +24,7 @@ Function to calculate age from date of birth
 }
 \examples{
 library(IPDFileCheck)
-this.df <- data.frame(c("1987-05-28", "1987-06-18"),c(1,2), stringsAsFactors = FALSE)
-colnames(this.df) <- c("dob","num")
-calculate_age_from_dob(this.df,"dob","ymd")
+this.df <- data.frame(c("1987-05-28", "1987-06-18"), c(1, 2), stringsAsFactors = FALSE)
+colnames(this.df) <- c("dob", "num")
+calculate_age_from_dob(this.df, "dob", "ymd")
 }

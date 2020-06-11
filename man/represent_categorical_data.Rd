@@ -20,7 +20,7 @@ number and percentages or error if failure
 Function to find the number and percentages of categories
 }
 \examples{
-this.df <- data.frame(c(11,78),c("m","f"),stringsAsFactors = FALSE)
-colnames(this.df) <- c("mark","gender")
-represent_categorical_data(this.df,"gender",NA)
+this.df <- data.frame(c(11, 78), c("m", "f"), stringsAsFactors = FALSE)
+colnames(this.df) <- c("mark", "gender")
+represent_categorical_data(this.df, "gender", NA)
 }

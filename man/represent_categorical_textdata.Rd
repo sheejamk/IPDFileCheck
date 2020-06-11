@@ -20,7 +20,7 @@ the numbers (percentage) , error for failure
 Function to represent categorical data in the form - numbers (percentage)
 }
 \examples{
-df <- data.frame(c(11,78),c("m","f"),stringsAsFactors = FALSE)
-colnames(df) <- c("mark","gender")
-represent_categorical_textdata(df,"gender",NA)
+df <- data.frame(c(11, 78), c("m", "f"), stringsAsFactors = FALSE)
+colnames(df) <- c("mark", "gender")
+represent_categorical_textdata(df, "gender", NA)
 }

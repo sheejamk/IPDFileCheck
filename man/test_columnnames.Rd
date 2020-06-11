@@ -18,6 +18,8 @@ test_columnnames(column_names, data)
 Function to test column names of a data being different from what specified
 }
 \examples{
-test_columnnames(c("name","age"), data.frame("Age" =  c(21,15),
-"Name" =  c("John","Dora")))
+test_columnnames(c("name", "age"), data.frame(
+  "Age" =  c(21, 15),
+  "Name" =  c("John", "Dora")
+))
 }

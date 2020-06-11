@@ -22,6 +22,8 @@ test_column_contents(data, column, code, nrcode = NA)
 Function to check the format of column contents
 }
 \examples{
-test_column_contents(data.frame("sex" =  c("m","f"),
-"Name"=  c("John","Dora")),"sex",c("m","f"),999)
+test_column_contents(data.frame(
+  "sex" = c("m", "f"),
+  "Name" = c("John", "Dora")
+), "sex", c("m", "f"), 999)
 }

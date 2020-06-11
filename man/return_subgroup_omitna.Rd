@@ -22,6 +22,8 @@ Function to return a subgroup when certain variable equals the given value
 while omitting those with NA
 }
 \examples{
-return_subgroup_omitna(data.frame("age" = c(21,15),
-"Name" = c("John","Dora")),"age",10)
+return_subgroup_omitna(data.frame(
+  "age" = c(21, 15),
+  "Name" = c("John", "Dora")
+), "age", 10)
 }

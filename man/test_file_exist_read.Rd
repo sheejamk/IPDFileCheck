@@ -17,5 +17,6 @@ Function to throw error on invalid directory or file and if not readable
 }
 \examples{
 test_file_exist_read(system.file("extdata", "blank.txt",
-package = "IPDFileCheck"))
+  package = "IPDFileCheck"
+))
 }

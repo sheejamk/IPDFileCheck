@@ -20,6 +20,6 @@ test_age(data, agecolumn = "age", nrcode = NA)
 Function to check the format of 'age' in data
 }
 \examples{
-df<-data.frame("Age" =  c(21,15), "Name" =  c("John", "Dora"))
-test_age(df,"age", 999)
+df <- data.frame("Age" = c(21, 15), "Name" = c("John", "Dora"))
+test_age(df, "age", 999)
 }

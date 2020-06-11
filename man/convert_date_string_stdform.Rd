@@ -17,3 +17,6 @@ entry corrected entries as in standard date format
 \description{
 Helper function to keep date formats in year-month-date
 }
+\examples{
+convert_date_string_stdform("Jan-1-2020", "mdy")
+}
