@@ -412,7 +412,7 @@ descriptive_stats_col <- function(data, column_name, nrcode = NA) {
         & !is.na(data[column_name])]
       }
       if (length(this_column) == 0) {
-
+        return(0)
       } else {
         this_sum <- sum(this_column)
         this_av <- mean(this_column)
