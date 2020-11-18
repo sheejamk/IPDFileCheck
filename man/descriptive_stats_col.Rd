@@ -22,5 +22,6 @@ Function to return descriptive statistics, sum, no of observations, mean,
 mode. median, range, standard deviation and standard error
 }
 \examples{
-descriptive_stats_col(data.frame("age" = c(21, 15), "Name" = c("John", "Dora")), "age", NA)
+descriptive_stats_col(data.frame("age" = c(21, 15),
+"Name" = c("John", "Dora")), "age", NA)
 }

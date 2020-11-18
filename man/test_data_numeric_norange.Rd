@@ -2,7 +2,8 @@
 % Please edit documentation in R/IPDFilecheck.R
 \name{test_data_numeric_norange}
 \alias{test_data_numeric_norange}
-\title{Function to check the format of a numeric column when the values are not bounded}
+\title{Function to check the format of a numeric column when the values
+are not bounded}
 \usage{
 test_data_numeric_norange(column_name, data, nrcode = NA)
 }
@@ -17,7 +18,8 @@ test_data_numeric_norange(column_name, data, nrcode = NA)
 0, if success error, if failure
 }
 \description{
-Function to check the format of a numeric column when the values are not bounded
+Function to check the format of a numeric column when the values
+are not bounded
 }
 \examples{
 test_data_numeric_norange("marks", data.frame(

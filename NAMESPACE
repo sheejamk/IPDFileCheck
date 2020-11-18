@@ -2,12 +2,11 @@
 
 export(calculate_age_from_dob)
 export(calculate_age_from_year)
-export(check_colno_pattern_colname)
+export(check_col_pattern_colname)
 export(check_column_exists)
 export(check_load_packages)
 export(cohensd)
 export(convert_date_numeric_stdform)
-export(convert_date_numeric_stdform_old)
 export(convert_date_string_stdform)
 export(convert_to_number)
 export(descriptive_stats_col)

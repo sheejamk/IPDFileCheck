@@ -9,9 +9,11 @@ convert_date_numeric_stdform(column, index, orderby = "dmy")
 \arguments{
 \item{column}{a data frame or a  vector}
 
-\item{index}{those correspond to valid date in numeic form (omitting non response code or no entry)}
+\item{index}{those correspond to valid date in numeic form (omitting non
+response code or no entry)}
 
-\item{orderby}{give the order such as mdy, dmy etc where d refers to day, m to month and y to year}
+\item{orderby}{give the order such as mdy, dmy etc where d refers to day,
+m to month and y to year}
 }
 \value{
 entry corrected entries as in standard date format

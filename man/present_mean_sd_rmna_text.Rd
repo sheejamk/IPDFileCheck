@@ -2,7 +2,7 @@
 % Please edit documentation in R/IPDFilecheck.R
 \name{present_mean_sd_rmna_text}
 \alias{present_mean_sd_rmna_text}
-\title{###############################################################################
+\title{############################################################################
 Function to present the mean and sd of a data set in the form Mean (SD)}
 \usage{
 present_mean_sd_rmna_text(data, column_name, nrcode = NA)
@@ -18,7 +18,7 @@ present_mean_sd_rmna_text(data, column_name, nrcode = NA)
 the mean(sd), error for failure
 }
 \description{
-###############################################################################
+############################################################################
 Function to present the mean and sd of a data set in the form Mean (SD)
 }
 \examples{

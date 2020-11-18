@@ -2,10 +2,10 @@
 % Please edit documentation in R/IPDFilecheck.R
 \name{test_data_string_restriction}
 \alias{test_data_string_restriction}
-\title{Function to check the format of a string column when the string values are given}
+\title{Function to check the format of a string column when the string values
+are given}
 \usage{
-test_data_string_restriction(data, column_name, nrcode = NA,
-  allowed_strings)
+test_data_string_restriction(data, column_name, nrcode = NA, allowed_strings)
 }
 \arguments{
 \item{data}{data frame}
@@ -14,13 +14,15 @@ test_data_string_restriction(data, column_name, nrcode = NA,
 
 \item{nrcode}{non response code corresponding to the column}
 
-\item{allowed_strings}{allowed strings or characters to represent meaningful entry}
+\item{allowed_strings}{allowed strings or characters to represent
+meaningful entry}
 }
 \value{
 0, if success error, if failure
 }
 \description{
-Function to check the format of a string column when the string values are given
+Function to check the format of a string column when the string values
+are given
 }
 \examples{
 test_data_string_restriction(

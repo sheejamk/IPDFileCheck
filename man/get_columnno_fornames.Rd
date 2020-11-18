@@ -18,5 +18,6 @@ column number, if success error, if failure
 Function to return the column number for column name
 }
 \examples{
-get_columnno_fornames(data.frame("Age" = c(21, 15), "Name" = c("John", "Dora")), "Name")
+get_columnno_fornames(data.frame("Age" = c(21, 15),
+"Name" = c("John", "Dora")), "Name")
 }

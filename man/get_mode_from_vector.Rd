@@ -2,7 +2,7 @@
 % Please edit documentation in R/IPDFilecheck.R
 \name{get_mode_from_vector}
 \alias{get_mode_from_vector}
-\title{###############################################################################
+\title{############################################################################
 Function to return mode}
 \usage{
 get_mode_from_vector(v)
@@ -14,7 +14,7 @@ get_mode_from_vector(v)
 mode
 }
 \description{
-###############################################################################
+############################################################################
 Function to return mode
 }
 \examples{

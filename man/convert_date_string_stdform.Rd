@@ -9,7 +9,8 @@ convert_date_string_stdform(entry, orderby)
 \arguments{
 \item{entry}{a date e.g 1 Jan 2020 with no commas}
 
-\item{orderby}{give the order such as mdy, dmy etc where d refers to day, m to month and y to year}
+\item{orderby}{give the order such as mdy, dmy etc where d refers to day,
+m to month and y to year}
 }
 \value{
 entry corrected entries as in standard date format
