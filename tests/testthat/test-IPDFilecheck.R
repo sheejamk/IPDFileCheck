@@ -41,6 +41,7 @@ test_that("testing age calculated from year of birth", {
   ag1 <- as.numeric(format(Sys.Date(), "%Y")) - 1957
   ag2 <- as.numeric(format(Sys.Date(), "%Y")) - 1987
   ag3 <- as.numeric(format(Sys.Date(), "%Y")) - 1989
+  ages <- c(ag1, ag2, 0, ag3)
   mod_data <- calculate_age_from_year(tempdata, "dob", 0)$calc.age.yob
   expect_equivalent(ages, mod_data, tolerance = 0.001)
 
@@ -472,9 +473,9 @@ test_that("testing mode function", {
 # ############################################################################
 context("testing column number from pattern")
 test_that("testing number from pattern", {
-  expect_equal(check_colno_pattern_colname("dd", "female_age"), FALSE)
-  expect_equal(check_colno_pattern_colname("age", "female_age"), TRUE)
-  expect_equal(check_colno_pattern_colname(12, "12age"), TRUE)
+  expect_equal(check_col_pattern_colname("dd", "female_age"), FALSE)
+  expect_equal(check_col_pattern_colname("age", "female_age"), TRUE)
+  expect_equal(check_col_pattern_colname(12, "12age"), TRUE)
 })
 # ############################################################################
 context("testing column existence")
