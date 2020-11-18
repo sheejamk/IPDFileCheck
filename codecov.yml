@@ -4,7 +4,7 @@ sudo: false
 cache: packages
 after_success: - Rscript -e 'covr::codecov()'
 codecov:
-  token: 29e5469d-a816-4123-8add-ba6c5071e0da
+  token: d4fcb585-8011-4a09-8d47-b4534f1379d5
 
 coverage:
   status:

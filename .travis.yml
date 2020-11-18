@@ -1,3 +1,9 @@
-language: r
-warnings_are_errors: true
-sudo: required
+language: R
+sudo: false
+before install:
+  - R -e "0" --args --bootstrap-packrat
+cache:
+  packages: true
+
+r_packages:
+    - covr
