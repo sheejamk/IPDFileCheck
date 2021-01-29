@@ -865,11 +865,11 @@ convert_date_string_stdform <- function(entry, orderby) {
   }
   if (month_index == 2) {
     if (year %% 4 != 0) {
-      if (day >= 28) {
+      if (day > 28) {
         stop("Date is not valid")
       }
     } else {
-      if (day >= 29) {
+      if (day > 29) {
         stop("Date is not valid")
       }
     }
@@ -881,7 +881,6 @@ convert_date_string_stdform <- function(entry, orderby) {
   if (day > 31 | day < 1 | month_index > 12 | month_index < 1) {
     stop("Month or date not valid")
   }
-
   date_return <- paste(year, "-", month_index, "-", day, sep = "")
   return(date_return)
 }
@@ -903,9 +902,10 @@ convert_date_string_stdform <- function(entry, orderby) {
 #' @export
 calculate_age_from_dob <- function(data, columnname, dateformat = "dmy",
                                    nrcode = NA) {
-  column_no <- get_columnno_fornames(data, columnname)
+    column_no <- get_columnno_fornames(data, columnname)
     data <- as.data.frame(data, string.as.factors = FALSE)
     entry <- data[[column_no]]
+    entry <- as.character(entry)
     blanks <- c(which(entry == ""), which(is.na(entry)))
     if (length(blanks) != 0) {
       entry[blanks] <- nrcode

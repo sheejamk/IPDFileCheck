@@ -10,7 +10,7 @@ keep_required_columns(variables, the_data)
 \arguments{
 \item{variables}{list of variables}
 
-\item{the_data}{data to be subsetting}
+\item{the_data}{data to be sub setting}
 }
 \value{
 subset
