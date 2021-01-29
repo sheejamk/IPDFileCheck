@@ -448,6 +448,19 @@ test_that("testing descriptive statistics", {
     fixed = TRUE
   )
 })
+# ############################################################################
+context("testing keep required variables")
+test_that("testing keep required variables", {
+  the_data <- data.frame("Age" = c(21, 15), "sex" = c("m", "f"))
+  ans <- keep_required_columns("Age", the_data)
+  expect_equal(ans$Age, c(21, 15))
+  expect_error(keep_required_columns( "num", the_data))
+  ans <- keep_required_columns(c("Age",NULL), the_data)
+  expect_equal(ans$Age, c(21, 15))
+  expect_error(keep_required_columns(NA, the_data))
+  expect_error(keep_required_columns(c(NULL), the_data))
+  expect_error(keep_required_columns(NULL, the_data))
+})
 
 # ############################################################################
 context("testing mode function")

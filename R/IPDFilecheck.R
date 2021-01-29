@@ -374,6 +374,34 @@ get_colno_pattern_colname <- function(pattern, column_names) {
   }
 }
 #' ############################################################################
+#'  Function to keep only certain variables
+#' @param variables list of variables
+#' @param the_data data to be sub setting
+#' @return subset
+#' @examples
+#' the_data <- data.frame("Age" = c(21, 15), "sex" = c("m", "f"))
+#' variable <- "Age"
+#' keep_required_columns(variable, the_data)
+#' @export
+keep_required_columns <- function(variables, the_data) {
+  for (i in seq_len(length(variables))) {
+    if (!is.null(variables[i])) {
+      if (is.na(variables[i])) stop("Some variables are NA")
+    } else {
+      stop("Some variables are NULL, please check")
+    }
+  }
+  exists = unlist(lapply(variables, IPDFileCheck::check_column_exists,
+                         the_data))
+  if (sum(exists) != 0) {
+    stop("Some variables do not exists in data, please check")
+  }
+  subset = the_data[(names(the_data) %in% variables)]
+  if (ncol(subset) == 0 | nrow(subset) == 0)
+    stop(" null value provided")
+  return(subset)
+}
+#' ############################################################################
 #' Function to return mode
 #' @param v a vector
 #' @return mode
