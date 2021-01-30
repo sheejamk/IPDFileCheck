@@ -925,7 +925,7 @@ calculate_age_from_dob <- function(data, columnname, dateformat = "dmy",
     if (any(non_na_ages > 150) || any(non_na_ages < 0)) {
       stop("Age can not be negative OR greater than 150")
     } else {
-      data["calc_age_dob"] <- calculated_ages
+      data["age"] <- calculated_ages
       return(data)
     }
 }

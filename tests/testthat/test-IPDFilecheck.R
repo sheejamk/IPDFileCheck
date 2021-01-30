@@ -639,7 +639,7 @@ test_that("testing age calculated from date of birth", {
   ag2 <- eeptools::age_calc(as.Date("1987-06-18"), units = "years")
   ag3 <- eeptools::age_calc(as.Date("1987-07-09"), units = "years")
   ages <- c(ag1, ag2, 0, ag3)
-  mod_data <- calculate_age_from_dob(tempdata, "dob", "ymd", 0)$calc_age_dob
+  mod_data <- calculate_age_from_dob(tempdata, "dob", "ymd", 0)$age
   expect_equivalent(ages, mod_data, tolerance = 0.001)
 
   x <- c("1287-05-28", "1987-06-18", NA, "1987-07-09")
@@ -658,7 +658,7 @@ test_that("testing age calculated from date of birth", {
   mod_data <- calculate_age_from_dob(
     tempdata, "dob",
     "ymd", NA
-  )$calc_age_dob
+  )$age
   ages <- c(ag1, ag2, NA, ag3)
   expect_equivalent(ages, mod_data, tolerance = 0.001)
 
@@ -669,7 +669,7 @@ test_that("testing age calculated from date of birth", {
   mod_data <- calculate_age_from_dob(
     tempdata, "dob",
     "ymd", NA
-  )$calc_age_dob
+  )$age
   ages <- c(ag1, ag2, NA, ag3)
   expect_equivalent(ages, mod_data, tolerance = 0.001)
 
@@ -680,7 +680,7 @@ test_that("testing age calculated from date of birth", {
   mod_data <- calculate_age_from_dob(
     tempdata, "dob",
     "dmy", NA
-  )$calc_age_dob
+  )$age
   ages <- c(ag1, ag2, NA, ag3)
   expect_equivalent(ages, mod_data, tolerance = 0.001)
 
@@ -691,7 +691,7 @@ test_that("testing age calculated from date of birth", {
   mod_data <- calculate_age_from_dob(
     tempdata, "dob",
     "mdy", NA
-  )$calc_age_dob
+  )$age
   ages <- c(ag1, ag2, NA, ag3)
   expect_equivalent(ages, mod_data, tolerance = 0.001)
 
@@ -704,14 +704,14 @@ test_that("testing age calculated from date of birth", {
   ag2 <- eeptools::age_calc(as.Date("1987-06-18"), units = "years")
   ag3 <- eeptools::age_calc(as.Date("2015-07-09"), units = "years")
   ages <- c(ag1, ag2, NA, ag3)
-  mod_data <- calculate_age_from_dob(tempdata, "dob", "ymd", NA)$calc_age_dob
+  mod_data <- calculate_age_from_dob(tempdata, "dob", "ymd", NA)$age
   expect_equivalent(ages, mod_data, tolerance = 0.001)
 
   x <- c("1997 May 28", "1987-June-18", NA, "2015/July/09")
   y <- c(1, 2, 3, 4)
   tempdata <- as.data.frame(cbind(y, x), stringsAsFactors = FALSE)
   colnames(tempdata) <- c("name", "dob")
-  mod_data <- calculate_age_from_dob(tempdata, "dob", "ymd", NA)$calc_age_dob
+  mod_data <- calculate_age_from_dob(tempdata, "dob", "ymd", NA)$age
   expect_equivalent(ages, mod_data, tolerance = 0.001)
 
   colnames(tempdata) <- c("name", "date")
