@@ -71,7 +71,6 @@ test_that("testing age calculated from year of birth", {
     fixed = TRUE
   )
 })
-
 # ############################################################################
 context("testing age")
 test_that("test for age checks for valid age", {
@@ -98,7 +97,7 @@ test_that("test for age checks for valid age", {
   tempdata <- as.data.frame(cbind(y, x), stringsAsFactors = F)
   colnames(tempdata) <- c("name", "AGE")
   expect_identical(test_age(tempdata, "AGE"), -1)
-  # #
+
   x <- c(-8, 99, 2, 5, -99)
   y <- c(1, 2, 3, 4, 5)
   tempdata <- as.data.frame(cbind(y, x), stringsAsFactors = F)
@@ -110,13 +109,13 @@ test_that("test for age checks for valid age", {
     "Column name does not exist",
     fixed = TRUE
   )
-  #
+
   x <- c(0, 11.5, "", 120, "noresponse")
   y <- c(1, 2, 3, 4, 5)
   tempdata <- as.data.frame(cbind(y, x), stringsAsFactors = F)
   colnames(tempdata) <- c("name", "AGE")
   expect_identical(test_age(tempdata, "AGE", "noresponse"), 0)
-  #
+
   x <- c(0, 11.5, "", 120, "noresponse")
   y <- c(1, 2, 3, 4, 5)
   tempdata <- as.data.frame(cbind(y, x), stringsAsFactors = F)
@@ -132,7 +131,6 @@ test_that("test for age checks for valid age", {
   colnames(tempdata) <- c("name", "age")
   expect_identical(test_age(tempdata, "age", "noresponse"), -4)
 })
-
 ###############################################################################
 context("testing gender")
 test_that("test for gender checks for correct gender", {
@@ -140,7 +138,7 @@ test_that("test for gender checks for correct gender", {
   y <- c(1, 2, 3, 4)
   tempdata <- as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("name", "sex")
-  # warning binrcpp version) appeared and suppressing it
+  # warning binrcpp version appeared and suppressing it
   expect_identical((test_gender(tempdata, c("f", "m"), "sex")), 0)
   x <- c("f", "f", "f", "f", 99)
   y <- c(1, 2, 3, 4, 5)
@@ -155,8 +153,7 @@ test_that("test for gender checks for correct gender", {
   colnames(tempdata) <- c("name", "age")
   expect_error(test_gender(tempdata, c("f", "m", 99), "sex", 99),
     "Column name does not exist",
-    fixed = TRUE
-  )
+    fixed = TRUE)
   colnames(tempdata) <- c("name", "sex")
   expect_identical(test_gender(tempdata, c(1, 2), "sex", 99), -1)
 
@@ -172,8 +169,32 @@ test_that("test for gender checks for correct gender", {
   colnames(tempdata) <- c("name", "gender")
   expect_identical(test_gender(
     tempdata, c("female", "male", 99),
-    "gender", 99
-  ), 0)
+    "gender", 99), 0)
+})
+# ############################################################################
+context("testing get value from codes")
+test_that("test  get value from codes", {
+  data = data.frame("sex" = c(1, 2, 2, 1, 1),
+   "Name" = c("John", "Dora","Dora", "John","John"))
+  list_codes_values = list(c(1,2), c("F", "M"))
+  ans <- get_value_from_codes(data, column = "sex", nrcode = NA,
+  list_codes_values)
+  expect_equal(ans,c("F", "M", "M", "F","F"))
+  expect_error(get_value_from_codes(data, column = NULL, nrcode = NA,
+                       list_codes_values))
+  expect_error(get_value_from_codes(data, column = NA, nrcode = NA,
+                                    list_codes_values))
+  expect_error(get_value_from_codes(data, column = "sex", nrcode = NA,
+                                    list_codes_values = NULL))
+  expect_error(get_value_from_codes(NULL, column = "sex", nrcode = NA,
+                                    list_codes_values ))
+
+  data = data.frame("sex" = c(1, 2,3, 1, 2),
+                    "Name" = c("John", "Dora","Dora", "John","John"))
+  list_codes_values = list(c(1,2, 3), c("F", "M", "Other"))
+  ans <- get_value_from_codes(data, column = "sex", nrcode = NA,
+                                     list_codes_values)
+  expect_equal(ans,c("F", "M", "Other", "F","M"))
 })
 # ############################################################################
 context("testing column contents")
@@ -192,21 +213,16 @@ test_that("test column contents", {
   colnames(tempdata) <- c("name", "age")
   expect_error(test_column_contents(tempdata, "sex", c("f", "M"), 99),
     "Column name does not exist",
-    fixed = TRUE
-  )
+    fixed = TRUE)
   x <- c(1, 2, 3, 4, 1, 3, 99)
   y <- c(1, 2, 3, 4, 5, 6, 7)
   tempdata <- as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("name", "level")
   expect_identical(test_column_contents(
-    tempdata, "level",
-    c(1, 2, 3, 4, 5), 99
-  ), 0)
+    tempdata, "level",c(1, 2, 3, 4, 5), 99), 0)
 
   expect_identical(test_column_contents(
-    tempdata, "level",
-    c(1, 2, 3), 99
-  ), -2)
+    tempdata, "level",c(1, 2, 3), 99), -2)
 })
 # # ############################################################################
 context("testing the column number for column name")

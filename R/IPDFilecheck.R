@@ -151,6 +151,7 @@ test_age <- function(data, agecolumn = "age", nrcode = NA) {
 #' test_gender(data.frame("sex" = c("m", "f"), "Name" = c("John", "Dora")),
 #' c("f", "m"), "sex", 999)
 #' @export
+
 test_gender <- function(data, gendercode, gendercolumn = "gender",
                         nrcode = NA) {
   gendercode <- toupper(gendercode)
@@ -171,6 +172,47 @@ test_gender <- function(data, gendercode, gendercolumn = "gender",
       return(-1)
     }
   }
+}
+###############################################################################
+#' Function to get the actual value of column content if its coded
+#' @param data a data frame
+#' @param column column name for value
+#' @param list_codes_values list of codes to understand the codes and value
+#' @param nrcode non response code corresponding to gender column
+#' @return 0, if success error if failure
+#' @examples
+#' data = data.frame("sex" = c(1, 2, 2, 1, 1),
+#'  "Name" = c("John", "Dora","Dora", "John","John"))
+#' list_codes_values = list(c("F", "M"),c(1,2))
+#' ans <- get_value_from_codes(data, column = "sex", nrcode = NA,
+#' list_codes_values)
+#' @export
+#' @importFrom dplyr %>%
+get_value_from_codes <- function(data, column,
+                              nrcode = NA, list_codes_values) {
+     if (is.null(column)) {
+       stop("Column name cant be null")
+     } else {
+       if (is.na(column))
+         stop("Column name cant be NA")
+     }
+     if (is.null(data))
+       stop("data cant be null")
+     if (is.null(list_codes_values))
+       stop("list_codes_values cant be null")
+     if (get_columnno_fornames(data, column) > 0) {
+        h <- hash::hash(key = unlist(list_codes_values[1]),
+                 values = unlist(list_codes_values[2]) )
+        leys <- h$key
+        vals <- h$values
+        ipd_codes <- unlist(data %>% dplyr::select(dplyr::all_of(column)))
+        this_values <- c()
+        for (i in seq_len(length(ipd_codes))) {
+          this_val <- vals[leys == ipd_codes[i]]
+          this_values <- append(this_values,this_val)
+        }
+        return((this_values))
+     }
 }
 ###############################################################################
 #' Function to check the format of column contents

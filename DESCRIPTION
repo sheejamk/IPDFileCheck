@@ -1,7 +1,7 @@
 Package: IPDFileCheck
 Type: Package
 Title: Basic Functions to Check Readability, Consistency, and Content of an Individual Participant Data File
-Version: 0.6.4
+Version: 0.6.5
 Author: Sheeja Manchira Krishnan
 Maintainer: Sheeja Manchira Krishnan <sheejamk@gmail.com>
 Description: Basic checks needed with an individual level participant data from randomised controlled trial. This 
@@ -12,7 +12,8 @@ Imports:
         GlobalOptions (>= 0.1.0),
         lubridate,
         methods,
-        eeptools
+        eeptools,
+        hash
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
