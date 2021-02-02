@@ -151,7 +151,6 @@ test_age <- function(data, agecolumn = "age", nrcode = NA) {
 #' test_gender(data.frame("sex" = c("m", "f"), "Name" = c("John", "Dora")),
 #' c("f", "m"), "sex", 999)
 #' @export
-
 test_gender <- function(data, gendercode, gendercolumn = "gender",
                         nrcode = NA) {
   gendercode <- toupper(gendercode)
@@ -686,7 +685,6 @@ represent_categorical_textdata <- function(data, variable, nrcode) {
   ans <- rep(0, ncol(intresult))
   i <- 1
   while (i <= ncol(intresult)) {
-    print(i)
     num <- intresult[1, i]
     perc <- intresult[2, i]
     temp <- c(paste(round(num, 2), " (", round(perc, 2), ")", sep = ""))
