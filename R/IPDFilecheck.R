@@ -201,7 +201,7 @@ get_value_from_codes <- function(data, column,
        stop("list_codes_values cant be null")
      if (get_columnno_fornames(data, column) > 0) {
         h <- hash::hash(key = unlist(list_codes_values[1]),
-                 values = unlist(list_codes_values[2]) )
+                 values = unlist(list_codes_values[2]))
         leys <- h$key
         vals <- h$values
         ipd_codes <- unlist(data %>% dplyr::select(dplyr::all_of(column)))
@@ -212,7 +212,7 @@ get_value_from_codes <- function(data, column,
           } else {
             this_val <- vals[leys == ipd_codes[i]]
           }
-          this_values <- append(this_values,this_val)
+          this_values <- append(this_values, this_val)
         }
         return((this_values))
      }
@@ -436,12 +436,12 @@ keep_required_columns <- function(variables, the_data) {
       stop("Some variables are NULL, please check")
     }
   }
-  exists = unlist(lapply(variables, IPDFileCheck::check_column_exists,
+  exists <- unlist(lapply(variables, IPDFileCheck::check_column_exists,
                          the_data))
   if (sum(exists) != 0) {
     stop("Some variables do not exists in data, please check")
   }
-  subset = the_data[(names(the_data) %in% variables)]
+  subset <- the_data[(names(the_data) %in% variables)]
   if (ncol(subset) == 0 | nrow(subset) == 0)
     stop(" null value provided")
   return(subset)
@@ -489,19 +489,19 @@ descriptive_stats_col_excl_nrcode <- function(data, column_name, nrcode = NA) {
       if (length(this_column) == 0) {
         return(0)
       } else {
-        this_sum <- round(sum(this_column),3)
-        this_av <- round(mean(this_column),3)
-        this_med <- round(median(this_column),3)
-        this_mode <- round(get_mode_from_vector(this_column),3)
-        this_range_low <- round(min(this_column),3)
-        this_range_high <- round(max(this_column),3)
-        this_sd <- round(sd(this_column),3)
-        this_se <- round(this_sd / sqrt(length(this_column)),3)
+        this_sum <- round(sum(this_column), 3)
+        this_av <- round(mean(this_column), 3)
+        this_med <- round(median(this_column), 3)
+        this_mode <- round(get_mode_from_vector(this_column), 3)
+        this_range_low <- round(min(this_column), 3)
+        this_range_high <- round(max(this_column), 3)
+        this_sd <- round(sd(this_column), 3)
+        this_se <- round(this_sd / sqrt(length(this_column)), 3)
         this_lq <- quantile(this_column, c(0.25))
         this_uq <- quantile(this_column, c(0.75))
         this_ci_low <- quantile(this_column, c(0.025))
         this_ci_high <- quantile(this_column, c(0.975))
-        this_range = paste(this_range_low, "-", this_range_high)
+        this_range <- paste(this_range_low, "-", this_range_high)
         results <- matrix(c(
           this_sum, this_av, this_sd, this_med, this_mode,
           this_se, this_range_low, this_range_high, this_range,
@@ -622,7 +622,7 @@ return_subgroup_withNA <- function(data, variable, value) {
   if (check_column_exists(variable, data) == 0) {
     column_no <- get_columnno_fornames(data, variable)
     if (is.na(value)) {
-      subgroup <- data[is.na(data[column_no]),]
+      subgroup <- data[is.na(data[column_no]), ]
     } else {
       subgroup <- data[which(data[column_no] == value), ]
     }
@@ -686,7 +686,8 @@ get_sem <- function(x) {
 #' colnames(this.df) <- c("mark", "gender")
 #' represent_categorical_data_exclude_missing(this.df, "gender", NA)
 #' @export
-represent_categorical_data_exclude_missing <- function(data, variable, nrcode = NA) {
+represent_categorical_data_exclude_missing <- function(data, variable,
+                                                       nrcode = NA) {
   coding <- unique(toupper(factor(data[[variable]])))
   if (is.na(nrcode)) {
     coding <- coding[!is.na(coding)]
@@ -737,7 +738,8 @@ represent_categorical_data_exclude_missing <- function(data, variable, nrcode = 
 #' colnames(this.df) <- c("mark", "gender")
 #' represent_categorical_data_include_missing(this.df, "gender", NA)
 #' @export
-represent_categorical_data_include_missing <- function(data, variable, nrcode = NA) {
+represent_categorical_data_include_missing <- function(data, variable,
+                                                       nrcode = NA) {
   coding <- unique(toupper(factor(data[[variable]])))
   num_categories <- length(coding)
   if (check_column_exists(variable, data) == 0) {
@@ -776,7 +778,8 @@ represent_categorical_data_include_missing <- function(data, variable, nrcode = 
 #' represent_categorical_textdata(df, "gender", NA)
 #' @export
 represent_categorical_textdata <- function(data, variable, nrcode) {
-  intresult <- represent_categorical_data_include_missing(data, variable, nrcode)
+  intresult <- represent_categorical_data_include_missing(data, variable,
+                                                          nrcode)
   ans <- rep(0, ncol(intresult))
   i <- 1
   while (i <= ncol(intresult)) {
@@ -815,8 +818,8 @@ represent_categorical_data_forsubgroups <- function(data, variable1, variable2,
   } else {
     coding <- unique(toupper(factor(data[[variable1]])))
     variables <- unique(toupper(factor(data[[variable2]])))
-    coding_len = length(coding)
-    var_len = length(variables)
+    coding_len <- length(coding)
+    var_len <- length(variables)
     all_list <- c()
     for (i in seq_len(length(coding))) {
       this_subgroup1 <- return_subgroup_withNA(data, variable1, coding[i])
@@ -824,21 +827,20 @@ represent_categorical_data_forsubgroups <- function(data, variable1, variable2,
         this_subgroup1, variable2, nrcode))
       if (ncol(this_rep) < var_len) {
         not_repr <- variables[colnames(this_rep) != variables]
-        this_rep[[not_repr]] <- rep(0,nrow(this_rep))
+        this_rep[[not_repr]] <- rep(0, nrow(this_rep))
       }
-      all_list <- append(all_list,this_rep )
+      all_list <- append(all_list, this_rep)
     }
     all_list <- data.frame(all_list)
     row.names(all_list) <- row.names(this_rep)
     out <- kableExtra::kbl(all_list, "html", booktabs = T, align = c("r"),
-               col.names = rep(variables,coding_len))
-    out2 <- kableExtra::kable_styling(out, "striped", full_width = F, position = "left",
-                          font_size = 12)
-
-    header = rep(coding_len, var_len)
-    names(header) = coding
-    header = c("", header)
-    out3 = kableExtra::add_header_above(out2, header = header)
+               col.names = rep(variables, coding_len))
+    out2 <- kableExtra::kable_styling(out, "striped", full_width = F,
+                                      position = "left", font_size = 12)
+    header <- rep(coding_len, var_len)
+    names(header) <- coding
+    header <- c("", header)
+    out3 <- kableExtra::add_header_above(out2, header = header)
     return(out3)
   }
 }
@@ -871,17 +873,17 @@ represent_numerical_data_forsubgroups <- function(data, variable1, variable2,
     all_list <- new_list <- c()
     for (i in seq_len(length(coding))) {
       this_subgroup1 <- return_subgroup_withNA(data, variable1, coding[i])
-      this_rep <- data.frame(descriptive_stats_col_excl_nrcode(this_subgroup1, variable2,
-                                                   nrcode))
+      this_rep <- data.frame(descriptive_stats_col_excl_nrcode(this_subgroup1,
+                                                    variable2, nrcode))
       if (nrow(this_rep) < 1) {
-        this_rep <- rep(0,15)
+        this_rep <- rep(0, 15)
       }
-      all_list <- rbind(all_list,this_rep )
+      all_list <- rbind(all_list, this_rep)
     }
     all_list <- data.frame(all_list)
-    new_list <- as.data.frame(append(new_list,coding))
+    new_list <- as.data.frame(append(new_list, coding))
     colnames(new_list) <- "Group"
-    newlist <- data.frame(append(new_list,all_list))
+    newlist <- data.frame(append(new_list, all_list))
     out <- kableExtra::kbl(newlist, "html", booktabs = T, align = c("l"),
                            caption = "Age details")
     out2 <- kableExtra::kable_styling(out, "striped", full_width = F,
@@ -903,7 +905,7 @@ convert_to_number <- function(character_array) {
   ending <- length(character_array)
   for (i in 1:ending) {
     converted <- converted +
-      suppressWarnings(as.numeric(character_array[i]) * 10^(ending - i))
+      suppressWarnings(as.numeric(character_array[i]) * 10 ^ (ending - i))
   }
   if (!is.na(converted)) {
     return(converted)
