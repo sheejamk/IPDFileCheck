@@ -44,18 +44,18 @@ For demonstration purposes, two simulated data sets (one with valid data and ano
 
 ```{r }
  set.seed(17)
- rctdata <- data.frame(age=abs(rnorm(10, 60, 20)),
-                           sex=c("M", "F","M", "F","M", "F","M", "F","F","F"),
-                           yob=sample(seq(1930,2000), 10, replace=T),
-                           dob=c("07/12/1969","16/02/1962","03/09/1978","17/02/1969",                                      "25/11/1960","17/04/1970","18/03/1997","30/01/1988",
+ rctdata <- data.frame(age = abs(rnorm(10, 60, 20)),
+                           sex = c("M", "F","M", "F","M", "F","M", "F","F","F"),
+                           yob = sample(seq(1930,2000), 10, replace = T),
+                           dob = c("07/12/1969","16/02/1962","03/09/1978","17/02/1969",                                      "25/11/1960","17/04/1970","18/03/1997","30/01/1988",
                                                "03/02/1990","25/09/1978"),
-                           arm=c("Control", "Intervention","Control", "Intervention","Control", "Intervention","Control", "Intervention","Control", "Intervention"),stringsAsFactors = FALSE)
+                           arm = c("Control", "Intervention","Control", "Intervention","Control", "Intervention","Control", "Intervention","Control", "Intervention"),stringsAsFactors = FALSE)
  
-rctdata_error <- data.frame(age=runif(10, -60, 120),
-                           sex=c("M", "F","M", "F","M", "F","M", "F","F","F"),
-                           yob=sample(seq(1930,2000), 10, replace=T),
-                           dob=c("1997 May 28","1987-June-18",NA,"2015/July/09","1997 May 28","1987-June-18",NA,"2015/July/09","1997 May 28","1987-June-18"),
-                           arm=c("Control", "Intervention","Control", "Intervention","Control", "Intervention","Control", "Intervention","Control", "Intervention"),stringsAsFactors = FALSE)
+rctdata_error <- data.frame(age = runif(10, -60, 120),
+                           sex = c("M", "F","M", "F","M", "F","M", "F","F","F"),
+                           yob = sample(seq(1930,2000), 10, replace = T),
+                           dob = c("1997 May 28","1987-June-18", NA,"2015/July/09","1997 May 28","1987-June-18",NA,"2015/July/09","1997 May 28","1987-June-18"),
+                           arm = c("Control", "Intervention","Control", "Intervention","Control", "Intervention","Control", "Intervention","Control", "Intervention"),stringsAsFactors = FALSE)
 ```
 ## Examples- IPDFileCheck
 
@@ -137,9 +137,9 @@ get_colno_pattern_colname("ob",colnames(rctdata))
 
 ####10. To return descriptive statistics, sum, no of observations, mean, mode. median, range, standard deviation and standard error
 
-The function descriptive_stats_col returns the descriptive statistics of the column with the user specified column name. This includes mean, standard deviation, median, mode, standard error f the mean, minimum and maximum values to the 95% confidence intervals. If the column contents are not numeric or any error in calculating any of the quantities, the function returns an error. For example, the column 'age' is numeric and can return the descriptive statistics, but the column 'sex' is not. Hence the function returns an error.
+The function descriptive_stats_col_excl_nrcode returns the descriptive statistics of the column with the user specified column name. This includes mean, standard deviation, median, mode, standard error f the mean, minimum and maximum values to the 95% confidence intervals. If the column contents are not numeric or any error in calculating any of the quantities, the function returns an error. For example, the column 'age' is numeric and can return the descriptive statistics, but the column 'sex' is not. Hence the function returns an error.
 ```{r }
-descriptive_stats_col(rctdata, "age")
+descriptive_stats_col_excl_nrcode(rctdata, "age")
 ```
 
 ####11. To present the mean and sd of a data set in the form Mean (SD)

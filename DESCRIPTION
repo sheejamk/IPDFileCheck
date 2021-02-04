@@ -13,7 +13,8 @@ Imports:
         lubridate,
         methods,
         eeptools,
-        hash
+        hash,
+        kableExtra
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
