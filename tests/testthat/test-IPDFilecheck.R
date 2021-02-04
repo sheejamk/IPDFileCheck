@@ -394,16 +394,15 @@ test_that("testing descriptive statistics", {
   tempdata <- as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("name", "age")
   results <- matrix(c(
-    249, 62.25, 73.72, 44.5, 0, 36.86, 0, 160, "0 - 160", 4,
-    8.25, 98.5, 0.825, 153.85,0), nrow = 1, byrow = TRUE)
+    "249", "62.25", "73.722", "44.5", "0", "36.861", "0", "160", "0 - 160", "4",
+    "8.25", "98.5", "0.825", "153.85","0"), nrow = 1, byrow = TRUE)
   colnames(results) <- c(
     "Sum", "Mean", "SD", "Median", "Mode", "SE",
-    "Minimum", "Maximum", "Range", "Count", "LQ", "UQ", "95%CI.low",
-    "95%CI.high", "Number missing"
+    "Minimum", "Maximum", "Range", "Count", "LQ", "UQ", "CIlow",
+    "CIhigh", "MissingCount"
   )
   rownames(results) <- "age"
-  expect_equal(descriptive_stats_col_excl_nrcode(tempdata, "age", NA), results,
-               tolerance = 1e-1)
+  expect_equal(descriptive_stats_col_excl_nrcode(tempdata, "age", NA), results)
  })
 
 context("testing descriptive statistics")
