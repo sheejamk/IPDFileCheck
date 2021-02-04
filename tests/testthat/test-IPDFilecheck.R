@@ -424,7 +424,6 @@ test_that("testing descriptive statistics", {
   expect_equal(descriptive_stats_col_excl_nrcode(tempdata, "age", 0), results,
                tolerance = 0.001)
 })
-
 context("testing descriptive statistics")
 test_that("testing descriptive statistics", {
   x <- c(0, NA, 78, 160)
@@ -436,7 +435,7 @@ test_that("testing descriptive statistics", {
     "3", "39", "119", "3.9", "155.9", "1"), nrow = 1, byrow = TRUE)
   colnames(results) <- c(
     "Sum", "Mean", "SD", "Median",
-    "Mode", "SE", "Minimum", "Maximum", "Range","Count", "LQ", "UQ",
+    "Mode", "SE", "Minimum", "Maximum", "Range", "Count", "LQ", "UQ",
     "CIlow", "CIhigh", "MissingCount"
   )
   rownames(results) <- "age"
