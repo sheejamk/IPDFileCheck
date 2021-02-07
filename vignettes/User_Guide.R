@@ -64,3 +64,23 @@ test_data_string_restriction(rctdata,"sex",NA,c("M","F"))
 get_colno_pattern_colname("ob",colnames(rctdata))
 
 
+## -----------------------------------------------------------------------------
+descriptive_stats_col_excl_nrcode(rctdata, "age")
+
+## -----------------------------------------------------------------------------
+present_mean_sd_rmna_text(rctdata, "age")
+
+## -----------------------------------------------------------------------------
+return_subgroup_omitna(rctdata, "sex","F")
+return_subgroup_omitna(rctdata, "arm","control")
+
+## -----------------------------------------------------------------------------
+represent_categorical_textdata(rctdata, "sex",NA)
+represent_categorical_textdata(rctdata, "arm",NA)
+
+## -----------------------------------------------------------------------------
+calculate_age_from_dob(rctdata,"dob","dmy")
+
+## -----------------------------------------------------------------------------
+calculate_age_from_year(rctdata,"yob",NA)
+

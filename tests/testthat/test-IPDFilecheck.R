@@ -672,6 +672,14 @@ test_that("testing representing categorical data from subgroup", {
   colnames(this.df) <- c("mark", "vv", "group")
   expect_error(represent_categorical_data_forsubgroups(this.df, "group",
                                                        "gender", NA))
+
+
+  this.df <- data.frame(c(11, 78, 22, 22), c("m", "f", "f", "NA"), c(1, 2, 2,1),
+                        stringsAsFactors = FALSE)
+  colnames(this.df) <- c("mark", "gender", "group")
+
+  ans <- represent_categorical_data_forsubgroups(this.df, "group",
+                                                       "gender", NA)
 })
 
 # ############################################################################

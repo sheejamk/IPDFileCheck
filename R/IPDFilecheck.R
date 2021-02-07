@@ -823,13 +823,24 @@ represent_categorical_data_forsubgroups <- function(data, variable1, variable2,
     all_list <- c()
     for (i in seq_len(length(coding))) {
       this_subgroup1 <- return_subgroup_withNA(data, variable1, coding[i])
-      this_rep <- data.frame(represent_categorical_data_include_missing(
+      this_rep <- (represent_categorical_data_include_missing(
         this_subgroup1, variable2, nrcode))
       if (ncol(this_rep) < var_len) {
-        not_repr <- variables[colnames(this_rep) != variables]
-        this_rep[[not_repr]] <- rep(0, nrow(this_rep))
+        not_repr <- c()
+        for (j in seq_len(var_len)) {
+          check <- variables[j] %in% colnames(this_rep)
+          if (!check)
+            not_repr <- append(not_repr, variables[j])
+        }
+        num_not_repr <- length(not_repr)
+        new_col <- rep(0, nrow(this_rep))
+        new_colnames <- append(colnames(this_rep), not_repr)
+        for (i in seq_len(num_not_repr)) {
+          this_rep <- cbind(this_rep, new_col)
+        }
+        colnames(this_rep) <- new_colnames
       }
-      all_list <- append(all_list, this_rep)
+      all_list <- cbind(all_list, this_rep)
     }
     all_list <- data.frame(all_list)
     row.names(all_list) <- row.names(this_rep)
@@ -837,7 +848,7 @@ represent_categorical_data_forsubgroups <- function(data, variable1, variable2,
                col.names = rep(variables, coding_len))
     out2 <- kableExtra::kable_styling(out, "striped", full_width = F,
                                       position = "left", font_size = 12)
-    header <- rep(coding_len, var_len)
+    header <- rep(var_len, coding_len)
     names(header) <- coding
     header <- c("", header)
     out3 <- kableExtra::add_header_above(out2, header = header)
