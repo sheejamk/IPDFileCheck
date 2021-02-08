@@ -828,7 +828,11 @@ represent_categorical_data_forsubgroups <- function(data, variable1, variable2,
       if (ncol(this_rep) < var_len) {
         not_repr <- c()
         for (j in seq_len(var_len)) {
-          check <- variables[j] %in% colnames(this_rep)
+          if (is.na(variables[j])) {
+            check <- sum("NA" %in% colnames(this_rep))
+          } else {
+            check <- variables[j] %in% colnames(this_rep)
+          }
           if (!check)
             not_repr <- append(not_repr, variables[j])
         }
@@ -839,13 +843,15 @@ represent_categorical_data_forsubgroups <- function(data, variable1, variable2,
           this_rep <- cbind(this_rep, new_col)
         }
         colnames(this_rep) <- new_colnames
+        this_rep <- this_rep[, order(colnames(this_rep))]
       }
+      names_list <- (colnames(this_rep))
       all_list <- cbind(all_list, this_rep)
     }
     all_list <- data.frame(all_list)
     row.names(all_list) <- row.names(this_rep)
     out <- kableExtra::kbl(all_list, "html", booktabs = T, align = c("r"),
-               col.names = rep(variables, coding_len))
+               col.names = rep(names_list, coding_len))
     out2 <- kableExtra::kable_styling(out, "striped", full_width = F,
                                       position = "left", font_size = 12)
     header <- rep(var_len, coding_len)

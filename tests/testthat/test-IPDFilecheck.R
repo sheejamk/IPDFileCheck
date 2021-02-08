@@ -655,7 +655,19 @@ test_that("testing representing categorical data including missing data", {
                "Data does not contain the column with the specfied column name",
                fixed = TRUE)
  })
-
+# ############################################################################
+context("testing representing categorical data from subgroup")
+test_that("testing representing categorical data from subgroup", {
+  this.df <- data.frame(c(11, 78, 22), c("m", "f", "f"), c(1, 2, 2),
+                        stringsAsFactors = FALSE)
+  colnames(this.df) <- c("mark", "gender", "group")
+  ans <- represent_numerical_data_forsubgroups(this.df, "group",
+                                                 "mark", NA)
+  expect_error(represent_numerical_data_forsubgroups(this.df, NULL,
+                                        "mark", NA))
+  expect_error(represent_numerical_data_forsubgroups(this.df, "group",
+                                                     "xx", NA))
+})
 # ############################################################################
 context("testing representing categorical data from subgroup")
 test_that("testing representing categorical data from subgroup", {
@@ -674,14 +686,18 @@ test_that("testing representing categorical data from subgroup", {
                                                        "gender", NA))
 
 
-  this.df <- data.frame(c(11, 78, 22, 22), c("m", "f", "f", "NA"), c(1, 2, 2,1),
-                        stringsAsFactors = FALSE)
+  this.df <- data.frame(c(11, 78, 22, 22, 33), c("m", "f", "f", "m", NA),
+                        c(1, 1, 2, 2, 2), stringsAsFactors = FALSE)
   colnames(this.df) <- c("mark", "gender", "group")
-
   ans <- represent_categorical_data_forsubgroups(this.df, "group",
                                                        "gender", NA)
-})
 
+  this.df <- data.frame(c(11, 78, 22, 22, 33), c("m", "f", "f", "f", NA),
+                        c(1, 1, 2, 2, 2), stringsAsFactors = FALSE)
+  colnames(this.df) <- c("mark", "gender", "group")
+  ans <- represent_categorical_data_forsubgroups(this.df, "group",
+                                                 "gender", NA)
+})
 # ############################################################################
 context("testing cohens d")
 test_that("testing cohens d", {
