@@ -820,7 +820,7 @@ represent_categorical_data_forsubgroups <- function(data, variable1, variable2,
     variables <- unique(toupper(factor(data[[variable2]])))
     coding_len <- length(coding)
     var_len <- length(variables)
-    all_list <- c()
+    all_list <-  c()
     for (i in seq_len(length(coding))) {
       this_subgroup1 <- return_subgroup_withNA(data, variable1, coding[i])
       this_rep <- (represent_categorical_data_include_missing(
@@ -845,6 +845,7 @@ represent_categorical_data_forsubgroups <- function(data, variable1, variable2,
         colnames(this_rep) <- new_colnames
         this_rep <- this_rep[, order(colnames(this_rep))]
       }
+      this_rep <- this_rep[, order(colnames(this_rep))]
       names_list <- (colnames(this_rep))
       all_list <- cbind(all_list, this_rep)
     }
