@@ -902,8 +902,7 @@ represent_numerical_data_forsubgroups <- function(data, variable1, variable2,
     new_list <- as.data.frame(append(new_list, coding))
     colnames(new_list) <- "Group"
     newlist <- data.frame(append(new_list, all_list))
-    out <- kableExtra::kbl(newlist, "html", booktabs = T, align = c("l"),
-                           caption = "Age details")
+    out <- kableExtra::kbl(newlist, "html", booktabs = T, align = c("l"))
     out2 <- kableExtra::kable_styling(out, "striped", full_width = F,
                         position = "left", font_size = 12)
     return(out2)
