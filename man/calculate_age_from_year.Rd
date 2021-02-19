@@ -4,12 +4,15 @@
 \alias{calculate_age_from_year}
 \title{Function to calculate age from year of birth}
 \usage{
-calculate_age_from_year(data, columnname, nrcode = NA)
+calculate_age_from_year(data, columnname, endyearcol = NULL, nrcode = NA)
 }
 \arguments{
 \item{data}{a data frame}
 
 \item{columnname}{name of column corresponding to year of birth}
+
+\item{endyearcol}{name of column where the year is entered to calculate
+the age upto, by default its the current year}
 
 \item{nrcode}{non response code corresponding to date of birth}
 }
@@ -22,5 +25,5 @@ Function to calculate age from year of birth
 \examples{
 this.data.frame <- data.frame(c(1951, 1980), c("John", "Dora"))
 colnames(this.data.frame) <- c("yob", "name")
-calculate_age_from_year(this.data.frame, "yob", NA)
+calculate_age_from_year(this.data.frame, "yob", NULL, NA)
 }

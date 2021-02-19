@@ -1144,6 +1144,8 @@ convert_date_string_stdform <- function(entry, orderby) {
 #' Function to calculate age from date of birth
 #' @param data a data frame
 #' @param columnname name of column corresponding to date of birth
+#' @param enddatecol column contaiining when to calculate the age to,
+#' default value is null, this means the age is calculated to the current date
 #' @param dateformat format of date e.g. dmy default is dmy
 #' @param nrcode non response code corresponding to date of birth
 #' @return data if success error if failure
@@ -1152,10 +1154,10 @@ convert_date_string_stdform <- function(entry, orderby) {
 #' this.df <- data.frame(c("1987-05-28", "1987-06-18"), c(1, 2),
 #' stringsAsFactors = FALSE)
 #' colnames(this.df) <- c("dob", "num")
-#' calculate_age_from_dob(this.df, "dob", "ymd")
+#' calculate_age_from_dob(this.df, "dob", NULL, "ymd")
 #' @importFrom eeptools age_calc
 #' @export
-calculate_age_from_dob <- function(data, columnname, dateformat = "dmy",
+calculate_age_from_dob <- function(data, columnname, enddatecol = NULL, dateformat = "dmy",
                                    nrcode = NA) {
     column_no <- get_columnno_fornames(data, columnname)
     data <- as.data.frame(data, string.as.factors = FALSE)
@@ -1173,7 +1175,19 @@ calculate_age_from_dob <- function(data, columnname, dateformat = "dmy",
     }
     mod_entry <- convert_date_numeric_stdform(entry, index,
                                               orderby = dateformat)
-    result <- eeptools::age_calc(as.Date(mod_entry[index]), units = "years")
+    if (is.null(enddatecol)) {
+      enddate = Sys.Date()
+    } else {
+      if (is.na(enddatecol)) {
+        enddate = Sys.Date()
+      } else {
+        enddate <- as.character(data[[enddatecol]])
+        mod_end_entry <- convert_date_numeric_stdform(enddate, index,
+                                                      orderby = dateformat)
+        enddate <- as.Date(mod_end_entry[index])
+      }
+    }
+    result <- eeptools::age_calc(as.Date(mod_entry[index]), enddate , units = "years")
     calculated_ages[index] <- result
     calculated_ages[blanks] <- NA
     non_na_ages <- calculated_ages[!is.na(calculated_ages)]
@@ -1189,14 +1203,16 @@ calculate_age_from_dob <- function(data, columnname, dateformat = "dmy",
 #' Function to calculate age from year of birth
 #' @param data a data frame
 #' @param columnname name of column corresponding to year of birth
+#' @param endyearcol name of column where the year is entered to calculate
+#' the age upto, by default its the current year
 #' @param nrcode non response code corresponding to date of birth
 #' @return data, if success error if failure
 #' @examples
 #' this.data.frame <- data.frame(c(1951, 1980), c("John", "Dora"))
 #' colnames(this.data.frame) <- c("yob", "name")
-#' calculate_age_from_year(this.data.frame, "yob", NA)
+#' calculate_age_from_year(this.data.frame, "yob", NULL, NA)
 #' @export
-calculate_age_from_year <- function(data, columnname, nrcode = NA) {
+calculate_age_from_year <- function(data, columnname, endyearcol = NULL, nrcode = NA) {
   column_no <- get_columnno_fornames(data, columnname)
     entry <- data[[column_no]]
     blanks <- c(which(entry == ""), which(is.na(entry)))
@@ -1204,15 +1220,32 @@ calculate_age_from_year <- function(data, columnname, nrcode = NA) {
       entry[blanks] <- nrcode
     }
     calculated_ages <- rep(0, length(entry))
-    this_year <- lubridate::year(as.Date(Sys.Date(), format = "%d/%m/%y"))
+    if (is.null(endyearcol)) {
+      this_year <- lubridate::year(as.Date(Sys.Date(), format = "%d/%m/%y"))
+    } else {
+      if (is.na(endyearcol)) {
+        this_year <- lubridate::year(as.Date(Sys.Date(), format = "%d/%m/%y"))
+      } else {
+        res <- sum(is.na(suppressWarnings(as.numeric(data[[endyearcol]]))))
+        if (res == 0) {
+          this_year = as.numeric(data[[endyearcol]])
+        } else {
+          stop("The year is not numeric")
+        }
+      }
+    }
     if (is.na(nrcode)) {
       index <- which(!is.na(entry))
-      calculated_ages[index] <- this_year -
+      if (length(this_year) == 1) the_year <- this_year
+      else the_year <- this_year[index]
+      calculated_ages[index] <- the_year -
         as.numeric(as.character(entry[index]))
       calculated_ages[blanks] <- NA
     } else {
       index <- which(entry != nrcode)
-      calculated_ages[index] <- this_year -
+      if (length(this_year) == 1) the_year <- this_year
+      else the_year <- this_year[index]
+      calculated_ages[index] <- the_year -
         as.numeric(as.character(entry[index]))
       calculated_ages[blanks] <- NA
     }

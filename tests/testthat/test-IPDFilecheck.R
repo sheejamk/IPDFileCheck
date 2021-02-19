@@ -42,15 +42,44 @@ test_that("testing age calculated from year of birth", {
   ag2 <- as.numeric(format(Sys.Date(), "%Y")) - 1987
   ag3 <- as.numeric(format(Sys.Date(), "%Y")) - 1989
   ages <- c(ag1, ag2, 0, ag3)
-  mod_data <- calculate_age_from_year(tempdata, "dob", 0)$calc.age.yob
+  mod_data <- calculate_age_from_year(tempdata, "dob", NULL,0)$calc.age.yob
   expect_equivalent(ages, mod_data, tolerance = 0.001)
+
+
+  x <- c("1957", "1987", 0, "1989")
+  y <- c(1, 2, 3, 4)
+  tempdata <- as.data.frame(cbind(y, x))
+  colnames(tempdata) <- c("name", "dob")
+  ag1 <- as.numeric(format(Sys.Date(), "%Y")) - 1957
+  ag2 <- as.numeric(format(Sys.Date(), "%Y")) - 1987
+  ag3 <- as.numeric(format(Sys.Date(), "%Y")) - 1989
+  ages <- c(ag1, ag2, 0, ag3)
+  mod_data <- calculate_age_from_year(tempdata, "dob", NA, 0)$calc.age.yob
+  expect_equivalent(ages, mod_data, tolerance = 0.001)
+
+  x <- c("1957", "1987", 0, "1989")
+  y <- c(1, 2, 3, 4)
+  y2 <- c("1987", "1997", 0, "2009")
+  tempdata <- as.data.frame(cbind(y, x, y2))
+  colnames(tempdata) <- c("name", "dob", "enddate")
+  ages <- c(30, 10, 0, 20)
+  mod_data <- calculate_age_from_year(tempdata, "dob",
+                                      "enddate",0)$calc.age.yob
+  expect_equivalent(ages, mod_data, tolerance = 0.001)
+
+  y2 <- c("sh", "sh", 0, "sh")
+  tempdata <- as.data.frame(cbind(y, x, y2))
+  colnames(tempdata) <- c("name", "dob", "enddate")
+  expect_error(calculate_age_from_year(tempdata, "dob",
+                                       "enddate",0)$calc.age.yob)
+
 
   x <- c("1957", "1987", NA, "1989")
   y <- c(1, 2, 3, 4)
   tempdata <- as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("name", "dob")
   ages <- c(ag1, ag2, NA, ag3)
-  mod_data <- calculate_age_from_year(tempdata, "dob", NA)$calc.age.yob
+  mod_data <- calculate_age_from_year(tempdata, "dob", NULL, NA)$calc.age.yob
   expect_equivalent(ages, mod_data, tolerance = 0.001)
   x <- c(1957, 1987, NA, 1989)
   y <- c(1, 2, 3, 4)
@@ -58,7 +87,7 @@ test_that("testing age calculated from year of birth", {
   colnames(tempdata) <- c("name", "dob")
   expect_equivalent(ages, mod_data, tolerance = 0.001)
   colnames(tempdata) <- c("name", "date")
-  expect_error(calculate_age_from_year(tempdata, "dob", NA),
+  expect_error(calculate_age_from_year(tempdata, "dob", NULL,NA),
     "Column name does not exist",
     fixed = TRUE
   )
@@ -66,7 +95,7 @@ test_that("testing age calculated from year of birth", {
   y <- c(1, 2, 3, 4)
   tempdata <- as.data.frame(cbind(y, x))
   colnames(tempdata) <- c("name", "dob")
-  expect_error(calculate_age_from_year(tempdata, "dob", NA),
+  expect_error(calculate_age_from_year(tempdata, "dob", NULL, NA),
     "Age can not be negative OR greater than 150",
     fixed = TRUE
   )
@@ -741,26 +770,51 @@ test_that("testing age calculated from date of birth", {
   ag2 <- eeptools::age_calc(as.Date("1987-06-18"), units = "years")
   ag3 <- eeptools::age_calc(as.Date("1987-07-09"), units = "years")
   ages <- c(ag1, ag2, 0, ag3)
-  mod_data <- calculate_age_from_dob(tempdata, "dob", "ymd", 0)$age
+  mod_data <- calculate_age_from_dob(tempdata, "dob", NULL, "ymd", 0)$age
   expect_equivalent(ages, mod_data, tolerance = 0.001)
+  mod_data <- calculate_age_from_dob(tempdata, "dob", NA, "ymd", 0)$age
+  expect_equivalent(ages, mod_data, tolerance = 0.001)
+
+  x <- c("1770-05-28", "1987-06-18", "0", "1987-07-09")
+  y <- c(1, 2, 3, 4)
+  tempdata <- data.frame(cbind(y, x), stringsAsFactors = FALSE)
+  colnames(tempdata) <- c("name", "dob")
+  expect_error(calculate_age_from_dob(tempdata, "dob",
+                                                  NULL, "ymd", 0))
+
+  x <- c("1947-05-28", "1957-06-18", "0", "1967-07-09")
+  y <- c(1, 2, 3, 4)
+  y2 <- c("1990-05-28", "1990-06-18", "0", "1990-07-09")
+  tempdata <- data.frame(cbind(y, x, y2), stringsAsFactors = FALSE)
+  colnames(tempdata) <- c("name", "dob", "start")
+  ages <- c(43, 33, 0, 23)
+  mod_data <- calculate_age_from_dob(tempdata, "dob","start", "ymd", 0)$age
+  expect_equivalent(ages, mod_data, tolerance = 0.001)
+
+  x <- c("1987-05-28", "1987-06-18", "0", "1987-07-09")
+  y <- c(1, 2, 3, 4)
+  tempdata <- data.frame(cbind(y, x), stringsAsFactors = FALSE)
+  colnames(tempdata) <- c("name", "dob")
+  ag1 <- eeptools::age_calc(as.Date("1987-05-28"), units = "years")
+  ag2 <- eeptools::age_calc(as.Date("1987-06-18"), units = "years")
+  ag3 <- eeptools::age_calc(as.Date("1987-07-09"), units = "years")
+  ages <- c(ag1, ag2, 0, ag3)
+  mod_data <- calculate_age_from_dob(tempdata, "dob", NULL, "ymd", 0)$age
+  expect_equivalent(ages, mod_data, tolerance = 0.001)
+
 
   x <- c("1287-05-28", "1987-06-18", NA, "1987-07-09")
   y <- c(1, 2, 3, 4)
   tempdata <- as.data.frame(cbind(y, x), stringsAsFactors = FALSE)
   colnames(tempdata) <- c("name", "dob")
-  expect_error(calculate_age_from_dob(tempdata, "dob", "ymd", NA),
-    "Age can not be negative OR greater than 150",
-    fixed = TRUE
-  )
+  expect_error(calculate_age_from_dob(tempdata, "dob", "ymd", NA))
 
   x <- c("1987-05-28", "1987-06-18", NA, "1987-07-09")
   y <- c(1, 2, 3, 4)
   tempdata <- as.data.frame(cbind(y, x), stringsAsFactors = FALSE)
   colnames(tempdata) <- c("name", "dob")
   mod_data <- calculate_age_from_dob(
-    tempdata, "dob",
-    "ymd", NA
-  )$age
+    tempdata, "dob", NULL,"ymd", NA)$age
   ages <- c(ag1, ag2, NA, ag3)
   expect_equivalent(ages, mod_data, tolerance = 0.001)
 
@@ -768,9 +822,7 @@ test_that("testing age calculated from date of birth", {
   y <- c(1, 2, 3, 4)
   tempdata <- as.data.frame(cbind(y, x), stringsAsFactors = FALSE)
   colnames(tempdata) <- c("name", "dob")
-  mod_data <- calculate_age_from_dob(
-    tempdata, "dob",
-    "ymd", NA
+  mod_data <- calculate_age_from_dob(tempdata, "dob", NULL, "ymd",NA
   )$age
   ages <- c(ag1, ag2, NA, ag3)
   expect_equivalent(ages, mod_data, tolerance = 0.001)
@@ -780,7 +832,7 @@ test_that("testing age calculated from date of birth", {
   tempdata <- as.data.frame(cbind(y, x), stringsAsFactors = FALSE)
   colnames(tempdata) <- c("name", "dob")
   mod_data <- calculate_age_from_dob(
-    tempdata, "dob",
+    tempdata, "dob", NULL,
     "dmy", NA
   )$age
   ages <- c(ag1, ag2, NA, ag3)
@@ -791,7 +843,7 @@ test_that("testing age calculated from date of birth", {
   tempdata <- as.data.frame(cbind(y, x), stringsAsFactors = FALSE)
   colnames(tempdata) <- c("name", "dob")
   mod_data <- calculate_age_from_dob(
-    tempdata, "dob",
+    tempdata, "dob",NULL,
     "mdy", NA
   )$age
   ages <- c(ag1, ag2, NA, ag3)
@@ -806,18 +858,18 @@ test_that("testing age calculated from date of birth", {
   ag2 <- eeptools::age_calc(as.Date("1987-06-18"), units = "years")
   ag3 <- eeptools::age_calc(as.Date("2015-07-09"), units = "years")
   ages <- c(ag1, ag2, NA, ag3)
-  mod_data <- calculate_age_from_dob(tempdata, "dob", "ymd", NA)$age
+  mod_data <- calculate_age_from_dob(tempdata, "dob", NULL, "ymd", NA)$age
   expect_equivalent(ages, mod_data, tolerance = 0.001)
 
   x <- c("1997 May 28", "1987-June-18", NA, "2015/July/09")
   y <- c(1, 2, 3, 4)
   tempdata <- as.data.frame(cbind(y, x), stringsAsFactors = FALSE)
   colnames(tempdata) <- c("name", "dob")
-  mod_data <- calculate_age_from_dob(tempdata, "dob", "ymd", NA)$age
+  mod_data <- calculate_age_from_dob(tempdata, "dob", NULL,"ymd", NA)$age
   expect_equivalent(ages, mod_data, tolerance = 0.001)
 
   colnames(tempdata) <- c("name", "date")
-  expect_error(calculate_age_from_dob(tempdata, "dob", "ymd", NA),
+  expect_error(calculate_age_from_dob(tempdata, "dob", NULL,"ymd", NA),
     "Column name does not exist",
     fixed = TRUE
   )

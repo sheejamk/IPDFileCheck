@@ -166,12 +166,12 @@ represent_categorical_textdata(rctdata, "arm",NA)
 
 The function calculate_age_from_dob returns the age calculated from given date of birth. User may provide the column name containing date of birth, format of date of birth and optional non response code.For example, in the 'rctdata' shown above, the 'dob' column has dates in the format "%d/%m/%y". The allowed formats for the dates should be in numeric. For example, in the rctdata_error, the dates are in combined numeric and text format, which will return  an error.
 ```{r }
-calculate_age_from_dob(rctdata,"dob","dmy")
+calculate_age_from_dob(rctdata,"dob", NULL,"dmy")
 ```
 
 The function calculate_age_from_year returns the age calculated from given year of birth. User may provide the column name containing date of birth and optional non response code.For example, in the 'rctdata' shown above, the 'yob' column has birth year.
 ```{r }
-calculate_age_from_year(rctdata,"yob",NA)
+calculate_age_from_year(rctdata,"yob",NULL, NA)
 ```
 
 
