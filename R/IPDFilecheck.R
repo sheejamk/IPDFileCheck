@@ -497,10 +497,10 @@ descriptive_stats_col_excl_nrcode <- function(data, column_name, nrcode = NA) {
         this_range_high <- round(max(this_column), 3)
         this_sd <- round(sd(this_column), 3)
         this_se <- round(this_sd / sqrt(length(this_column)), 3)
-        this_lq <- quantile(this_column, c(0.25))
-        this_uq <- quantile(this_column, c(0.75))
-        this_ci_low <- quantile(this_column, c(0.025))
-        this_ci_high <- quantile(this_column, c(0.975))
+        this_lq <- round(quantile(this_column, c(0.25)), 3)
+        this_uq <- round(quantile(this_column, c(0.75)), 3)
+        this_ci_low <- round(quantile(this_column, c(0.025)), 3)
+        this_ci_high <- round(quantile(this_column, c(0.975)), 3)
         this_range <- paste(this_range_low, "-", this_range_high)
         results <- matrix(c(
           this_sum, this_av, this_sd, this_med, this_mode,
