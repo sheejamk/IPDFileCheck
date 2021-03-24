@@ -1157,7 +1157,8 @@ convert_date_string_stdform <- function(entry, orderby) {
 #' calculate_age_from_dob(this.df, "dob", NULL, "ymd")
 #' @importFrom eeptools age_calc
 #' @export
-calculate_age_from_dob <- function(data, columnname, enddatecol = NULL, dateformat = "dmy",
+calculate_age_from_dob <- function(data, columnname, enddatecol = NULL,
+                                   dateformat = "dmy",
                                    nrcode = NA) {
     column_no <- get_columnno_fornames(data, columnname)
     data <- as.data.frame(data, string.as.factors = FALSE)
@@ -1176,10 +1177,10 @@ calculate_age_from_dob <- function(data, columnname, enddatecol = NULL, dateform
     mod_entry <- convert_date_numeric_stdform(entry, index,
                                               orderby = dateformat)
     if (is.null(enddatecol)) {
-      enddate = Sys.Date()
+      enddate <- Sys.Date()
     } else {
       if (is.na(enddatecol)) {
-        enddate = Sys.Date()
+        enddate <- Sys.Date()
       } else {
         enddate <- as.character(data[[enddatecol]])
         mod_end_entry <- convert_date_numeric_stdform(enddate, index,
@@ -1187,7 +1188,7 @@ calculate_age_from_dob <- function(data, columnname, enddatecol = NULL, dateform
         enddate <- as.Date(mod_end_entry[index])
       }
     }
-    result <- eeptools::age_calc(as.Date(mod_entry[index]), enddate , units = "years")
+    result <- eeptools::age_calc(as.Date(mod_entry[index]), enddate, units = "years")
     calculated_ages[index] <- result
     calculated_ages[blanks] <- NA
     non_na_ages <- calculated_ages[!is.na(calculated_ages)]
@@ -1228,7 +1229,7 @@ calculate_age_from_year <- function(data, columnname, endyearcol = NULL, nrcode 
       } else {
         res <- sum(is.na(suppressWarnings(as.numeric(data[[endyearcol]]))))
         if (res == 0) {
-          this_year = as.numeric(data[[endyearcol]])
+          this_year <- as.numeric(data[[endyearcol]])
         } else {
           stop("The year is not numeric")
         }
