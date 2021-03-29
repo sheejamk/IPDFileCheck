@@ -851,6 +851,7 @@ represent_categorical_data_forsubgroups <- function(data, variable1, variable2,
     }
     all_list <- data.frame(all_list)
     row.names(all_list) <- row.names(this_rep)
+
     out <- kableExtra::kbl(all_list, "html", booktabs = T, align = c("r"),
                col.names = rep(names_list, coding_len))
     out2 <- kableExtra::kable_styling(out, "striped", full_width = F,
@@ -859,7 +860,11 @@ represent_categorical_data_forsubgroups <- function(data, variable1, variable2,
     names(header) <- coding
     header <- c("", header)
     out3 <- kableExtra::add_header_above(out2, header = header)
-    return(out3)
+    results <- structure(list(
+      list_results = all_list,
+      table_results = out3
+    ))
+    return(results)
   }
 }
 #############################################################################
@@ -899,13 +904,17 @@ represent_numerical_data_forsubgroups <- function(data, variable1, variable2,
       all_list <- rbind(all_list, this_rep)
     }
     all_list <- data.frame(all_list)
-    new_list <- as.data.frame(append(new_list, coding))
-    colnames(new_list) <- "Group"
-    newlist <- data.frame(append(new_list, all_list))
-    out <- kableExtra::kbl(newlist, "html", booktabs = T, align = c("l"))
+    new_list <- append(all_list, coding)
+    new_list <- data.frame(new_list)
+    colnames(new_list) <- append("Group",colnames(all_list))
+    out <- kableExtra::kbl(new_list, "html", booktabs = T, align = c("l"))
     out2 <- kableExtra::kable_styling(out, "striped", full_width = F,
                         position = "left", font_size = 12)
-    return(out2)
+    results <- structure(list(
+      list_results = new_list,
+      table_results = out2
+    ))
+    return(results)
   }
 }
 
