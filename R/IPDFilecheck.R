@@ -904,9 +904,10 @@ represent_numerical_data_forsubgroups <- function(data, variable1, variable2,
       all_list <- rbind(all_list, this_rep)
     }
     all_list <- data.frame(all_list)
-    new_list <- append(all_list, coding)
+    new_list <- cbind(coding, all_list)
     new_list <- data.frame(new_list)
     colnames(new_list) <- append("Group",colnames(all_list))
+    rownames(new_list) <- NULL
     out <- kableExtra::kbl(new_list, "html", booktabs = T, align = c("l"))
     out2 <- kableExtra::kable_styling(out, "striped", full_width = F,
                         position = "left", font_size = 12)
