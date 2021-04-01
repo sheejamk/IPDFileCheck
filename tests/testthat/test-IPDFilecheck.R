@@ -969,3 +969,28 @@ test_that("testingconvert date sting form to std form", {
   expect_error(convert_date_string_stdform("Feb-ss-2020", "mdy"))
   expect_error(convert_date_string_stdform("Feb-12-ss", "mdy"))
 })
+# ############################################################################
+context("testing getting summary from gtsummary")
+test_that("testing getting summary from gtsummary", {
+  y <- c(10, 20.4, 32, 43)
+  x <- c("f", "m", "m", "m")
+  tempdata <- data.frame(y, x, stringsAsFactors = FALSE)
+  colnames(tempdata) <- c("mark", "sex")
+  summary_tempdata <- get_summary_gtsummary(tempdata, c("mark", "sex"),
+                                            byvar = NULL)
+  expect_equal(summary_tempdata$N, 4)
+  my_data <- gtsummary::trial
+  this <- get_summary_gtsummary(my_data, selectvar = c("trt", "age", "grade"),
+          byvar = "trt", label = grade ~ "Tumor Grade")
+  expect_equal(this$N, 200)
+
+  expect_error(get_summary_gtsummary(my_data, selectvar = c("age", "grade"),
+                        byvar = "trt", label = grade ~ "Tumor Grade"))
+
+  expect_error(get_summary_gtsummary(NULL, selectvar = c("trt", "age", "grade"),
+                      byvar = "trt", label = grade ~ "Tumor Grade"))
+  expect_error(get_summary_gtsummary(my_data, selectvar = NULL,
+                        byvar = "trt", label = grade ~ "Tumor Grade"))
+  expect_error(get_summary_gtsummary(my_data, selectvar = NA,
+                                     byvar = "trt", label = grade ~ "Tumor Grade"))
+})

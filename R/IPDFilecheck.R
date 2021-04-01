@@ -1293,3 +1293,65 @@ get_contents_cols <- function(data, colname) {
     stop("Data does not contain the column with the specfied column name")
   }
 }
+#############################################################################
+#' Function to return the summary table using gtsummary package
+#' @param the_data a data frame
+#' @param selectvar variables to be selected for summary
+#' @param byvar A column name (quoted or unquoted) in data.
+#' Summary statistics will be calculated separately for each level
+#' of the by variable. If NULL, summary statistics are calculated
+#' using all observations.
+#' @param label List of formulas specifying variables labels,
+#' @return the summary using gtsummarys  tbl_summary option
+#' @examples
+#' trial <- gtsummary::trial
+#' table1 <- get_summary_gtsummary(trial, c("trt", "age", "grade"),
+#' byvar = "trt")
+#' @export
+get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
+                                  label = NULL){
+  if (is.null(the_data)) {
+    stop("data cant be null")
+  }
+  if (is.null(selectvar)) {
+    stop("selectvar cant be null")
+  } else {
+    if (sum(is.na(selectvar)) == length(selectvar)) {
+      stop("selectvar cant be NA")
+    }
+  }
+  subset_data <- dplyr::select(the_data,selectvar)
+  if (is.null(byvar)) {
+    summary_table <-
+      gtsummary::tbl_summary(
+        subset_data,
+        by = byvar, # split table by group
+        type = where(is.numeric) ~ "continuous2",
+        statistic = where(is.numeric) ~ c("{N_nonmiss}",
+                                          "{mean} ({sd})",
+                                          "{median} ({p25}, {p75})",
+                                          "{min}, {max}"),
+        missing =  "always",
+      ) %>%
+      gtsummary::add_n() %>% # add column with total number of non-missing observations
+      gtsummary::modify_header(label = "**Variable**") %>% # update the column header
+      gtsummary::bold_labels()
+  } else{
+    summary_table <-
+      gtsummary::tbl_summary(
+        subset_data,
+        by = byvar, # split table by group
+        type = where(is.numeric) ~ "continuous2",
+        statistic = where(is.numeric) ~ c("{N_nonmiss}",
+                                          "{mean} ({sd})",
+                                          "{median} ({p25}, {p75})",
+                                          "{min}, {max}"),
+        missing =  "always", # don't list missing data separately
+      ) %>%
+      gtsummary::add_n() %>% # add column with total number of non-missing observations
+      gtsummary::add_p() %>% # test for a difference between groups
+      gtsummary::modify_header(label = "**Variable**") %>% # update the column header
+      gtsummary::bold_labels()
+  }
+  return(summary_table)
+}
