@@ -1293,7 +1293,27 @@ get_contents_cols <- function(data, colname) {
     stop("Data does not contain the column with the specfied column name")
   }
 }
-#############################################################################
+########################################################################
+#' Function to get the effect size
+#' @param data a data frame
+#' @param variable  variables to be selected for summary
+#' @param by   A column name (quoted or unquoted) in data.
+#' @param ... extra parameters required
+#' @return returns the effect sizes
+#' @export
+get_effect_size <- function(data, variable, by, ...) {
+  # Cohen's D
+  d <- effsize::cohen.d(data[[variable]] ~ as.factor(data[[by]]),
+                        conf.level = .95, pooled = TRUE, paired = FALSE,
+                        hedges.correction = TRUE)
+  # Formatting statistic with CI
+  est <- gtsummary::style_sigfig(d$estimate)
+  ci <- gtsummary::style_sigfig(d$conf.int) %>% paste(collapse = ", ")
+
+  # returning estimate with CI together
+  stringr::str_glue("{est} ({ci})")
+}
+############################################################################
 #' Function to return the summary table using gtsummary package
 #' @param the_data a data frame
 #' @param selectvar variables to be selected for summary
@@ -1320,7 +1340,7 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
       stop("selectvar cant be NA")
     }
   }
-  subset_data <- dplyr::select(the_data,selectvar)
+  subset_data <- dplyr::select(the_data, selectvar)
   if (is.null(byvar)) {
     summary_table <-
       gtsummary::tbl_summary(
@@ -1349,9 +1369,16 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
         missing =  "always", # don't list missing data separately
       ) %>%
       gtsummary::add_n() %>% # add column with total number of non-missing observations
-      gtsummary::add_p() %>% # test for a difference between groups
+      gtsummary::add_p() %>%
+      gtsummary::add_stat(
+        fns = where(is.numeric) ~ get_effect_size,
+        fmt_fun = NULL,
+        header = "**Effect Size (95% CI)**"
+      ) %>%
       gtsummary::modify_header(label = "**Variable**") %>% # update the column header
       gtsummary::bold_labels()
   }
+  #####################################################
   return(summary_table)
 }
+

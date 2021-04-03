@@ -15,7 +15,10 @@ Imports:
         eeptools,
         hash,
         kableExtra,
-        gtsummary
+        gtsummary,
+        effsize,
+        stringr,
+        tidyverse
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

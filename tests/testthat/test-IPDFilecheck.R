@@ -980,8 +980,9 @@ test_that("testing getting summary from gtsummary", {
                                             byvar = NULL)
   expect_equal(summary_tempdata$N, 4)
   my_data <- gtsummary::trial
+
   this <- get_summary_gtsummary(my_data, selectvar = c("trt", "age", "grade"),
-          byvar = "trt", label = grade ~ "Tumor Grade")
+          byvar = "trt")
   expect_equal(this$N, 200)
 
   expect_error(get_summary_gtsummary(my_data, selectvar = c("age", "grade"),
