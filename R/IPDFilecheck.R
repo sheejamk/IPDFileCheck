@@ -1346,6 +1346,7 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
       gtsummary::tbl_summary(
         subset_data,
         by = byvar, # split table by group
+        digits = everything() ~ 2,
         type = where(is.numeric) ~ "continuous2",
         statistic = where(is.numeric) ~ c("{N_nonmiss}",
                                           "{mean} ({sd})",
@@ -1361,6 +1362,7 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
       gtsummary::tbl_summary(
         subset_data,
         by = byvar, # split table by group
+        digits = everything() ~ 2,
         type = where(is.numeric) ~ "continuous2",
         statistic = where(is.numeric) ~ c("{N_nonmiss}",
                                           "{mean} ({sd})",
@@ -1368,6 +1370,7 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
                                           "{min}, {max}"),
         missing =  "always", # don't list missing data separately
       ) %>%
+      gtsummary::add_overall() %>%
       gtsummary::add_n() %>% # add column with total number of non-missing observations
       gtsummary::add_p() %>%
       gtsummary::add_stat(
