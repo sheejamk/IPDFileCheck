@@ -20,3 +20,10 @@ returns the effect sizes
 \description{
 Function to get the longitudinal summary mean and sd
 }
+\examples{
+test_data <- as.data.frame(cbind(c(1,2,3,4,5), c(20,40,60,80,100),
+c("F", "F", "M", "M", "F")))
+colnames(test_data) <- c("no", "marks", "gender")
+test_data$marks <- as.numeric(test_data$marks)
+results <- return_longitudinal_summary(test_data, "marks", NA)
+}

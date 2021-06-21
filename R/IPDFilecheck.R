@@ -1391,8 +1391,12 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
 #' @param nrcode the non response code in the data
 #' @return returns the effect sizes
 #' @export
-#' @example
-#'
+#' @examples
+#' test_data <- as.data.frame(cbind(c(1,2,3,4,5), c(20,40,60,80,100),
+#' c("F", "F", "M", "M", "F")))
+#' colnames(test_data) <- c("no", "marks", "gender")
+#' test_data$marks <- as.numeric(test_data$marks)
+#' results <- return_longitudinal_summary(test_data, "marks", NA)
 return_longitudinal_summary <- function(thedata, columnnames, nrcode = NA){
  result <- unlist(lapply(columnnames, check_column_exists, thedata))
  if (sum(result) != 0)
