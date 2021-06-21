@@ -981,7 +981,7 @@ test_that("testing getting summary from gtsummary", {
   expect_equal(summary_tempdata$N, 4)
   my_data <- gtsummary::trial
 
-  this <- get_summary_gtsummary(my_data, selectvar = c("trt", "age", "grade"),
+  this <- get_summary_gtsummary(my_data, selectvar = c("trt", "age", "marker", "response"),
           byvar = "trt")
   expect_equal(this$N, 200)
 
@@ -995,3 +995,16 @@ test_that("testing getting summary from gtsummary", {
   expect_error(get_summary_gtsummary(my_data, selectvar = NA,
                                      byvar = "trt", label = grade ~ "Tumor Grade"))
 })
+# ############################################################################
+context("testing for returning the longitudinal summary")
+test_that("testing for returning the longitudinal summary", {
+  test_data <- as.data.frame(cbind(c(1,2,3,4,5), c(20,40,60,80,100),
+                                   c("F", "F", "M", "M", "F")))
+  colnames(test_data) <- c("no", "marks", "gender")
+  test_data$marks <- as.numeric(test_data$marks)
+  results <- return_longitudinal_summary(test_data, "marks", NA)
+  expect_equal(results$means, 60)
+  expect_error( return_longitudinal_summary(test_data, "gender", NA))
+  expect_error( return_longitudinal_summary(test_data, "gen", NA))
+})
+

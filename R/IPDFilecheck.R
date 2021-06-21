@@ -1346,6 +1346,7 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
       gtsummary::tbl_summary(
         subset_data,
         by = byvar, # split table by group
+        digits = everything() ~ 2,
         type = where(is.numeric) ~ "continuous2",
         statistic = where(is.numeric) ~ c("{N_nonmiss}",
                                           "{mean} ({sd})",
@@ -1361,24 +1362,54 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
       gtsummary::tbl_summary(
         subset_data,
         by = byvar, # split table by group
+        digits = everything() ~ 2,
         type = where(is.numeric) ~ "continuous2",
         statistic = where(is.numeric) ~ c("{N_nonmiss}",
                                           "{mean} ({sd})",
                                           "{median} ({p25}, {p75})",
                                           "{min}, {max}"),
-        missing =  "always", # don't list missing data separately
+        missing =  "always",
       ) %>%
+      gtsummary::add_overall() %>%
       gtsummary::add_n() %>% # add column with total number of non-missing observations
-      gtsummary::add_p() %>%
+      gtsummary::add_difference() %>%
       gtsummary::add_stat(
         fns = where(is.numeric) ~ get_effect_size,
-        fmt_fun = NULL,
-        header = "**Effect Size (95% CI)**"
+        fmt_fun = NULL
       ) %>%
       gtsummary::modify_header(label = "**Variable**") %>% # update the column header
       gtsummary::bold_labels()
   }
-  #####################################################
+
   return(summary_table)
 }
-
+#####################################################
+#' Function to get the longitudinal summary mean and sd
+#' @param thedata a data frame
+#' @param columnnames  column names of the data that are some observations
+#' at some time points
+#' @param nrcode the non response code in the data
+#' @return returns the effect sizes
+#' @export
+#' @example
+#'
+return_longitudinal_summary <- function(thedata, columnnames, nrcode = NA){
+ result <- unlist(lapply(columnnames, check_column_exists, thedata))
+ if (sum(result) != 0)
+   stop("Error - some columns do not exists in the data")
+means <- c()
+ se <- c()
+ for (i in 1:length(columnnames)) {
+   this_col <- columnnames[i]
+   check <- IPDFileCheck::test_data_numeric_norange(this_col, thedata)
+   if (check != 0)
+     stop("Need numerical data to estimate mean and sd")
+   res <- as.data.frame(descriptive_stats_col_excl_nrcode(thedata, this_col, nrcode))
+   this_mean = as.numeric(res$Mean)
+   this_se =  as.numeric(res$SE)
+   means <- append(means, this_mean)
+   se <- append(se, this_se)
+ }
+ results <- structure(list(means  = means, se = se ))
+ return(results)
+}
