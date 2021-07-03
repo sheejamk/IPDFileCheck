@@ -985,6 +985,7 @@ test_that("testing getting summary from gtsummary", {
           byvar = "trt")
   expect_equal(this$N, 200)
 
+
   expect_error(get_summary_gtsummary(my_data, selectvar = c("age", "grade"),
                         byvar = "trt", label = grade ~ "Tumor Grade"))
 

@@ -1330,6 +1330,9 @@ get_effect_size <- function(data, variable, by, ...) {
 #' @export
 get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
                                   label = NULL){
+  wilcoxtest <- function(data, variable, by, ...) {
+    wilcox.test(data[[variable]] ~ as.factor(data[[by]]), data = data)$p.value
+  }
   if (is.null(the_data)) {
     stop("data cant be null")
   }
@@ -1373,10 +1376,10 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
       gtsummary::add_overall() %>%
       gtsummary::add_n() %>% # add column with total number of non-missing observations
       gtsummary::add_difference() %>%
-      gtsummary::add_stat(
-        fns = where(is.numeric) ~ get_effect_size,
-        fmt_fun = NULL
-      ) %>%
+      gtsummary::add_stat(fns = where(is.numeric) ~ get_effect_size) %>%
+      gtsummary::modify_header(add_stat_1 ~ "**Difference in mean-Treatment Comparison**")%>%
+      gtsummary::add_stat(where(is.numeric) ~ wilcoxtest) %>%
+      gtsummary::modify_header(add_stat_2 ~ "**Median -Treatment Comparison**")%>%
       gtsummary::modify_header(label = "**Variable**") %>% # update the column header
       gtsummary::bold_labels()
   }
