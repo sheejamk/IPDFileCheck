@@ -1,5 +1,0 @@
-Parameter,Description,Strategy,Value,Calculation,Distribution,Param1_name,Param1_value,Param2_name,Param2_value
-cost_IT,cost of IT,Intervention,2000,No,,,,,
-rr,,comb,,,,rate,0.3,,
-rr2,,,,,,,,,
-rr4,,,,,NA,,,,

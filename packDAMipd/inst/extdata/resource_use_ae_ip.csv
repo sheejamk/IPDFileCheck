@@ -1,6 +1,0 @@
-Person_id,type_admit_1,code_1,desc_1,number_use_1,type_admit_2,code_2,desc_2,number_use_2
-1,T01A,VB01Z,"Emergency Medicine, Any Investigation with Category 5 Treatment",1,T01NA,VB03Z,"Emergency Medicine, Any Investigation with Category 5 Treatment",1
-2,T01A,VB02Z,"Emergency Medicine, Category 3 Investigation with Category 4 Treatment",2,,,,
-3,T03NA,VB03Z,"Emergency Medicine, Category 3 Investigation with Category 1-3 Treatment",1,,,,
-4,T01A,VB04Z,"Emergency Medicine, Category 2 Investigation with Category 4 Treatment",4,,,,
-5,T01A,VB05Z,"Emergency Medicine, Category 2 Investigation with Category 3 Treatment",1,T02A,VB08Z,"Emergency Medicine, Any Investigation with Category 5 Treatment",1
