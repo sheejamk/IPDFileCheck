@@ -1,0 +1,90 @@
+Service_Code,Service_Description,Currency_Code,Currency_Description,Attendances,National_Average_Unit_Cost,Total Cost,No. Data Submissions
+T01A,Type 01 admitted,VB01Z,"Emergency Medicine, Any Investigation with Category 5 Treatment","14,015",377.00,5283849.00,113
+T01A,Type 01 admitted,VB02Z,"Emergency Medicine, Category 3 Investigation with Category 4 Treatment","205,559",452.00,93006742.00,118
+T01A,Type 01 admitted,VB03Z,"Emergency Medicine, Category 3 Investigation with Category 1-3 Treatment","391,189",337.00,131895092.00,118
+T01A,Type 01 admitted,VB04Z,"Emergency Medicine, Category 2 Investigation with Category 4 Treatment","783,047",318.00,248758385.00,118
+T01A,Type 01 admitted,VB05Z,"Emergency Medicine, Category 2 Investigation with Category 3 Treatment","117,802",279.00,32903351.00,118
+T01A,Type 01 admitted,VB06Z,"Emergency Medicine, Category 1 Investigation with Category 3-4 Treatment","105,211",232.00,24434324.00,117
+T01A,Type 01 admitted,VB07Z,"Emergency Medicine, Category 2 Investigation with Category 2 Treatment","542,364",251.00,135967046.00,118
+T01A,Type 01 admitted,VB08Z,"Emergency Medicine, Category 2 Investigation with Category 1 Treatment","918,713",220.00,202320919.00,118
+T01A,Type 01 admitted,VB09Z,"Emergency Medicine, Category 1 Investigation with Category 1-2 Treatment","405,561",159.00,64491348.00,117
+T01A,Type 01 admitted,VB10Z,"Emergency Medicine, Dental Care",50,120.00,5990.00,24
+T01A,Type 01 admitted,VB11Z,"Emergency Medicine, No Investigation with No Significant Treatment","254,718",167.00,42455156.00,117
+T01A,Type 01 admitted,VB99Z,"Emergency Medicine, Patient Dead On Arrival",225,272.00,61123.00,32
+T01NA,Type 01 non admitted,VB01Z,"Emergency Medicine, Any Investigation with Category 5 Treatment","12,543",480.00,6018198.00,130
+T01NA,Type 01 non admitted,VB02Z,"Emergency Medicine, Category 3 Investigation with Category 4 Treatment","114,549",426.00,48782492.00,132
+T01NA,Type 01 non admitted,VB03Z,"Emergency Medicine, Category 3 Investigation with Category 1-3 Treatment","540,818",294.00,158877924.00,132
+T01NA,Type 01 non admitted,VB04Z,"Emergency Medicine, Category 2 Investigation with Category 4 Treatment","499,478",302.00,150949779.00,132
+T01NA,Type 01 non admitted,VB05Z,"Emergency Medicine, Category 2 Investigation with Category 3 Treatment","193,604",239.00,46326053.00,132
+T01NA,Type 01 non admitted,VB06Z,"Emergency Medicine, Category 1 Investigation with Category 3-4 Treatment","325,928",182.00,59422874.00,132
+T01NA,Type 01 non admitted,VB07Z,"Emergency Medicine, Category 2 Investigation with Category 2 Treatment","1,622,690",200.00,324242742.00,132
+T01NA,Type 01 non admitted,VB08Z,"Emergency Medicine, Category 2 Investigation with Category 1 Treatment","3,214,121",179.00,576187401.00,132
+T01NA,Type 01 non admitted,VB09Z,"Emergency Medicine, Category 1 Investigation with Category 1-2 Treatment","3,391,485",133.00,452291847.00,132
+T01NA,Type 01 non admitted,VB10Z,"Emergency Medicine, Dental Care","2,785",62.00,173122.00,79
+T01NA,Type 01 non admitted,VB11Z,"Emergency Medicine, No Investigation with No Significant Treatment","2,296,290",114.00,260961774.00,132
+T01NA,Type 01 non admitted,VB99Z,"Emergency Medicine, Patient Dead On Arrival","1,233",162.00,199622.00,78
+T02A,Type 02 admitted,VB01Z,"Emergency Medicine, Any Investigation with Category 5 Treatment",9,123.00,1108.00,3
+T02A,Type 02 admitted,VB02Z,"Emergency Medicine, Category 3 Investigation with Category 4 Treatment",56,149.00,8325.00,6
+T02A,Type 02 admitted,VB03Z,"Emergency Medicine, Category 3 Investigation with Category 1-3 Treatment",363,164.00,59501.00,11
+T02A,Type 02 admitted,VB04Z,"Emergency Medicine, Category 2 Investigation with Category 4 Treatment",344,121.00,41582.00,8
+T02A,Type 02 admitted,VB05Z,"Emergency Medicine, Category 2 Investigation with Category 3 Treatment",93,112.00,10438.00,8
+T02A,Type 02 admitted,VB06Z,"Emergency Medicine, Category 1 Investigation with Category 3-4 Treatment",190,95.00,18012.00,7
+T02A,Type 02 admitted,VB07Z,"Emergency Medicine, Category 2 Investigation with Category 2 Treatment",633,146.00,92148.00,11
+T02A,Type 02 admitted,VB08Z,"Emergency Medicine, Category 2 Investigation with Category 1 Treatment","1,491",144.00,214567.00,14
+T02A,Type 02 admitted,VB09Z,"Emergency Medicine, Category 1 Investigation with Category 1-2 Treatment","1,157",172.00,199201.00,12
+T02A,Type 02 admitted,VB10Z,"Emergency Medicine, Dental Care","5,783",115.00,667416.00,1
+T02A,Type 02 admitted,VB11Z,"Emergency Medicine, No Investigation with No Significant Treatment","1,076",116.00,125030.00,12
+T02NA,Type 02 non admitted,VB01Z,"Emergency Medicine, Any Investigation with Category 5 Treatment",813,134.00,108632.00,14
+T02NA,Type 02 non admitted,VB02Z,"Emergency Medicine, Category 3 Investigation with Category 4 Treatment",159,216.00,34363.00,11
+T02NA,Type 02 non admitted,VB03Z,"Emergency Medicine, Category 3 Investigation with Category 1-3 Treatment","11,100",162.00,1794020.00,17
+T02NA,Type 02 non admitted,VB04Z,"Emergency Medicine, Category 2 Investigation with Category 4 Treatment","1,195",212.00,253874.00,15
+T02NA,Type 02 non admitted,VB05Z,"Emergency Medicine, Category 2 Investigation with Category 3 Treatment","8,294",94.00,778590.00,16
+T02NA,Type 02 non admitted,VB06Z,"Emergency Medicine, Category 1 Investigation with Category 3-4 Treatment","5,451",119.00,650171.00,16
+T02NA,Type 02 non admitted,VB07Z,"Emergency Medicine, Category 2 Investigation with Category 2 Treatment","49,894",122.00,6108385.00,16
+T02NA,Type 02 non admitted,VB08Z,"Emergency Medicine, Category 2 Investigation with Category 1 Treatment","129,984",94.00,12234825.00,17
+T02NA,Type 02 non admitted,VB09Z,"Emergency Medicine, Category 1 Investigation with Category 1-2 Treatment","81,683",147.00,12031587.00,17
+T02NA,Type 02 non admitted,VB10Z,"Emergency Medicine, Dental Care",4,7.00,27.00,1
+T02NA,Type 02 non admitted,VB11Z,"Emergency Medicine, No Investigation with No Significant Treatment","78,096",81.00,6310218.00,18
+T02NA,Type 02 non admitted,VB99Z,"Emergency Medicine, Patient Dead On Arrival",20,65.00,1296.00,5
+T03A,Type 03 admitted,VB01Z,"Emergency Medicine, Any Investigation with Category 5 Treatment",8,278.00,2224.00,4
+T03A,Type 03 admitted,VB02Z,"Emergency Medicine, Category 3 Investigation with Category 4 Treatment",185,363.00,67098.00,11
+T03A,Type 03 admitted,VB03Z,"Emergency Medicine, Category 3 Investigation with Category 1-3 Treatment",649,293.00,190152.00,17
+T03A,Type 03 admitted,VB04Z,"Emergency Medicine, Category 2 Investigation with Category 4 Treatment","1,993",245.00,488870.00,20
+T03A,Type 03 admitted,VB05Z,"Emergency Medicine, Category 2 Investigation with Category 3 Treatment",394,195.00,76683.00,17
+T03A,Type 03 admitted,VB06Z,"Emergency Medicine, Category 1 Investigation with Category 3-4 Treatment",987,101.00,99779.00,24
+T03A,Type 03 admitted,VB07Z,"Emergency Medicine, Category 2 Investigation with Category 2 Treatment","3,224",178.00,573415.00,28
+T03A,Type 03 admitted,VB08Z,"Emergency Medicine, Category 2 Investigation with Category 1 Treatment","4,327",154.00,667529.00,29
+T03A,Type 03 admitted,VB09Z,"Emergency Medicine, Category 1 Investigation with Category 1-2 Treatment","15,105",84.00,1272588.00,36
+T03A,Type 03 admitted,VB11Z,"Emergency Medicine, No Investigation with No Significant Treatment","7,930",74.00,587788.00,35
+T03A,Type 03 admitted,VB99Z,"Emergency Medicine, Patient Dead On Arrival",4,75.00,302.00,1
+T03NA,Type 03 non admitted,VB01Z,"Emergency Medicine, Any Investigation with Category 5 Treatment",326,118.00,38430.00,28
+T03NA,Type 03 non admitted,VB02Z,"Emergency Medicine, Category 3 Investigation with Category 4 Treatment",640,192.00,123050.00,24
+T03NA,Type 03 non admitted,VB03Z,"Emergency Medicine, Category 3 Investigation with Category 1-3 Treatment","88,584",64.00,5702046.00,42
+T03NA,Type 03 non admitted,VB04Z,"Emergency Medicine, Category 2 Investigation with Category 4 Treatment","7,972",161.00,1281508.00,47
+T03NA,Type 03 non admitted,VB05Z,"Emergency Medicine, Category 2 Investigation with Category 3 Treatment","11,541",131.00,1511352.00,53
+T03NA,Type 03 non admitted,VB06Z,"Emergency Medicine, Category 1 Investigation with Category 3-4 Treatment","74,283",85.00,6323882.00,55
+T03NA,Type 03 non admitted,VB07Z,"Emergency Medicine, Category 2 Investigation with Category 2 Treatment","178,046",110.00,19605320.00,56
+T03NA,Type 03 non admitted,VB08Z,"Emergency Medicine, Category 2 Investigation with Category 1 Treatment","291,998",105.00,30594576.00,55
+T03NA,Type 03 non admitted,VB09Z,"Emergency Medicine, Category 1 Investigation with Category 1-2 Treatment","1,546,565",68.00,105499867.00,60
+T03NA,Type 03 non admitted,VB10Z,"Emergency Medicine, Dental Care",37,57.00,2121.00,15
+T03NA,Type 03 non admitted,VB11Z,"Emergency Medicine, No Investigation with No Significant Treatment","1,032,202",65.00,67109144.00,59
+T03NA,Type 03 non admitted,VB99Z,"Emergency Medicine, Patient Dead On Arrival",357,75.00,26694.00,12
+T04A,Type 04 admitted,VB03Z,"Emergency Medicine, Category 3 Investigation with Category 1-3 Treatment",5,122.00,608.00,1
+T04A,Type 04 admitted,VB04Z,"Emergency Medicine, Category 2 Investigation with Category 4 Treatment",30,231.00,6935.00,1
+T04A,Type 04 admitted,VB05Z,"Emergency Medicine, Category 2 Investigation with Category 3 Treatment",49,214.00,10496.00,1
+T04A,Type 04 admitted,VB06Z,"Emergency Medicine, Category 1 Investigation with Category 3-4 Treatment",216,66.00,14249.00,1
+T04A,Type 04 admitted,VB07Z,"Emergency Medicine, Category 2 Investigation with Category 2 Treatment",67,143.00,9568.00,1
+T04A,Type 04 admitted,VB08Z,"Emergency Medicine, Category 2 Investigation with Category 1 Treatment",180,64.00,11603.00,2
+T04A,Type 04 admitted,VB09Z,"Emergency Medicine, Category 1 Investigation with Category 1-2 Treatment",750,38.00,28627.00,3
+T04A,Type 04 admitted,VB11Z,"Emergency Medicine, No Investigation with No Significant Treatment",803,13.00,10674.00,1
+T04NA,Type 04 non admitted,VB01Z,"Emergency Medicine, Any Investigation with Category 5 Treatment",5,27.00,134.00,3
+T04NA,Type 04 non admitted,VB02Z,"Emergency Medicine, Category 3 Investigation with Category 4 Treatment",10,143.00,1431.00,2
+T04NA,Type 04 non admitted,VB03Z,"Emergency Medicine, Category 3 Investigation with Category 1-3 Treatment","10,798",45.00,484341.00,4
+T04NA,Type 04 non admitted,VB04Z,"Emergency Medicine, Category 2 Investigation with Category 4 Treatment",501,187.00,93917.00,2
+T04NA,Type 04 non admitted,VB05Z,"Emergency Medicine, Category 2 Investigation with Category 3 Treatment",967,147.00,142129.00,3
+T04NA,Type 04 non admitted,VB06Z,"Emergency Medicine, Category 1 Investigation with Category 3-4 Treatment","95,214",54.00,5132473.00,7
+T04NA,Type 04 non admitted,VB07Z,"Emergency Medicine, Category 2 Investigation with Category 2 Treatment","215,516",41.00,8754020.00,8
+T04NA,Type 04 non admitted,VB08Z,"Emergency Medicine, Category 2 Investigation with Category 1 Treatment","11,167",60.00,674666.00,6
+T04NA,Type 04 non admitted,VB09Z,"Emergency Medicine, Category 1 Investigation with Category 1-2 Treatment","109,646",53.00,5827107.00,7
+T04NA,Type 04 non admitted,VB10Z,"Emergency Medicine, Dental Care",2,86.00,173.00,2
+T04NA,Type 04 non admitted,VB11Z,"Emergency Medicine, No Investigation with No Significant Treatment","345,411",43.00,14969316.00,11

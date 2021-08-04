@@ -1,0 +1,5 @@
+pat_TrialArm	SEX	age	Drug
+N	f	44	ORAMORPH 10MG/5ML
+N	f	30	matrifen patch
+N	M	21	Zomorph
+N	M	43	Tramadol MR

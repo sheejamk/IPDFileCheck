@@ -1,0 +1,3 @@
+Parameter,Description,Strategy,Value,Calculation,Distribution,Param1_name,Param1_value,Param2_name,Param2_value
+cost_IT,cost of IT,Intervention,,No,,,,,
+rr,,comb,,,exponential,rate,0.3,,

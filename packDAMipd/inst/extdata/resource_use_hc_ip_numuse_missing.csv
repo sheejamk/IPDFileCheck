@@ -1,0 +1,9 @@
+Person_id,HRGcode_1,EL_1,Description_1,number_use_1,HRGcode_2,EL_2,Description_2,HRGcode_3,Description_3,EL_3
+1,AA22C,EL,Cerebrovascular Accident,1,,,,,,
+2,AA22D,EL,Cerebrovascular Accident,2,,,,,,
+3,AA22E,EL,Cerebrovascular Accident,1,AA22E,EL,Cerebrovascular Accident,,,
+4,AA22F,EL,Cerebrovascular Accident,1,,,,,,
+5,AA22G,EL,Cerebrovascular Accident,1,,,,,,
+6,AB13Z,EL,Insertion of Intrathecal Drug Delivery Device for Pain Management,1,AA26C,NEL,"Muscular, Balance, Cranial or Peripheral Nerve Disorders, Epilepsy or Head Injury, with CC Score 12-14",AB20Z,Epidural Under Image Control for Pain Management,EL
+7,AA26C,NEL,"Muscular, Balance, Cranial or Peripheral Nerve Disorders, Epilepsy or Head Injury, with CC Score 15+",1,,,,,,
+8,AA26D,NEL,"Muscular, Balance, Cranial or Peripheral Nerve Disorders, Epilepsy or Head Injury, with CC Score 12-14",2,,,,,,

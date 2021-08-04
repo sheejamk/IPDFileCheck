@@ -1,0 +1,6 @@
+Timepoint,hospital_admission_1,length_1,nhs_1,length_2,nhs_2,daycare,number,nhs_visit,other_contact,number_of_contacts
+2,1,1,1,1,2,yes,1,1,GP surgery visit,1
+1,1,2,1,2,1,yes,0,1,Practice nurse,3
+2,2,3,2,3,2,yes,2,1,Occupational therapist,4
+2,2,4,2,4,2,yes,3,2,GP surgery visit,1
+2,2,23,2,23,2,yes,4,2,Practice nurse,2

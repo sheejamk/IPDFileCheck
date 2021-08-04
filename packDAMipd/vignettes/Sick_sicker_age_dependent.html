@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Sheeja Manchira Krishnan" />
+
+<meta name="date" content="2021-01-12" />
+
+<title>Sick sicker age dependent</title>
+
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+<style type="text/css">
+a.anchor-section {margin-left: 10px; visibility: hidden; color: inherit;}
+a.anchor-section::before {content: '#';}
+.hasAnchor:hover a.anchor-section {visibility: visible;}
+</style>
+<script>// Anchor sections v1.0 written by Atsushi Yasumoto on Oct 3rd, 2020.
+document.addEventListener('DOMContentLoaded', function() {
+  // Do nothing if AnchorJS is used
+  if (typeof window.anchors === 'object' && anchors.hasOwnProperty('hasAnchorJSLink')) {
+    return;
+  }
+
+  const h = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+  // Do nothing if sections are already anchored
+  if (Array.from(h).some(x => x.classList.contains('hasAnchor'))) {
+    return null;
+  }
+
+  // Use section id when pandoc runs with --section-divs
+  const section_id = function(x) {
+    return ((x.classList.contains('section') || (x.tagName === 'SECTION'))
+            ? x.id : '');
+  };
+
+  // Add anchors
+  h.forEach(function(x) {
+    const id = x.id || section_id(x.parentElement);
+    if (id === '') {
+      return null;
+    }
+    let anchor = document.createElement('a');
+    anchor.href = '#' + id;
+    anchor.classList = ['anchor-section'];
+    x.classList.add('hasAnchor');
+    x.appendChild(anchor);
+  });
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Sick sicker age dependent</h1>
+<h4 class="author">Sheeja Manchira Krishnan</h4>
+<h4 class="date">2021-01-12</h4>
+
+
+
+<p>This document demonstrates development of a Markov model explained in reference using this package “packDAMipd”. This model is explained in STM_02.R file in Cohort-modeling-tutorial provided in DARTH-git github page.</p>
+<p>Here we look at how the model is defined when the transition probabilities (or parameters) are dependent on the model cycle or time. (Another example for considering the time dependency is explained in vignettes/cycle_dependent.html)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(packDAMipd)</span></code></pre></div>
+<p>Define health states. Each health state must have a name, cost, and utility. The cost and utility are the state values. That means the individuals having the state membership will occur the particular cost and utility. If any cost/utility due to transitions occur, they need to specify similar to defining the transition probabilities.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>H &lt;-<span class="st"> </span><span class="kw">health_state</span>(<span class="st">&quot;H&quot;</span>, <span class="dt">cost =</span> <span class="st">&quot;c_H &quot;</span>, <span class="dt">utility =</span> <span class="st">&quot;u_H&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>S1 &lt;-<span class="st"> </span><span class="kw">health_state</span>(<span class="st">&quot;S1&quot;</span>, <span class="dt">cost =</span> <span class="st">&quot;c_S1&quot;</span>,<span class="dt">utility =</span> <span class="st">&quot;u_S1&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>S2 &lt;-<span class="st"> </span><span class="kw">health_state</span>(<span class="st">&quot;S2&quot;</span>, <span class="dt">cost =</span> <span class="st">&quot;c_S2&quot;</span>,<span class="dt">utility =</span> <span class="st">&quot;u_S2&quot;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>D &lt;-<span class="st"> </span><span class="kw">health_state</span>(<span class="st">&quot;D&quot;</span>, <span class="dt">cost =</span> <span class="st">&quot;c_D &quot;</span>,<span class="dt">utility =</span> <span class="st">&quot;u_D&quot;</span>)</span></code></pre></div>
+<p>Define allowed transition probabilities and number them. The below matrix is numbered so that the maximum entry in the matrix gives the total number of allowed transitions. Column names and row names are just the names of the health states.“NA” indicates a non allowed transition.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>tmat &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>, <span class="dv">3</span>), <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>),<span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="dv">8</span>, <span class="dv">9</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="dv">10</span>))</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">colnames</span>(tmat) &lt;-<span class="st"> </span><span class="kw">rownames</span>(tmat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;H&quot;</span>,<span class="st">&quot;S1&quot;</span> ,<span class="st">&quot;S2&quot;</span>,<span class="st">&quot;D&quot;</span>)</span></code></pre></div>
+<p>As there is cost and utility during some transitions, we define tmat_cost and tmat_utility similar to defining transition probability. Again only non zero transition cost and transition utility are non NA.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>tmat_cost &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1</span>, <span class="ot">NA</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="dv">3</span>),<span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="dv">4</span>), </span>
+<span id="cb4-2"><a href="#cb4-2"></a>                   <span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>))</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">colnames</span>(tmat_cost) &lt;-<span class="st"> </span><span class="kw">rownames</span>(tmat_cost) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;H&quot;</span>, <span class="st">&quot;S1&quot;</span>, <span class="st">&quot;S2&quot;</span>, <span class="st">&quot;D&quot;</span>)</span>
+<span id="cb4-4"><a href="#cb4-4"></a>tmat_util &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1</span>, <span class="ot">NA</span>, <span class="ot">NA</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>),<span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>), </span>
+<span id="cb4-5"><a href="#cb4-5"></a>                   <span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>))</span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">colnames</span>(tmat_util) &lt;-<span class="st"> </span><span class="kw">rownames</span>(tmat_util) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;H&quot;</span>, <span class="st">&quot;S1&quot;</span>, <span class="st">&quot;S2&quot;</span>, <span class="st">&quot;D&quot;</span>)</span></code></pre></div>
+<p>Now we define the transition matrix , transition cost matrix and transition utility matrix (the latter two are optional,we use only if there are cost/utility during transitions) using the tmat defined earlier, and number of health states. Note that the probabilities are age dependent (when compared to simple sick sicker model and are named differently to indicate the age dependency)</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>tm &lt;-<span class="st"> </span><span class="kw">populate_transition_matrix</span>(<span class="dv">4</span>, tmat, <span class="kw">c</span>(<span class="st">&quot;p_HH&quot;</span>,<span class="st">&quot;p_HS1&quot;</span>,<span class="st">&quot;p_HDage&quot;</span>,<span class="st">&quot;p_S1H&quot;</span>,</span>
+<span id="cb5-2"><a href="#cb5-2"></a>                                   <span class="st">&quot;p_S1S1&quot;</span>, <span class="st">&quot;p_S1S2&quot;</span>, <span class="st">&quot;p_S1Dage&quot;</span>,</span>
+<span id="cb5-3"><a href="#cb5-3"></a>                                   <span class="st">&quot;p_S2S2&quot;</span>,<span class="st">&quot;p_S2Dage&quot;</span>,<span class="st">&quot;p_DD&quot;</span> ), </span>
+<span id="cb5-4"><a href="#cb5-4"></a>                                 <span class="kw">colnames</span>(tmat))</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="op">&gt;</span><span class="st"> </span>[<span class="dv">1</span>] <span class="st">&quot;The transition matrix as explained&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="op">&gt;</span><span class="st">     </span>transition number probability name from from state to to state</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="op">&gt;</span><span class="st">  </span><span class="dv">1</span><span class="op">:</span><span class="st">                 </span><span class="dv">1</span>      prob_H_to_H    <span class="dv">1</span>          H  <span class="dv">1</span>        H</span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="op">&gt;</span><span class="st">  </span><span class="dv">2</span><span class="op">:</span><span class="st">                 </span><span class="dv">2</span>     prob_H_to_S1    <span class="dv">1</span>          H  <span class="dv">2</span>       S1</span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="op">&gt;</span><span class="st">  </span><span class="dv">3</span><span class="op">:</span><span class="st">                 </span><span class="dv">3</span>      prob_H_to_D    <span class="dv">1</span>          H  <span class="dv">4</span>        D</span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="op">&gt;</span><span class="st">  </span><span class="dv">4</span><span class="op">:</span><span class="st">                 </span><span class="dv">4</span>     prob_S1_to_H    <span class="dv">2</span>         S1  <span class="dv">1</span>        H</span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="op">&gt;</span><span class="st">  </span><span class="dv">5</span><span class="op">:</span><span class="st">                 </span><span class="dv">5</span>    prob_S1_to_S1    <span class="dv">2</span>         S1  <span class="dv">2</span>       S1</span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="op">&gt;</span><span class="st">  </span><span class="dv">6</span><span class="op">:</span><span class="st">                 </span><span class="dv">6</span>    prob_S1_to_S2    <span class="dv">2</span>         S1  <span class="dv">3</span>       S2</span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="op">&gt;</span><span class="st">  </span><span class="dv">7</span><span class="op">:</span><span class="st">                 </span><span class="dv">7</span>     prob_S1_to_D    <span class="dv">2</span>         S1  <span class="dv">4</span>        D</span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="op">&gt;</span><span class="st">  </span><span class="dv">8</span><span class="op">:</span><span class="st">                 </span><span class="dv">8</span>    prob_S2_to_S2    <span class="dv">3</span>         S2  <span class="dv">3</span>       S2</span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="op">&gt;</span><span class="st">  </span><span class="dv">9</span><span class="op">:</span><span class="st">                 </span><span class="dv">9</span>     prob_S2_to_D    <span class="dv">3</span>         S2  <span class="dv">4</span>        D</span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span><span class="op">:</span><span class="st">                </span><span class="dv">10</span>      prob_D_to_D    <span class="dv">4</span>          D  <span class="dv">4</span>        D</span>
+<span id="cb5-17"><a href="#cb5-17"></a>tm_cost &lt;-<span class="st"> </span><span class="kw">transition_cost_util</span>(<span class="dv">4</span>, tmat_cost, <span class="kw">c</span>(<span class="st">&quot;ic_HS1&quot;</span>,<span class="st">&quot;ic_D&quot;</span>,<span class="st">&quot;ic_D&quot;</span>,<span class="st">&quot;ic_D&quot;</span>), <span class="kw">colnames</span>(tmat_cost))</span>
+<span id="cb5-18"><a href="#cb5-18"></a>tm_util &lt;-<span class="st"> </span><span class="kw">transition_cost_util</span>(<span class="dv">4</span>, tmat_util, <span class="kw">c</span>(<span class="st">&quot;du_HS1&quot;</span> ), <span class="kw">colnames</span>(tmat_util))</span></code></pre></div>
+<p>Now define the parameter list using define_parameters(). If there is any formula or expression to be evaluated during the cycle, it has be given as a string (see below). For example. p_S1D is calculated using a formula with parameters p_HD and hr_S1 and is thus given as a string expression. Here the mortality rates are age dependent, thus each cycle, the age of the cohort is to be calculated to determine the mortality. We read the mortality data from the provided data file as shown below. The dependency is thus defined by using the keyword “Markov_cycle” for the current cycle.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>mortality_file =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;LifeTable_USA_Mx_2015.csv&quot;</span>,  <span class="dt">package =</span> <span class="st">&quot;packDAMipd&quot;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>param_list &lt;-<span class="st"> </span><span class="kw">define_parameters</span>(<span class="dt">age_init =</span> <span class="dv">25</span>,</span>
+<span id="cb6-3"><a href="#cb6-3"></a>                      <span class="dt">mortality_age =</span> <span class="st">&quot;get_mortality_from_file(mortality_file, age_init - 1 + markov_cycle, </span><span class="ch">\&quot;</span><span class="st">total</span><span class="ch">\&quot;</span><span class="st">)&quot;</span>,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>                      <span class="dt">p_HDage =</span> <span class="st">&quot;1-exp(-mortality_age)&quot;</span>, <span class="dt">p_HS1  =</span> <span class="fl">0.15</span>, </span>
+<span id="cb6-5"><a href="#cb6-5"></a>                      <span class="dt">p_S1H =</span> <span class="fl">0.5</span>,</span>
+<span id="cb6-6"><a href="#cb6-6"></a>                      <span class="dt">p_S1S2  =</span> <span class="fl">0.105</span>, <span class="dt">hr_S1   =</span> <span class="dv">3</span>,<span class="dt">hr_S2   =</span> <span class="dv">10</span>,</span>
+<span id="cb6-7"><a href="#cb6-7"></a>                      <span class="dt">p_S1Dage  =</span>  <span class="st">&quot;1-exp(-mortality_age *hr_S1)&quot;</span>,</span>
+<span id="cb6-8"><a href="#cb6-8"></a>                      <span class="dt">p_S2Dage  =</span> <span class="st">&quot;1-exp(-mortality_age *hr_S2)&quot;</span>,</span>
+<span id="cb6-9"><a href="#cb6-9"></a>                      <span class="dt">p_HH =</span> <span class="st">&quot;1 - (p_HS1 + p_HDage)&quot;</span>,</span>
+<span id="cb6-10"><a href="#cb6-10"></a>                      <span class="dt">p_S1S1 =</span> <span class="st">&quot;1 - (p_S1H + p_S1S2+ p_S1Dage)&quot;</span>,</span>
+<span id="cb6-11"><a href="#cb6-11"></a>                      <span class="dt">p_S2S2 =</span> <span class="st">&quot;1 - ( p_S2Dage)&quot;</span>,</span>
+<span id="cb6-12"><a href="#cb6-12"></a>                      <span class="dt">p_DD =</span> <span class="dv">1</span>,</span>
+<span id="cb6-13"><a href="#cb6-13"></a>                      <span class="dt">c_H   =</span> <span class="dv">2000</span>,<span class="dt">c_S1  =</span> <span class="dv">4000</span>,<span class="dt">c_S2  =</span> <span class="dv">15000</span>,</span>
+<span id="cb6-14"><a href="#cb6-14"></a>                      <span class="dt">c_D   =</span> <span class="dv">0</span>, <span class="dt">c_Trt =</span> <span class="dv">12000</span>,<span class="dt">u_H   =</span> <span class="dv">1</span>,</span>
+<span id="cb6-15"><a href="#cb6-15"></a>                      <span class="dt">u_S1  =</span> <span class="fl">0.75</span>, <span class="dt">u_S2  =</span> <span class="fl">0.5</span>,<span class="dt">u_D   =</span> <span class="dv">0</span>,</span>
+<span id="cb6-16"><a href="#cb6-16"></a>                      <span class="dt">u_Trt =</span> <span class="fl">0.95</span>, <span class="dt">du_HS1 =</span> <span class="fl">-0.01</span>, <span class="dt">ic_HS1 =</span> <span class="dv">1000</span>, <span class="dt">ic_D =</span> <span class="dv">2000</span>)</span></code></pre></div>
+<p>We define the strategy “Usual care” by using the function ‘strategy’ with the health states combined (using combine_state()), the transition matrix (tm), transition cost and utility matrices. Using the defined strategy ‘uc_strategy’, we run the Markov model using Markov_model() with cycles, initial states, initial cost, initial utility values, discount rates and parameter list. The results of the Markov model (trace matrix) can be plotted using plot_model() function.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>health_states &lt;-<span class="st"> </span><span class="kw">combine_state</span>(H,S1,S2,D)</span>
+<span id="cb7-2"><a href="#cb7-2"></a>uc_strategy &lt;-<span class="st"> </span><span class="kw">strategy</span>(tm, health_states, <span class="st">&quot;Usual care&quot;</span>,tm_cost,tm_util)</span>
+<span id="cb7-3"><a href="#cb7-3"></a>uc_markov &lt;-<span class="st"> </span><span class="kw">markov_model</span>(<span class="dt">current_strategy =</span> uc_strategy, <span class="dt">cycles =</span> <span class="dv">85</span>, </span>
+<span id="cb7-4"><a href="#cb7-4"></a>                          <span class="dt">initial_state =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">discount =</span> <span class="kw">c</span>(<span class="fl">0.03</span>,<span class="fl">0.03</span>), <span class="dt">parameter_values =</span> param_list, <span class="ot">TRUE</span>, </span>
+<span id="cb7-5"><a href="#cb7-5"></a>                          <span class="dt">method =</span> <span class="st">&quot;half cycle correction&quot;</span>)</span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">plot_model</span>(uc_markov)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>Similarly, we define the health states, strategy, and Markov model for the “New treatment”. Parameter list is the same as that defined for the usual care. Costs for the health states in the new treatment strategy differs, thus we need to redefine the health states.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>H &lt;-<span class="st"> </span><span class="kw">health_state</span>(<span class="st">&quot;H&quot;</span>, <span class="dt">cost =</span> <span class="st">&quot;c_H &quot;</span>, <span class="dt">utility =</span> <span class="st">&quot;u_H&quot;</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>S1 &lt;-<span class="st"> </span><span class="kw">health_state</span>(<span class="st">&quot;S1&quot;</span>, <span class="dt">cost =</span> <span class="st">&quot;c_S1 + c_Trt &quot;</span>,<span class="dt">utility =</span> <span class="st">&quot;u_Trt&quot;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a>S2 &lt;-<span class="st"> </span><span class="kw">health_state</span>(<span class="st">&quot;S2&quot;</span>, <span class="dt">cost =</span> <span class="st">&quot;c_S2 + c_Trt&quot;</span>,<span class="dt">utility =</span> <span class="st">&quot;u_S2&quot;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a>D &lt;-<span class="st"> </span><span class="kw">health_state</span>(<span class="st">&quot;D&quot;</span>, <span class="dt">cost =</span> <span class="st">&quot;c_D &quot;</span>,<span class="dt">utility =</span> <span class="st">&quot;u_D&quot;</span>)</span>
+<span id="cb8-5"><a href="#cb8-5"></a>health_states &lt;-<span class="st"> </span><span class="kw">combine_state</span>(H,S1,S2,D)</span>
+<span id="cb8-6"><a href="#cb8-6"></a>trt_strategy &lt;-<span class="st"> </span><span class="kw">strategy</span>(tm, health_states, <span class="st">&quot;New treatment&quot;</span>,tm_cost,tm_util)</span>
+<span id="cb8-7"><a href="#cb8-7"></a>trt_markov &lt;-<span class="st"> </span><span class="kw">markov_model</span>(<span class="dt">current_strategy =</span> trt_strategy, <span class="dt">cycles =</span> <span class="dv">85</span>, </span>
+<span id="cb8-8"><a href="#cb8-8"></a>                           <span class="dt">initial_state =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">discount =</span> <span class="kw">c</span>(<span class="fl">0.03</span>,<span class="fl">0.03</span>),<span class="dt">parameter_values =</span> param_list,<span class="ot">TRUE</span>, </span>
+<span id="cb8-9"><a href="#cb8-9"></a>                           <span class="dt">method =</span> <span class="st">&quot;half cycle correction&quot;</span>)</span></code></pre></div>
+<p>Once we have the results form the Markov models for both the strategies, we combine these two to define list_Markov. Finally we obtain incremental cost effectiveness ratio (ICER) and net monetary benefit (NMB) for the cost effectiveness analysis using the function calculate_icer_nmb(). The results of the cost effectiveness acceptability curve(CEAC) can be plotted using plot_ceac function as shown below. For calculating NMB, threshold value and the name of the comparator should be provided, while for plotting CEAC, range of values of thresholds should be provided along with the name of the comparator.</p>
+<p>The reports the results as follows which is the same as obtained using packDAMipd.</p>
+<p>The cost of usual care obtained from STM_02.R of Cohort-modeling-tutorial in DARTH-git package is 115,415 USD while that of the new treatment is 212,867 USD. The QALYs for the usual care and the new treatment are 19.460 and 20.157 respectively. The ICER obtained is 139,794</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>list_markov &lt;-<span class="st"> </span><span class="kw">combine_markov</span>(uc_markov, trt_markov)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>cal &lt;-<span class="st"> </span><span class="kw">calculate_icer_nmb</span>(list_markov, <span class="dt">threshold =</span> <span class="dv">20000</span>, </span>
+<span id="cb9-3"><a href="#cb9-3"></a>                          <span class="dt">comparator =</span> <span class="st">&quot;Usual care&quot;</span> )</span>
+<span id="cb9-4"><a href="#cb9-4"></a>cal</span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="op">&gt;</span><span class="st">         </span>Strategy             Cost           Effect              NMB</span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="st">    </span>Usual care <span class="fl">115414.831188968</span> <span class="fl">19.4595827471125</span> <span class="fl">273776.823753282</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span><span class="op">:</span><span class="st"> </span>New treatment <span class="fl">212866.531304463</span> <span class="fl">20.1566917302682</span> <span class="fl">190267.303300902</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="op">&gt;</span><span class="st">            </span>Inc_Cost        Inc_Effect             ICER</span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="st">             </span><span class="er">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">              </span><span class="er">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">             </span><span class="er">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="er">&gt;</span><span class="st"> </span><span class="dv">2</span><span class="op">:</span><span class="st"> </span><span class="fl">97451.7001154942</span> <span class="fl">0.697108983155694</span> <span class="fl">139794.067312613</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">plot_ceac</span>(list_markov,<span class="dt">threshold_values =</span> <span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">5000</span>, <span class="dv">7000</span>, <span class="dv">10000</span>, </span>
+<span id="cb10-2"><a href="#cb10-2"></a>                                           <span class="dv">150000</span>, <span class="dv">20000</span>), </span>
+<span id="cb10-3"><a href="#cb10-3"></a>          <span class="dt">comparator =</span> <span class="st">&quot;Usual care&quot;</span> , <span class="dt">currency =</span> <span class="st">&quot;USD&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAkAAAAGACAMAAAByRC0tAAABLFBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZrYzMzM6AAA6ADo6AGY6OgA6Ojo6OmY6OpA6ZmY6ZpA6ZrY6kLY6kNtNTU1NTW5NTY5NbqtNjshmAABmADpmOgBmOmZmZgBmZmZmkJBmkNtmtrZmtttmtv9uTU1uTW5uTY5ubqtuq+SOTU2OTW6OTY6ObquOyP+QOgCQZgCQZjqQZmaQkDqQkGaQkLaQtpCQttuQ27aQ2/+rbk2rbm6rbo6rjk2ryKur5P+2ZgC2Zjq2kDq2kGa2tpC2ttu229u22/+2///Ijk3I///bkDrbkGbbtmbbtpDb25Db27bb29vb2//b/7bb/9vb///kq27k///r6+v/AAD/tmb/yI7/25D/27b/29v/5Kv//7b//8j//9v//+T///9bqV6bAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAWg0lEQVR4nO2dC3vbxpmFISdm2Ha3bSo5ieLtLUxjOam02e1uK29bqVdbYtPLbmSbFFPd8P//w2IGdxIgAcx8mAPM+Z5HEoXLwcHMy5kBCM4XhAyGQQSuDTCGHQSIYRQEiGEUBIhhFASIYRQEiGEUBIhhFASIYRSWALr/w3eC4J1Patau/u1VxdLfBcHkSv+q3uP+5HHFGtEoG709nCSvlJX0p+ZsfA07AK2mgY73q1fPH1UU+TLafqJ/1ezhAKCy0RqAKs/G27AC0O1h8P7/huHfngazyvU1AM2SX033kI86gFRkPBOgYlgBaB7s67+rqSrjb54Gwbsvo3/vvwyCvU+iko+amf10W7X2X6O159HCRz9Uv15ly8Lwq2nw7mmyh6qxuLJ0TaYbRYv/+J1g7ydFsfRQhRdxfBX1rPGmsXLxRbrz7eH+snDYfKfosGrFy1IL9LXeKAY/2jM9TiwaQ3Z/MlE/8+DRl5v2xxY2ALo/Sd+T/4h+lro720vqIwhmJYBW6doCQNky3a1FL3KAVtNZGLdTqzVZVYPry2b5izjm2abLtUMUdr49/N60cNh8p9vDd6ap/hpAceO03DuNj7MM8u1SgKJ9H/9t0/7YwgZApaY+qoVPVM2pyn8/GnFOJ8VG//5ENQ9/VQuzLixfFr06Db9SsKVjoLhGzh+9Km6kht3zYFLYMTtUfsz4aI9ehvrfTLn4Itk56oAnV/e/DybpYdOdohU/iFdsjoHO9a+kUyuI5gCp06iwP7awDlBSe+d7p6vpOz/+s16WA7Sa7qcLMoDyZcmrsDCInusmYlLYKG7vysuyQ+XHTOIff/yPaZBtGm68iHa+PdQcKCQSo8lO8Qp1vE2AlrqFWhctAqSlNu2bFTVeCAA0U3+WSS8VfP9lXG66Y9hfxt2DasszgPJlyb5hASBV8uWN8koqiGWHyl4kZvQGkzBTzl7kOyf2VV3rCs52SgCZx8csA6R2ynqwTLQIkKZy076F8oYKu2Ogv3z/ZQGg8K9P40GyAUDq17lur7YClB0qfxHqq8Pv/def/u+wFUD5TtsAUg1W2oNtAWjTvoXyhgqrV2G3h6o3Sbswvejv/x4hUuzCZulOhS5slq3d6MKi6vuVquB8o7ySCmLZoUov4g3isdFmF5bunPdU+rD5TjFZ1V1Y5Pynh/mVQfrqPG2d0ov+DftjC8v3gfYLg+hlNAQN73+v3tjZGy8aTP4yuqQ9KY6B8mV6MLo6TIY+cR2spj9SGxY3yt/l6bLsUPkxVUQUXKnrZ1XziXLxRbJzPlbWh813ilZE57M5iNbq9yf/UjyrxPd58BM9ys8A2rBvo7yRwu6daH1tu3ZtrYo8v4xP2vL94o3E4rLkqnueXMbrq7rkHZ9slANUXJYcKj+mivSKP/o3U157Ee2cXK2ro8SHTXdKru8LF4QxQPHZzIOchrLou09zgDbsjy0sfRb2zZdRUSefha1KNxKjy+rw9mn+gZdaqzcs3InOlqkbcvo2oNrj67gO5slnHelGBYDyHbNDZS9iW8rKL3W/kirnL9Kd4/uFeuCtjWY7xXcYv1u+kXiVns2qeE2eif4lUvo6HwNt2h9b8NP4tU8sGkfdpzCeBQHqCNA3T3v/qBcyCFAngKLx9QjHM12CAHUCKBob1zy64lsQIIZRECCGURAghlEQIIZRECCGURAghlHYAOhtRVQu7Bg2tWjMkhYBAtOCNUaA5MS8MEaA5MS8MEaA5MS8MEaA5MS8MEaA5MS8MEaA5MS8MEaA5MS8MEaA5MS8MEaA5MS8MEaA5MS8MEaA5MR8MBYEQfUhCBCWFqgx/XXIykMQICwtUGMESFLMA2MESFJs9MYWC46BJMXGbmyxRYsAgWnhGVsstmkRIDAtOGOL7VoECEwLzNgi5YcACYqN1liODwGSFBursUXxHwIkJzZOY4sSPwRIUGyMxtbwIUCSYiM0to4PAZIUG52xjeanXosAgWkBGKvChwBJio3LWCU+BEhSbEzGqpufei0CBKbl2FgdPgRIUmw0xmqbn3otAgSm5dDYNnwIkKTYOIxtxYcASYqNwdj25qdeiwCBabkxthMfAiQpNnhju/EhQJJiAzfWoPmp1yJAYFq9G2uGDwGSFBuysYb4ECBJseEaa9r81GsRIDCtXo01x4cASYoN1FiL5qdeyyZAjCHFYmFVji0QiFZfxlq1Plu0CBCYVj/G2vVe27QIEJhWH8Y64EOAJMUGZqwLPgRIUmxQxjo1PzVabwkQnJa0sY74ECBJseEY69r8VGkliwkQlpakMQN8CJCk2ECMmeBDgCTFBmHMqPl5S4AkxQZgzBQfAiQphm/MGB8CJCmGbsy8+XlLgCTFsI1ZwYcASYpBG7ODDwGSFAM2Zqn5eUuAJMVwjVnDhwBJiqEas9f8vCVAkmKYxiJ8ejhJAgSmZU1sYVHrbb0WAQLTsiS22JaiqVMQIDkxOGPp4IcAiWmN2tiuDDudggDJiWEZK1x7ESAxrdEaK126EyAxrbEaa5Rhp1MQIDkxGGPrdw4JkJjWKI1t3HgmQGJaIzRW8cEFARLTGp2xys+9CJCY1tiMVX9sSoDEtMZlrO5jdwIkpjUmY/VPbRAgMa0RGWufYadTECA5MZfGtj40RoDEtEZibMczhwRITGscxjpm2OkUBEhOzJGx3Y88EyAxrREYa/DEPAES0xq8sUbfuCBAYloDN9bwCzsESExr2Maaft8LA6CbTw8OjtcX3j0/+PBNGD68OHhyRoAsajUQa/59QQiA7j4/C29+dlZe+PDiOHz9URheHIfXCiQC1JtYm6+bQgB0HXGiQInanA8uFVBfXMa/bj671K+zcHQK7sX6NGYjw06nMBoDqVbo4ki3OTFAN8/eqIU3z36TdGHvRbFVgmEjLKfYsRhbAXp4caQZiti5PlBxpPotBdCnx5qlOBy9B9yL9Was7WQJIC3Q3fMjPWo+0K1NuQXSfwhQL2LtJ9vAAEg1Mwk3Ybg2Bvo5AbKsVSvWZa4WCIBifkI1BsovuFSnllyFsQvrxVinqX4gAHqtRz36Kiy/5ZPeB0ovzQiQrFjHqaIgAGoejk7BvZi0sc4zjREgMa0hGbOeYcemFgEC09oQM5nokACJaQ3FmNk8mQRITGsgxmQy7NjUIkBgWkUx42l6CZCY1hCMmc/yTIDEtPCN2ZglnACJaaEbszPJPAES0wI3ZilHAQES04I2Zi3HBQES0wI2ZjFFCgES08I11kOGHZtaBAhLa7EANUaABMWsaaneC9JYvRYBAtLqK8OOTS0CBKOVDJ7xjG3VIkAoWungGc7Ydi0ChKGVX7uDGdulRYAQtIq3fqCM7dYiQABapVs/SMYaaBEg51prd55xjDXSIkCOtTY+uEAx1lCLALnVcpJhx6YWAXKpVfW5KYSx5loEyKFW5eemCMZaaBEgZ1o1j224N9ZKiwA50qp96se1sZZaBMiNVv1TP6glRoDkxFprbXvoELXECJCcWEut7c+sopYYAZITa6e145lV1BIjQHJibbR2PjKPWmIESE6suVaDb1yglhgBkhNrrAWSYcemFgHqT6vZF75QS4wAyYk102r4hS/UEiNAcmJNtBp/3xS1xAiQnNhurRZfV0YtMQIkJ7ZTq83XlVFLjADJie3QajdbAmqJ9QAQoypwMzRZDbZAQlqIGXZsalUAdB4E+6tpEEwIkLFWh7l+UEusMUDnj6/uT4JZeH+yT4DMtDpNFYVaYk0Buj+ZheHy0avo1+MrAmSiBZthx6bWBkC3hxlA6hcB6qrVdaY61BIjQHJiVVqdZ6pDLTECJCe2qWUwUSZqiREgObF1LaN5VlFLrDlAQRoEqJuW2TyrqCXGjzLkxEpaptM8o5YYAZITK2iZzxKOWmIESE4s1xpGhh2bWgTIopaVJAWoJdb8TjQH0d20LOW4QC2xxi3QMghmbIHaaw0ow45NrU2AQv15fBeGHJ2Ce7HQYoYm2BJrNwZSHVlrhhydgnux0GaKHdQSaz2Ivj/hGKhhWMzwhVtirVugvdOWDZCvANnN0ARbYi0A6kSPtwBZztAEW2ItrsI60eMpQLr3QjTWl9YGQLwP1CIEMjTBlhjvRNsXk8jQBFtiBMi2mEyGJtgS4/NAlsWEMjTBlljrFug84Nd66qN06wfJWN9adQDdHvI+UH0IZmiCLbF2AC2Dtl8K8wkgyQxNsCXWCqDz9t9r9gegzQ8uQIw50aoCSH+zmQBVh3SGJtgSaw7Qatr28ssjgMQzNMGWWGOA5p26Lz8A6iFDE2yJ8T6QsVgvGZpgS4x3ok3F+snQBFtiBMhMrK8MTbAlRoCMxHrL0ARbYgTIQGzHM6sEiABti14zNMGWGAHqKtZvhibYEiNA3cSafOOCABGgmug/QxNsiRGgDmIOMjTBlpgJQDefXa4vunt+8OGbMHx4cfDkbKwAOcnQBFtiBgBdH3ywDtDDi+Pw9UdheHEcXiuQRgiQowxNsCXWHaCLJ79VLVDU5miO7r64jH9F7ZJ+nYWjU5ARc5WhCbbEjLuwiyPd5sQA3Tx7E959fnbz7DdJF/ZeFNskBhaepNixGDsBinBR7FwfqDhS/ZYC6NNjzVIcjt4DAmItJ0tgC9QEoOcROKq1KbdA+s/IAGo92QYBagJQOtwpjYF+Pj6AHGdogi0xG2Og/ILr4cVRehU2si7MdYYm2BIzBijqw/JbPul9oPTSbCwAdZsqigDxTrQOhAxNsCVGgHaKQWRogi0xArRDDCRDE2yJEaDtYigZmmBLjABtEzObZ5UAeQ4QUoYm2BIjQLViUBmaYEuMANWIWZglnAD5CxBchibYEiNAVWJ4GZpgS4wAbYrZynFBgLwECDNDE2yJEaA1MdAMTbAlRoBKAZuhCbbECFAxFqjGYEuMABViYTlFEwHyCqC49wI0Zl+MAAloLWyK2deCNUaAdGSDZzRjImIEyLJW4doLy5iQGAGyqyWVYYcAeQFQ+dYPkDE5MQJkT2v9ziGMMUkxAmRNSzTDDgEaO0AVH1xgGBMWI0B2tKo+94IwJi1GgGxoVX9uCmBMXowAmWvVfezu3FgfYgTIWKv2qQ3XxnoRI0CGWlue+kGtJ1hjHgK09aEx1HqCNeYfQP1l2CFAIwRo1zOrqPUEa8wvgHY/8oxaT7DGvAKo5ww7BGhcADX6xgVqPcEa8wegZl/YQa0nWGO+ANT0C1+o9QRrzA+Amn9fELWeYI15AVCLr5ui1hOsMQ8AavV1ZdR6gjXWA0BugxmanMbgWyCXGXbYAg0eoPaTbaDWE6yxUQPUYa4W1HqCNTZigDrN9YNaT7DGRgtQx6miUOsJ1thYAeo60xhqPcEaGydA3WeqQ60nWGNjBMhkokPUeoI1NkKAYDLsEKAhAmQ4zypqPcEaGxlAxtP0otYTrLFxAYSVYYcADQwgG7OEo9YTrLERAWRlknnUeoI1NhqALCUpQK0nWGMjAchajgvUeoI1Ng6A7KVIQa0nWGNjAMhmih3UeoI1NnyArGZogq0nWGODB8huhibYeoI1NnCAbGdogq0nWGODBsh+hibYeoI1NmSABDI0wdYTrLHhAiSSoQm2nmCNDRYgmQxNsPUEa2yAAAVBULp296KeYI0ND6BAhSWtzUCtJ1hjBKgcqPUEa4wAlQO1nmCNDQ2gaPCzxo8f9QRrbGAASWdogq0nWGODAkg+QxNsPcEaGxJAPWRogq0nWGPDAaj2sQ0v6gnW2FAA6ilDE2w9wRobCEB9ZWiCrSdYY4MAaPtDh17UE6yxAQDUZ4Ym2HqCNYYPUK8ZmmDrCdYYOkANHpn3op5gjWED1HuGJth6gjUGDVD/GZpg6wnWWHeA7p4ffPimZmFpXddTcJGhCbaeYI11BujhxXH4+qPqheV1HU/BSYYm2HqCNdYZoLsvLsObzy5VY/PBZfJ/ujBd1xGg9WdWu51Ct0CtJ1hjnQG6efYmvPv8LLw4ihsbDVCyMF0Xhu9FUStRE/qJsbY7MTCjviKvP9SQKE4idq4PVBwlC5M/yZZt3wMbjxx2ew90C9Q3Oqwx0xYo6sEODp6c1bVABAhRDAKgwnAn+9/KGGjzmdVup9AtUOsJ1pjBVVg8+InGQNfZJXuyMF3XAaAOk7V4UU+wxozvA0V/npxVLGx/H0hffNk7hW6BWk+wxnDuRLcd+uw6hW6BWk+wxgiQnJgXxgiQnJgXxiAAikc/Hfnxo55gjSEA1Lnt2XoK7sW8MEaA5MS8MEaA5MS8MOYeoIrpEqycgnsxL4y5BKjlYxstT8G9mBfGHAJk2HPtOgX3Yl4YcwZQEBAgV2JjACggQO7ERgSQ4Cm4F/PCmFOARE/BvZgXxlyOgWRPwb2YF8bc3weSOgX3Yl4YI0ByYl4YI0ByYl4YI0ByYl4YI0ByYl4YI0ByYl4YI0ByYl4YI0ByYl4YI0ByYl4YI0ByYl4YI0ByYl4Y6wGgqmg9aVBfQWMtY4cvAoQSqMYIUDlorGUQoHLQWMtwBBDDkyBADKMgQAyjIEAMoyBADKMQAagyy4abeH1woCbaL0/tWDXRY8+h57jd5sqROe2rTaFJAFSZZcNRXByr3+UUH5UJP/qNa1VB21w5Mqd9tSo0CYDKs0g7jYf/0RPMlqe3rpzsute4ePJblYVkiys35mJfrQpNAqDyPPZOQ8+zf7w2wX7ldPs9h6qEba5cmUvS6zQvNAmAypk0nMbNz87UG6qc4qMy4UffxqKK2ubKlTkNdptCG3kLpOPiGOpNrgO5BdLRtNBGPgbScXEMNMxI4gZyDFQCyN0YqJxJw2moFvfh15flFB+VCT96DlUJ21y5Mpd2rY0LzYP7QDpXFdCtFh3o94EaFxrvRDOMggAxjIIAMYyCADGMggAxjIIAMYzCJ4DuT5KpYyerb53Wb7a+Mv1/+ehVg60rjjpTf24PZ5nIPPKwd5oZmiRb3n68QwoxfAJIRVzffQI0j/koADRXQstgFgG0HyqMHl/Fmy7TFwMKAlSzyeb/3QBKm5UcoKRJOn98FQOUrsoaq0GFrwD9Iuo6ZuHq2/8ZqBoNAgXHahovTFbqHmYS73J7GOz9QgMUV3rUiOit99Varal+rQnpmCetShGg/cRM+mqedmIDbII8BWga1ZSGYKKqcaLrOeZgOktXquXqJ1p+e7gfERC3QIqIqOY1EEoiB2hdSG2d0VLowpYKvOLKjJud/SFe+ArQTL/Uf3XXFNXv6ttxF5Wu1MuXGpF46BsDpBSin39exa8LAK0Lqci6p+IgWo+iJwWA0s4x23o44SlASZXrv/P40mw/PI8viDIeVLsQb6T7oYQLVev6/6W+lioAtC6kohog/X82BspboLx3G0wQoGyUEqpaDXSLsw2gqLq/PlE92t7pWgu0LhS/mMVLkgFyvo3u82JezlPcCBB8VAC03CsMPFQPlAKklhe6sLTxuP34vyOUNF7LUgu0LlT4E8W5ZuN8kg50coDybdiFwUcFQPo+TFT5GpC1MXE2iJ5kg+gIAtVBKVpWUw2QGmLfn+ydrgvFG6dtirrxE4+vzuObiJON+0AcRONHBUD66lu3NvEN4tJV+cZlfJigoAY6e7+K2yt12f7Tj0/XheKNczqm6dJ5PFRK70Tn3dacl/GMtWjz+QRvJDI2I7tLuDsGeB+RAIlH82aFH6Yy/AsCxDAKAsQwCgLEMAoCxDAKAsQwCgLEMIr/B8nC8egoPZiNAAAAAElFTkSuQmCC" /><!-- --></p>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

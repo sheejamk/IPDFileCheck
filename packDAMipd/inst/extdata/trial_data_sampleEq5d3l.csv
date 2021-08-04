@@ -1,0 +1,7 @@
+pat_TrialArm,SEX,age,Drug,Timepoint,qol_MO,qol_SC,qol_UA,qol_PD,qol_AX,tpi_PainDayToDayActivities,tpi_PainWorkAroundHome,tpi_PainParticipateSocial,tpi_PainHouseholdChores,tpi_PainUsuallyDoForFun,tpi_PainEnjoySocial,tpi_PainEnjoyLife,tpi_PainFamilyLife,qsy_SympFeelingSick,qsy_SympStomachCramps,qsy_SympMuscleSpasms,qsy_SympFeelColdness,qsy_SympHeartPounding,qsy_SympMuscularTension,qsy_SympAches,qsy_SympYawning,qsy_SympRunnyEyes,qsy_SympInsomnia
+N,f,22,ORAMORPH 10MG/3ML,2,1,3,2,3,1,1,1,2,2,2,3,1,2,2,2,3,2,1,2,3,2,2,1
+N,f,30,matrifen patch,1,3,3,3,2,3,2,2,2,1,3,2,1,2,1,2,3,3,3,2,3,2,2,1
+N,M,21,Zomorph,2,2,1,1,2,3,1,1,3,3,1,3,1,1,2,2,2,3,2,3,2,3,1,3
+N,M,23,Tramadol MR,2,3,3,2,3,1,2,2,3,1,2,2,1,2,2,1,2,2,2,1,3,1,3,1
+Y,F,37,Zomorph,2,1,3,2,3,1,2,1,2,1,3,2,3,3,2,3,3,2,3,1,1,2,3,3
+Y,F,73,Oxycontin,1,3,1,2,3,2,1,1,3,2,2,1,3,2,3,1,2,2,3,3,2,3,2,2

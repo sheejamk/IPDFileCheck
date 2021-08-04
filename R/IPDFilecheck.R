@@ -1377,9 +1377,9 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
       gtsummary::add_n() %>% # add column with total number of non-missing observations
       gtsummary::add_difference() %>%
       gtsummary::add_stat(fns = where(is.numeric) ~ get_effect_size) %>%
-      gtsummary::modify_header(add_stat_1 ~ "**Difference in mean-Treatment Comparison**")%>%
+      gtsummary::modify_header(add_stat_1 ~ "**Difference in mean**")%>%
       gtsummary::add_stat(where(is.numeric) ~ wilcoxtest) %>%
-      gtsummary::modify_header(add_stat_2 ~ "**Median -Treatment Comparison**")%>%
+      gtsummary::modify_header(add_stat_2 ~ "**p value for Median**")%>%
       gtsummary::modify_header(label = "**Variable**") %>% # update the column header
       gtsummary::bold_labels()
   }

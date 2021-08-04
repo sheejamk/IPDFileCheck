@@ -1,0 +1,3 @@
+Parameter,Description,,Value,Calculation,Distribution,Param1_name,Param1_value,Param2_name,Param2_value
+cost_IT,cost of IT,,2000,No,,,,,
+rr,,,,,exponential,rate,0.3,,

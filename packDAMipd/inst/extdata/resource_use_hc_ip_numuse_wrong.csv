@@ -1,0 +1,9 @@
+Person_id,HRGcode_1,Description_1,number_use_1,EL_1,HRGcode_2,Description_2,number_use_2,EL_2,HRGcode_3,Description_3,number_use_3,EL_2,number_use_4
+1,AA22C,Cerebrovascular Accident,1,EL,,,,,,,,,1
+2,AA22D,Cerebrovascular Accident,2,EL,,,,,,,,,2
+3,AA22E,Cerebrovascular Accident,1,EL,AA22E,Cerebrovascular Accident,1,EL,,,,,1
+4,AA22F,Cerebrovascular Accident,1,EL,,,,,,,,,1
+5,AA22G,Cerebrovascular Accident,1,EL,,,,,,,,,1
+6,AB13Z,Insertion of Intrathecal Drug Delivery Device for Pain Management,1,EL,AA22G,Cerebrovascular Accident,1,EL,AB20Z,Epidural Under Image Control for Pain Management,1,EL,1
+7,AB14Z,Insertion of Neurostimulator Electrodes for Pain Management,1,NEL,,,,,,,,,1
+8,AB15Z,"Radiofrequency Ablation or Cryoablation, for Pain Management",1,NEL,,,,,,,,,1

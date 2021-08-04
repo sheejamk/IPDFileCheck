@@ -1,0 +1,12 @@
+Resource,UnitUsed
+Inpatient hospital admissions,day
+Day care admission,visit
+GP surgery visit,per visit
+GP home visit,per visit
+Practice nurse,per hour
+District nurse,per hour
+Occupational therapist,per hour
+Counsellor,per hour
+Psychologist,per hour
+Social worker,per hour
+Physiotherapist,per hour
