@@ -1379,7 +1379,7 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
       gtsummary::add_stat(fns = where(is.numeric) ~ get_effect_size) %>%
       gtsummary::modify_header(add_stat_1 ~ "**Difference in mean**") %>%
       gtsummary::add_stat(where(is.numeric) ~ wilcoxtest) %>%
-      gtsummary::modify_header(add_stat_2 ~ "**p value for Median**") %>%
+      gtsummary::modify_header(add_stat_2 ~ "**p value (Wilcox rank sum test for equal median)**") %>%
       gtsummary::modify_header(label = "**Variable**") %>% # update the column header
       gtsummary::bold_labels()
   }
@@ -1393,7 +1393,6 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
 #' at some time points
 #' @param nrcode the non response code in the data
 #' @return returns the effect sizes
-
 #' @examples
 #' test_data <- as.data.frame(cbind(c(1,2,3,4,5), c(20,40,60,80,100),
 #' c("F", "F", "M", "M", "F")))
@@ -1405,7 +1404,7 @@ return_longitudinal_summary <- function(thedata, columnnames, nrcode = NA){
  result <- unlist(lapply(columnnames, check_column_exists, thedata))
  if (sum(result) != 0)
    stop("Error - some columns do not exists in the data")
-means <- c()
+ means <- c()
  se <- c()
  for (i in 1:length(columnnames)) {
    this_col <- columnnames[i]

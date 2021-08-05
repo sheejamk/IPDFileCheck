@@ -975,6 +975,7 @@ test_that("testing getting summary from gtsummary", {
   y <- c(10, 20.4, 32, 43)
   x <- c("f", "m", "m", "m")
   tempdata <- data.frame(y, x, stringsAsFactors = FALSE)
+
   colnames(tempdata) <- c("mark", "sex")
   summary_tempdata <- get_summary_gtsummary(tempdata, c("mark", "sex"),
                                             byvar = NULL)
