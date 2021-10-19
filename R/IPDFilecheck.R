@@ -1354,8 +1354,10 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
         statistic = where(is.numeric) ~ c("{N_nonmiss}",
                                           "{mean} ({sd})",
                                           "{median} ({p25}, {p75})",
-                                          "{min}, {max}"),
+                                          "{min}, {max}",
+                                          "{N_miss} ({p_miss})"),
         missing =  "always",
+        missing_text = "(Missing)"
       ) %>%
       gtsummary::add_n() %>% # add column with total number of non-missing observations
       gtsummary::modify_header(label = "**Variable**") %>% # update the column header
@@ -1370,8 +1372,10 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
         statistic = where(is.numeric) ~ c("{N_nonmiss}",
                                           "{mean} ({sd})",
                                           "{median} ({p25}, {p75})",
-                                          "{min}, {max}"),
+                                          "{min}, {max}",
+                                          "{N_miss} ({p_miss})"),
         missing =  "always",
+        missing_text = "(Missing)"
       ) %>%
       gtsummary::add_overall() %>%
       gtsummary::add_n() %>% # add column with total number of non-missing observations
@@ -1383,7 +1387,6 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
       gtsummary::modify_header(label = "**Variable**") %>% # update the column header
       gtsummary::bold_labels()
   }
-
   return(summary_table)
 }
 #####################################################

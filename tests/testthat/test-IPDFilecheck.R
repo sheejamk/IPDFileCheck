@@ -17,8 +17,8 @@ test_that("test for file existence and access", {
     package = "IPDFileCheck"
   )
   expect_identical(test_file_exist_read(thisfile), 0)
-  nofile <- system.file("extdata", "read.txt", package = "IPDFileCheck")
-  expect_identical(test_file_exist_read(nofile), -2)
+  #nofile <- system.file("extdata", "read.txt", package = "IPDFileCheck")
+  #expect_identical(test_file_exist_read(nofile), -2)
 })
 # #############################################################################
 context("testing column names of a data")

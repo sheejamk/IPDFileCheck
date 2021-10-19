@@ -12,7 +12,7 @@
 
 <meta name="author" content="Sheeja Manchira Krishnan" />
 
-<meta name="date" content="2021-04-29" />
+<meta name="date" content="2021-10-12" />
 
 <title>User Guide</title>
 
@@ -141,7 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <h1 class="title toc-ignore">User Guide</h1>
 <h4 class="author">Sheeja Manchira Krishnan</h4>
-<h4 class="date">2021-04-29</h4>
+<h4 class="date">2021-10-12</h4>
 
 
 
@@ -247,16 +247,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The function calculate_age_from_dob returns the age calculated from given date of birth. User may provide the column name containing date of birth, format of date of birth and optional non response code.For example, in the ‘rctdata’ shown above, the ‘dob’ column has dates in the format “%d/%m/%y”. The allowed formats for the dates should be in numeric. For example, in the rctdata_error, the dates are in combined numeric and text format, which will return an error.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_age_from_dob</span>(rctdata,<span class="st">&quot;dob&quot;</span>, <span class="cn">NULL</span>,<span class="st">&quot;dmy&quot;</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         age sex  yob        dob          arm</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  51.39178   M 1949 07/12/1969      Control</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  59.19726   F 1934 16/02/1962 Intervention</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  42.65205   M 1956 03/09/1978      Control</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  52.19452   F 1933 17/02/1969 Intervention</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  60.42711   M 1986 25/11/1960      Control</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  51.03288   F 1950 17/04/1970 Intervention</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  24.11507   M 1986 18/03/1997      Control</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  33.24384   F 1945 30/01/1988 Intervention</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  31.23288   F 1948 03/02/1990      Control</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 42.59178   F 1983 25/09/1978 Intervention</span></span></code></pre></div>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  51.84658   M 1949 07/12/1969      Control</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  59.65205   F 1934 16/02/1962 Intervention</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  43.10685   M 1956 03/09/1978      Control</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  52.64932   F 1933 17/02/1969 Intervention</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  60.88191   M 1986 25/11/1960      Control</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  51.48767   F 1950 17/04/1970 Intervention</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  24.56986   M 1986 18/03/1997      Control</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  33.69863   F 1945 30/01/1988 Intervention</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  31.68767   F 1948 03/02/1990      Control</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 43.04658   F 1983 25/09/1978 Intervention</span></span></code></pre></div>
 <p>The function calculate_age_from_year returns the age calculated from given year of birth. User may provide the column name containing date of birth and optional non response code.For example, in the ‘rctdata’ shown above, the ‘yob’ column has birth year.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_age_from_year</span>(rctdata,<span class="st">&quot;yob&quot;</span>,<span class="cn">NULL</span>, <span class="cn">NA</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         age sex  yob        dob          arm calc.age.yob</span></span>
