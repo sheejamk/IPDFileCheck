@@ -20,7 +20,7 @@ Imports:
         tidyverse
 License: GPL-3
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Depends:
     R (>= 3.6.0)
 Suggests: 
@@ -28,3 +28,4 @@ Suggests:
     rmarkdown,
     covr
 VignetteBuilder: knitr
+Config/testthat/edition: 3

@@ -1359,7 +1359,6 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
         missing =  "always",
         missing_text = "(Missing)"
       ) %>%
-      gtsummary::add_n() %>% # add column with total number of non-missing observations
       gtsummary::modify_header(label = "**Variable**") %>% # update the column header
       gtsummary::bold_labels()
   } else{
@@ -1378,7 +1377,6 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
         missing_text = "(Missing)"
       ) %>%
       gtsummary::add_overall() %>%
-      gtsummary::add_n() %>% # add column with total number of non-missing observations
       gtsummary::add_difference() %>%
       gtsummary::add_stat(fns = where(is.numeric) ~ get_effect_size) %>%
       gtsummary::modify_header(add_stat_1 ~ "**Difference in mean**") %>%
