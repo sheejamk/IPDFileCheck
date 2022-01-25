@@ -1336,15 +1336,15 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
   if (is.null(the_data)) {
     stop("data cant be null")
   }
-  if (is.null(selectvar)) {
+  if (is.null(tidyselect::all_of(selectvar))) {
     stop("selectvar cant be null")
   } else {
-    if (sum(is.na(selectvar)) == length(selectvar)) {
+    if (sum(is.na(tidyselect::all_of(selectvar))) == length(selectvar)) {
       stop("selectvar cant be NA")
     }
   }
   subset_data <- dplyr::select(the_data, selectvar)
-  if (is.null(byvar)) {
+  if (is.null(tidyselect::all_of(byvar))) {
     summary_table <-
       gtsummary::tbl_summary(
         subset_data,
