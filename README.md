@@ -3,7 +3,7 @@
    [![Build Status](https://travis-ci.org/sheejamk/IPDFileCheck.svg?branch=master)](https://travis-ci.org/sheejamk/IPDFileCheck)
 <!-- badges: end -->
 <!-- badges: start -->
-[![Codecov test coverage](https://codecov.io/gh/sheejamk/IPDFileCheck/branch/master/graph/badge.svg)](https://codecov.io/gh/sheejamk/IPDFileCheck?branch=master)
+[![codecov](https://codecov.io/gh/sheejamk/ipdFileCheck/branch/main/graph/badge.svg?token=PPLl5IBhyy)](https://codecov.io/gh/sheejamk/ipdFileCheck)
 <!-- badges: end -->
 
 IPDFileCheck is a package that can be used to check the data file from a randomised clinical trial (RCT). The standard checks on data file from RCT will be of the following
