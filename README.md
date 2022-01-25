@@ -1,6 +1,6 @@
 # IPDFileCheck
 <!-- badges: start -->
-   [![Build Status](https://travis-ci.com/sheejamk/IPDFileCheck.svg?branch=master)](https://travis-ci.org/sheejamk/IPDFileCheck)
+   [![Build Status](https://app.travis-ci.com/sheejamk/IPDFileCheck.svg?branch=master)](https://app.travis-ci.com/github/sheejamk/IPDFileCheck)
 <!-- badges: end -->
 
 <!-- badges: start -->
