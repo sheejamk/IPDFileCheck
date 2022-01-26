@@ -1339,16 +1339,16 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
   if (is.null(tidyselect::all_of(selectvar))) {
     stop("selectvar cant be null")
   } else {
-    if (sum(is.na(tidyselect::all_of(selectvar))) == length(selectvar)) {
+    if (sum(is.na(tidyselect::all_of(selectvar))) == length(tidyselect::all_of(selectvar))) {
       stop("selectvar cant be NA")
     }
   }
-  subset_data <- dplyr::select(the_data, selectvar)
+  subset_data <- dplyr::select(the_data, tidyselect::all_of(selectvar))
   if (is.null(tidyselect::all_of(byvar))) {
     summary_table <-
       gtsummary::tbl_summary(
         subset_data,
-        by = byvar, # split table by group
+        by = tidyselect::all_of(byvar), # split table by group
         digits = everything() ~ 2,
         type = where(is.numeric) ~ "continuous2",
         statistic = where(is.numeric) ~ c("{N_nonmiss}",
@@ -1365,7 +1365,7 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
     summary_table <-
       gtsummary::tbl_summary(
         subset_data,
-        by = byvar, # split table by group
+        by = tidyselect::all_of(byvar), # split table by group
         digits = everything() ~ 2,
         type = where(is.numeric) ~ "continuous2",
         statistic = where(is.numeric) ~ c("{N_nonmiss}",
