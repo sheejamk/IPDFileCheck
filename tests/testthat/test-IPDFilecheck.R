@@ -1,14 +1,14 @@
 
 ###############################################################################
-test_that("testing package installation", {
-  expect_identical(check_load_packages("config"), 0)
-  expect_identical(check_load_packages("valueEQ5D"), 0)
-  expect_warning(check_load_packages("Sheeja"), "Invalid package",
-                 fixed = TRUE)
-  reqd_packages <- c("gmodels", "lmtest", "survival", "eha", "nlme",
-                     "coda", "lattice", "R2WinBUGS", "MASS", "foreign", "plyr")
-  expect_identical(check_load_packages(reqd_packages), 0)
-})
+# test_that("testing package installation", {
+#   expect_identical(check_load_packages("config"), 0)
+#   expect_identical(check_load_packages("valueEQ5D"), 0)
+#   expect_warning(check_load_packages("Sheeja"), "Invalid package",
+#                  fixed = TRUE)
+#   reqd_packages <- c("gmodels", "lmtest", "survival", "eha", "nlme",
+#                      "coda", "lattice", "R2WinBUGS", "MASS", "foreign", "plyr")
+#   expect_identical(check_load_packages(reqd_packages), 0)
+# })
 ##############################################################################
 test_that("test for file existence and access", {
   thisfile <- system.file("extdata", "blank.txt",
