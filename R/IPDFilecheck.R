@@ -1318,6 +1318,7 @@ get_effect_size <- function(data, variable, by, ...) {
 #' @param the_data a data frame
 #' @param selectvar variables to be selected for summary
 #' @param byvar A column name (quoted or unquoted) in data.
+#' @param no_digits no of digits to diaply, by default it is 2
 #' Summary statistics will be calculated separately for each level
 #' of the by variable. If NULL, summary statistics are calculated
 #' using all observations.
@@ -1328,7 +1329,7 @@ get_effect_size <- function(data, variable, by, ...) {
 #' table1 <- get_summary_gtsummary(trial, c("trt", "age", "grade"),
 #' byvar = "trt")
 #' @export
-get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
+get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL, no_digits =2,
                                   label = NULL){
   wilcoxtest <- function(data, variable, by, ...) {
     wilcox.test(data[[variable]] ~ as.factor(data[[by]]), data = data)$p.value
@@ -1349,7 +1350,7 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
       gtsummary::tbl_summary(
         subset_data,
         by = tidyselect::all_of(byvar), # split table by group
-        digits = everything() ~ 2,
+        digits = everything() ~ no_digits,
         type = where(is.numeric) ~ "continuous2",
         statistic = where(is.numeric) ~ c("{N_nonmiss}",
                                           "{mean} ({sd})",
@@ -1366,7 +1367,7 @@ get_summary_gtsummary <- function(the_data, selectvar, byvar = NULL,
       gtsummary::tbl_summary(
         subset_data,
         by = tidyselect::all_of(byvar), # split table by group
-        digits = everything() ~ 2,
+        digits = everything() ~ no_digits,
         type = where(is.numeric) ~ "continuous2",
         statistic = where(is.numeric) ~ c("{N_nonmiss}",
                                           "{mean} ({sd})",

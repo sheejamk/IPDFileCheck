@@ -4,14 +4,22 @@
 \alias{get_summary_gtsummary}
 \title{Function to return the summary table using gtsummary package}
 \usage{
-get_summary_gtsummary(the_data, selectvar, byvar = NULL, label = NULL)
+get_summary_gtsummary(
+  the_data,
+  selectvar,
+  byvar = NULL,
+  no_digits = 2,
+  label = NULL
+)
 }
 \arguments{
 \item{the_data}{a data frame}
 
 \item{selectvar}{variables to be selected for summary}
 
-\item{byvar}{A column name (quoted or unquoted) in data.
+\item{byvar}{A column name (quoted or unquoted) in data.}
+
+\item{no_digits}{no of digits to diaply, by default it is 2
 Summary statistics will be calculated separately for each level
 of the by variable. If NULL, summary statistics are calculated
 using all observations.}
