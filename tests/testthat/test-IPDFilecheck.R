@@ -1,4 +1,6 @@
-
+#' @importFrom testthat expect_identical
+#' @importFrom testthat expect_equal
+#'
 ###############################################################################
 # test_that("testing package installation", {
 #   expect_identical(check_load_packages("config"), 0)

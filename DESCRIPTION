@@ -1,7 +1,7 @@
 Package: IPDFileCheck
 Type: Package
 Title: Basic Functions to Check Readability, Consistency, and Content of an Individual Participant Data File
-Version: 0.8.0
+Version: 0.8.1
 Author: Sheeja Manchira Krishnan
 Maintainer: Sheeja Manchira Krishnan <sheejamk@gmail.com>
 Description: Basic checks needed with an individual level participant data from randomised controlled trial. This 
@@ -17,14 +17,10 @@ Imports:
         gtsummary,
         effsize,
         stringr,
-        tidyverse,
-        tidyselect,
-        gmodels,
-        lmtest,
-        zoo
+        tidyselect
 License: GPL-3
 Encoding: UTF-8
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.1
 Depends:
     R (>= 3.6.0)
 Suggests: 
