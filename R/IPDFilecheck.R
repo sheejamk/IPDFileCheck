@@ -6,6 +6,8 @@
 #' check_load_packages("dplyr")
 #' @export
 #' @importFrom methods is
+#'
+#' @import testthat
 check_load_packages <- function(pkg) {
   for (i in seq_len(length(pkg))) {
     x <- pkg[i]
